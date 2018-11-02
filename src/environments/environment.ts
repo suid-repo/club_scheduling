@@ -3,7 +3,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  fireauthui:
+  {
+    signInLink:'',
+    signUpLink:'',
+    signOutLink:'',
+    defaultSignInRedirect:'',
+    authenticationOptions:
+    {
+      GoogleProvider:true,
+      FacebookProvider:false,
+      TwitterProvider:false,
+      GithubProvider:false,
+      PhoneProvider:false,
+      EmailProvider:false   
+    }
+  }
 };
 
 /*
