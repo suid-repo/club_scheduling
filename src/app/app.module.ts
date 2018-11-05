@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { EventComponent } from './event/event.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    EventComponent,
   ],
   imports: [
     BrowserModule,
