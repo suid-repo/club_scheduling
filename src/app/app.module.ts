@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { EventComponent } from './event/event.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     ProfileComponent
     NavbarComponent,
+    EventComponent,
   ],
   imports: [
     BrowserModule,
