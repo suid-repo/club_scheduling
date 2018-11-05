@@ -8,10 +8,12 @@ import { environment } from 'src/environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent
     NavbarComponent,
     EventComponent,
   ],

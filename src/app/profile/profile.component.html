@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Enter the details of your profile and press submit</h5>
+<form>
+  <div class="form-group">
+    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter your First Name" [(ngModel)]='firstName'>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="surname" name="surname" placeholder="Enter tour Surname" [(ngModel)]='surname'>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="email" name="email" placeholder="Enter your Email" [(ngModel)]='email'>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your Phone Number" [(ngModel)]='phoneNumber'>
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="level" name="level" placeholder="Enter your Level" [(ngModel)]='level'>
+  </div>  
+  <button type="submit" (click)="addProfile()" class="btn btn-primary">Submit</button>
+</form>
+  </div>
+</div>
