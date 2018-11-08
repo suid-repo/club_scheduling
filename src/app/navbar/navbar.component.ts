@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGuardService } from 'firebase-authentication-ui';
 
 @Component({
   selector: 'app-navbar',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _AuthGuard:AuthGuardService) { }
 
   ngOnInit() {
+  }
+
+  signOut() {
+    this._AuthGuard.signOut();
   }
 }
