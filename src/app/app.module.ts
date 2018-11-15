@@ -4,7 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FirebaseAuthenticationUiModule, SigninComponent, SignupComponent, AuthGuardService } from 'firebase-authentication-ui';
 import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
@@ -26,6 +26,7 @@ import { HomeComponent } from './home/home.component';
     RouterModule.forRoot(
       [
         {path: "", component: HomeComponent, canActivate:[AuthGuardService]},
+        {path:"profile", component:ProfileComponent, canActivate:[AuthGuardService]},
         {path: "signin", component: SigninComponent},
         {path: "signup", component: SignupComponent}
       ]

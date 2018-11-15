@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UserAgentService } from 'firebase-authentication-ui';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -12,10 +12,11 @@ export class ProfileComponent implements OnInit {
   email: string;
   phoneNumber: string;
   level: string;
-
-  constructor() { }
+  user:firebase.User;
+  constructor(private UserAgent:UserAgentService) { }
 
   ngOnInit() {
+    this.user = this.UserAgent.user;
   }
 
 }
