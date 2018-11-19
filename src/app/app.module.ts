@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
+import { EventManagerComponent } from './event-manager/event-manager.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     EventComponent,
     HomeComponent,
+    EventManagerComponent,
   ],
   imports: [
     BrowserModule,
