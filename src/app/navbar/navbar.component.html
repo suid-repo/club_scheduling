@@ -15,9 +15,6 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['profile']" routerLinkActive="router-link-active">Profile</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['profile/edit']" routerLinkActive="router-link-active">Edit Profile</a>
-      </li>
       <li class="nav-item" *ngIf="!_AuthGuard.isSignIn">
         <a class="nav-link" [routerLink]="['signin']" routerLinkActive="router-link-active">Sign in</a>
       </li>

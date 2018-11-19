@@ -11,8 +11,6 @@ import { EventComponent } from './event/event.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -31,14 +29,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
       [
         {path: "", component: HomeComponent, canActivate:[AuthGuardService]},
         {path:"profile", component:ProfileComponent, canActivate:[AuthGuardService]},
-        {path:"profile/edit", component:ProfileManagerComponent, canActivate:[AuthGuardService]},
         {path: "signin", component: SigninComponent},
         {path: "signup", component: SignupComponent}
       ]
-    ),
-    AngularFirestoreModule,
-    FormsModule,
-    ReactiveFormsModule    
+    )
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]
