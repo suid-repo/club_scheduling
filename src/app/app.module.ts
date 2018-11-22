@@ -10,7 +10,9 @@ import { RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
+import { EventManagerComponent } from './event-manager/event-manager.component';
 import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
     NavbarComponent,
     EventComponent,
     HomeComponent,
+    EventManagerComponent,
     ProfileManagerComponent,
   ],
   imports: [
@@ -29,10 +32,13 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
       [
         {path: "", component: HomeComponent, canActivate:[AuthGuardService]},
         {path:"profile", component:ProfileComponent, canActivate:[AuthGuardService]},
+        {path:"profile/edit", component:ProfileManagerComponent, canActivate:[AuthGuardService]},
         {path: "signin", component: SigninComponent},
         {path: "signup", component: SignupComponent}
       ]
-    )
+    ),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]
