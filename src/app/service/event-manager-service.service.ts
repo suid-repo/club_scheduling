@@ -39,7 +39,7 @@ export class EventManagerServiceService implements CanActivate {
     // });
 
   }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+ /*  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     let self = this;
     return new Observable<boolean>
     (
@@ -75,4 +75,6 @@ export class EventManagerServiceService implements CanActivate {
   }
 
 
+}
+ */
 }
