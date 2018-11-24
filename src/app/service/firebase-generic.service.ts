@@ -87,4 +87,17 @@ export class FirebaseGenericService<T> {
     .catch(() => {return false})
     .then(() => {return true;});
   }
+
+  isExist(id:string):Promise<boolean>
+  {
+    this.initCollection();
+    
+    return this.genericCollection.doc(id).ref.get().then
+    (
+      (doc) => 
+      {
+        return doc.exists;
+      }
+    )
+  }
 }
