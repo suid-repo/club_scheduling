@@ -1,3 +1,4 @@
 export interface IEvent {
-    Name:string;
+    ID
+    name:string;
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { EventService } from '../service/event.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-event-create',
@@ -9,9 +11,10 @@ import { EventService } from '../service/event.service';
 })
 export class EventCreateComponent implements OnInit {
   form: FormGroup;
+ 
   
 
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EventService,private router: Router) {
     this.form = new FormGroup({
       name: new FormControl(''),
       date: new FormControl(''),
@@ -28,8 +31,7 @@ export class EventCreateComponent implements OnInit {
     this.eventService.addEvent(this.form.value)
 	.then(
 	  res => {
-	    
-	    
+      this.router.navigate(['/home'])
 	  })
   }
 }

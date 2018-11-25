@@ -19,6 +19,9 @@ export class EventService {
   tasks: AngularFirestoreCollection<Event>;
   users: Observable<Event>
 
+
+  
+
   GetEvents() {
 
     
@@ -33,4 +36,12 @@ export class EventService {
       createdBy: firebase.auth().currentUser.uid
     })
   }
+
+  emrollUser(eventID:string,numofpeople: number){
+    this.db.collection('event/'+eventID+'/members').add({
+      bookedby: firebase.auth().currentUser.uid,
+      
+    })
+  }
 }
+

@@ -15,6 +15,7 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventCreateComponent } from './event-create/event-create.component';
 import {AngularFirestore } from '@angular/fire/firestore';
+import { EventRegisterComponent } from './event-register/event-register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {AngularFirestore } from '@angular/fire/firestore';
     HomeComponent,
     EventManagerComponent,
     ProfileManagerComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    EventRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,10 @@ import {AngularFirestore } from '@angular/fire/firestore';
         {path:"profile/edit", component:ProfileManagerComponent, canActivate:[AuthGuardService]},
         {path: "signin", component: SigninComponent},
         {path: "signup", component: SignupComponent},
-        {path: "create-event", component: EventCreateComponent}
+        {path: "create-event", component: EventCreateComponent},
+        {path: "home", component: HomeComponent, canActivate:[AuthGuardService]},
+        {path: "register-event/:id", component: EventRegisterComponent}
+
       ]
     ),
     FormsModule,

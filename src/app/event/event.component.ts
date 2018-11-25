@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class EventComponent implements OnInit {
 
-  eventsCollection: AngularFirestoreCollection<Event>;
-  events: Event[];
+  eventsCollection: AngularFirestoreCollection<IEvent>;
+  events: IEvent[];
 
   constructor(public db: AngularFirestore, eventservice: EventService,
     private router: Router) { }
@@ -22,8 +22,13 @@ export class EventComponent implements OnInit {
   ngOnInit() {
     this.eventsCollection = this.db.collection('event')
 
-    this.eventsCollection.valueChanges().subscribe(data => {
-      this.events = data
+    this.eventsCollection.snapshotChanges().subscribe(data => {
+      this.events = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as IEvent;
+      })
     })
   }
 }
