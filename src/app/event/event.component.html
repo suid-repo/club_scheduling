@@ -9,9 +9,9 @@
 
 <div class="container">
   <div class="card-group">
-    <div class="card">
+    <div class="card" *ngFor="let item of events">
       <div class="card-body">
-        <h4 class="card-title">Event Title</h4>
+        <h4 class="card-title">{{item.name}}</h4>
         <p class="card-text">Test Text</p>
         <div class="ml-auto p-2">Flex item</div>
       </div>

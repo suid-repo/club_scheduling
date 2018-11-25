@@ -13,7 +13,9 @@ export class EventCreateComponent implements OnInit {
 
   constructor(private eventService: EventService) {
     this.form = new FormGroup({
-      name: new FormControl('')
+      name: new FormControl(''),
+      date: new FormControl(''),
+      time: new FormControl('')
     });
    }
 
