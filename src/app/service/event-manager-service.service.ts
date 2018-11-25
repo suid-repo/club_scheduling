@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class EventManagerServiceService implements CanActivate {
+export class EventManagerServiceService {
 
   public IsHeadCoach: boolean;
 

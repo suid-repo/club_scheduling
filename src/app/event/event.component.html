@@ -1,16 +1,22 @@
-<div class="card" style="width: 36rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Event Name</h5>
-    <p class="card-text">Event description</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Coaches</li>
-    <li class="list-group-item">Level</li>
-    <li class="list-group-item">Date</li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Register</a>
-    <a href="#" class="card-link">Cancel(only for headcoach)</a>
+<body>
+<nav class="navbar navbar-light navbar-expand bh-light navigation-clean">
+  <div class="container">
+    <div id="navcol1" class="collapse navbar-collapse">
+    <a class="btn btn-primary ml-auto p-2" [routerLink]="[ '/create-event']" role="button">Create Event</a>
   </div>
 </div>
+</nav>
+
+<div class="container">
+  <div class="card-group">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Event Title</h4>
+        <p class="card-text">Test Text</p>
+        <div class="ml-auto p-2">Flex item</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
