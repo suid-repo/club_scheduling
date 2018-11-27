@@ -12,7 +12,12 @@
           <span class="text-danger" *ngIf="userForm.controls['phoneNumber'].hasError('required')">Phone Number is <strong>Required</strong>.</span>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="level" placeholder="Enter your Level">
+          Your level :
+          <select class="form-control" formControlName="level">
+            <ng-container *ngFor="let option of levelList">
+            <option [value]="option.id">{{option.Name}}</option>
+            </ng-container>
+          </select>
           <span class="text-danger" *ngIf="userForm.controls['level'].hasError('required')">Level is <strong>Required</strong>.</span>
         </div>  
         <button type="submit" class="btn btn-primary">Submit</button>

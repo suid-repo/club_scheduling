@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { EventManagerComponent } from './event-manager/event-manager.component';
 import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     FirebaseAuthenticationUiModule.forRoot(environment.fireauthui),
+    AngularFirestoreModule,
     RouterModule.forRoot(
       [
         {path: "", component: HomeComponent, canActivate:[AuthGuardService]},
