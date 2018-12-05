@@ -1,5 +1,5 @@
 import { IUser } from "./IUser";
-import { IRoles } from "./IRoles";
+import { IRoles } from "./interface/iroles";
 
 export class User implements IUser
 {

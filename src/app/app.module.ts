@@ -17,6 +17,8 @@ import { EventCreateComponent } from './event-create/event-create.component';
 import {AngularFirestore } from '@angular/fire/firestore';
 import { EventRegisterComponent } from './event-register/event-register.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CanActivateCoach } from './can-activate/can-activate-coach';
+import { CanActivateHeadCoach } from './can-activate/can-activate-head-coach';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
         {path:"profile/edit", component:ProfileManagerComponent, canActivate:[AuthGuardService]},
         {path: "signin", component: SigninComponent},
         {path: "signup", component: SignupComponent},
-        {path: "create-event", component: EventCreateComponent},
+        {path: "create-event", component: EventCreateComponent, canActivate:[CanActivateHeadCoach]},
         {path: "home", component: HomeComponent, canActivate:[AuthGuardService]},
         {path: "register-event/:id", component: EventRegisterComponent}
 
@@ -51,7 +53,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AngularFireAuth,AngularFirestore],
+  providers: [AngularFireAuth,AngularFirestore, CanActivateCoach, CanActivateHeadCoach],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

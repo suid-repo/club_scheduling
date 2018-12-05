@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
 import { UserAgentService } from 'firebase-authentication-ui';
 import { Observable } from 'rxjs';
-import { IRoles } from '../IRoles';
+import { IRoles } from '../interface/iroles';
 import { IUser } from '../IUser'
 import { User } from '../User';
 

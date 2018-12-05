@@ -24,7 +24,7 @@ export class UsersService extends FirebaseGenericService<IUser>
       {
         if(!result)
         {
-          const user:IUser = { CategoryId:"", ChildrenCount:0, IsCoach:false, IsHeadCoach:false, PhoneNumber:""};
+          const user:IUser = { CategoryId:"", ChildrenCount:0, PhoneNumber:"", Roles:{member:true}};
           this.add(user, uid);
         }
       }
