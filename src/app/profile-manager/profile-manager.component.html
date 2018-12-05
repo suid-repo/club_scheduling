@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
   <div class="card">
     <div class="card-body">
@@ -19,8 +20,11 @@
             </ng-container>
           </select>
           <span class="text-danger" *ngIf="userForm.controls['level'].hasError('required')">Level is <strong>Required</strong>.</span>
-        </div>  
-        <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="row">
+          <div class="col-xs-1"><button type="submit" class="btn btn-primary">Submit</button></div>
+          <div class="col"><button type="button" class="btn btn-primary" [routerLink]="['/profile']" routerLinkActive="router-link-active" >Cancel</button></div>
+        </div>
     </div>
   </div>
 </form>
