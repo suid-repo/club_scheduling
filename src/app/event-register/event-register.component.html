@@ -1,0 +1,13 @@
+Registering for event {{test.name}}
+<br>
+How many people do you want to book?
+<form [formGroup]="form">
+<select>
+    <option formControlName="countryControl" value="1">1</option>
+    <option formControlName="countryControl" value="2">2</option>
+    <option formControlName="countryControl" value="3">3</option>
+    <option formControlName="countryControl" value="4">4</option>
+</select>
+</form>
+<br>
+<button (click)="ConfirmRegistration()">Confirm Registration</button>
