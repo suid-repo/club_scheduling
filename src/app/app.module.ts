@@ -19,6 +19,7 @@ import { EventRegisterComponent } from './event-register/event-register.componen
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { CanActivateCoach } from './can-activate/can-activate-coach';
 import { CanActivateHeadCoach } from './can-activate/can-activate-head-coach';
+import * as firebase from 'firebase/app';
 
 @NgModule({
   declarations: [
