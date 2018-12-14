@@ -9,9 +9,6 @@ import { IRoles } from '../interface/IRoles';
   providedIn: 'root'
 })
 export class GuardService {
-
- // isHeadCoach: boolean;
-
   private _isSignIn:boolean = false;
   private _roles:IRoles = {member:false, coach:false, headCoach:false};
 
@@ -78,22 +75,4 @@ export class GuardService {
       self.router.navigate(['/signin']);
     });
   }
-
-  /*
-  private _createSession(authResult, profile) {
-    
-    // If initial login, set profile and admin information
-    if (profile) {
-      this.isHeadCoach = this._checkIfHeadCoach(profile);
-    }
-    // Update login status in loggedIn$ stream
-    
-  }
-
-  private _checkIfHeadCoach(profile) {
-    // Check if the user has HEAD COACH role
-    const roles = profile[profile.isHeadCoach] || [];
-    return roles.indexOf('isHeadCoach') > -1;
-  }
-  */
 }
