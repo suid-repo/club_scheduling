@@ -15,14 +15,14 @@ namespace WebApplication.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = I18N.WebApplication.About_Subtitle;
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message =  I18N.WebApplication.Contact_Subtitle;
 
             return View();
         }
