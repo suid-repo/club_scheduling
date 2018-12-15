@@ -52,7 +52,7 @@ namespace WebApplication.Migrations
             }
 
             //SEED DEFAULT ADMIN USER IF NO ONE EXIST
-            if (manager.FindByName("admin@localhost.com") == null)
+            if (!context.Users.Any(u => u.Roles.All(r => r.RoleId == context.Roles.FirstOrDefault(m => m.Name == "Head Coach").Id)))
             {
                 ApplicationUser firstHeadCoach = new ApplicationUser
                 {
