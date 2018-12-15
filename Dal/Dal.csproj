@@ -50,12 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Level.cs" />
     <Compile Include="DalDbContext.cs" />
+    <Compile Include="Migrations\201812152157469_Initial Migration.cs" />
+    <Compile Include="Migrations\201812152157469_Initial Migration.Designer.cs">
+      <DependentUpon>201812152157469_Initial Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201812152157469_Initial Migration.resx">
+      <DependentUpon>201812152157469_Initial Migration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
