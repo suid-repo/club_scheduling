@@ -10,11 +10,11 @@ namespace WebApplication.Core
 {
     public class QueuedItem
     {
-        [Key]
+        [Key, Column(Order = 0)]
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        [Key]
+        [Key, Column(Order = 1)]
         [ForeignKey("Queued")]
         public int QueuedId { get; set; }        
         public virtual Queued Queued { get; set; }

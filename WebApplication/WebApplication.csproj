@@ -186,6 +186,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CultureHelper.cs" />
+    <Compile Include="Helpers\QueuedHelper.cs" />
     <Compile Include="Migrations\201812152158088_Initial Migration.cs" />
     <Compile Include="Migrations\201812152158088_Initial Migration.Designer.cs">
       <DependentUpon>201812152158088_Initial Migration.cs</DependentUpon>
