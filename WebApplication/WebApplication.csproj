@@ -187,6 +187,10 @@
     <Compile Include="Migrations\201812152158088_Initial Migration.Designer.cs">
       <DependentUpon>201812152158088_Initial Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812172057085_Add Core Classes level event.cs" />
+    <Compile Include="Migrations\201812172057085_Add Core Classes level event.Designer.cs">
+      <DependentUpon>201812172057085_Add Core Classes level event.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -277,6 +281,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201812152158088_Initial Migration.resx">
       <DependentUpon>201812152158088_Initial Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812172057085_Add Core Classes level event.resx">
+      <DependentUpon>201812172057085_Add Core Classes level event.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
