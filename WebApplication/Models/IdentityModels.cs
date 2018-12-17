@@ -26,11 +26,11 @@ namespace WebApplication.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        DbSet<Level> Levels { get; set; }
-        DbSet<Event> Events { get; set; }
-        DbSet<Family> Families { get; set; }
-        DbSet<Queued> Queueds { get; set; }
-        DbSet<QueuedItem> QueuedItems { get; set; }
+        public DbSet<Level> Levels { get; set; }
+        public DbSet<Event> Events { get; set; }
+        public DbSet<Family> Families { get; set; }
+        public DbSet<Queued> Queueds { get; set; }
+        public DbSet<QueuedItem> QueuedItems { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

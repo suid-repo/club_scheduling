@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using WebApplication.Core;
+using WebApplication.Models;
+/**
+ * Help you to use queued system
+ */
+namespace WebApplication.Helpers
+{
+    public static class QueuedHelper
+    {
+        // ADD AN USER IN THE QUEUED
+        public static bool Add(ApplicationUser user, int EventId)
+        {
+            try
+            {
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    context.Queueds.First(q => q.EventId == EventId).QueuedItems
+                        .Add(new QueuedItem()
+                        {
+                            User = user
+                        });
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        //TO DO : FIINISH IT
+        public static bool Remove(ApplicationUser user, int EventId)
+        {
+            try
+            {
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return false;
+        }
+    }
+}
