@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Models;
 
 namespace WebApplication.Core
 {
@@ -17,5 +18,7 @@ namespace WebApplication.Core
         [Required(ErrorMessageResourceType = typeof(I18N.WebApplication),
               ErrorMessageResourceName = "Level_NameRequired")]
         public string Name { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

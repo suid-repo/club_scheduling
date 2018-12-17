@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WebApplication.Core;
 
 namespace WebApplication.Models
 {
@@ -13,7 +14,7 @@ namespace WebApplication.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string BirthDay { get; set; }
-        public virtual IEnumerable<ApplicationUser> FamilyMembers { get; set; }
+        public virtual ICollection<ApplicationUser> FamilyMembers { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -25,6 +26,8 @@ namespace WebApplication.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        DbSet<Level> Levels { get; set; }
+        DbSet<Event> Events { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

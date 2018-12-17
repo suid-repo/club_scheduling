@@ -177,6 +177,8 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Core\Event.cs" />
+    <Compile Include="Core\Level.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -278,10 +280,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dal\Dal.csproj">
-      <Project>{4f9ff10b-bd29-428f-a6a9-3c1f26772174}</Project>
-      <Name>Dal</Name>
-    </ProjectReference>
     <ProjectReference Include="..\I18N\I18N.csproj">
       <Project>{85ebeb98-b280-4160-b84d-8d9e60356a41}</Project>
       <Name>I18N</Name>

@@ -29,7 +29,7 @@ namespace WebApplication.Core
         [Display(Name = "Event_Level", ResourceType = typeof(I18N.WebApplication))]
         [Required(ErrorMessageResourceType = typeof(I18N.WebApplication),
               ErrorMessageResourceName = "Event_LevelDateRequired")]
-        public virtual IEnumerable<Level> Levels { get; set; }
-        public virtual IEnumerable<ApplicationUser> RegisterUsers { set; get; }
+        public virtual ICollection<Level> Levels { get; set; }
+        public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }
     }
 }
