@@ -16,7 +16,6 @@ namespace WebApplication.Controllers
         public ActionResult About()
         {
             ViewBag.Message = I18N.WebApplication.About_Subtitle;
-
             return View();
         }
 
