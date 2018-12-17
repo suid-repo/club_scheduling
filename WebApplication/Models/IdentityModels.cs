@@ -14,7 +14,7 @@ namespace WebApplication.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string BirthDay { get; set; }
-        public virtual ICollection<ApplicationUser> FamilyMembers { get; set; }
+        public virtual Family Family { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -28,6 +28,9 @@ namespace WebApplication.Models
     {
         DbSet<Level> Levels { get; set; }
         DbSet<Event> Events { get; set; }
+        DbSet<Family> Families { get; set; }
+        DbSet<Queued> Queueds { get; set; }
+        DbSet<QueuedItem> QueuedItems { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

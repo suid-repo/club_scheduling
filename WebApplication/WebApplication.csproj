@@ -178,7 +178,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Core\Event.cs" />
+    <Compile Include="Core\Family.cs" />
     <Compile Include="Core\Level.cs" />
+    <Compile Include="Core\Queued.cs" />
+    <Compile Include="Core\QueuedItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
