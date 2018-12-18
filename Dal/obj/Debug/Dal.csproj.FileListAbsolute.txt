@@ -1,0 +1,14 @@
+C:\Git\Github\club_scheduling\Dal\bin\Debug\Dal.dll.config
+C:\Git\Github\club_scheduling\Dal\bin\Debug\Dal.dll
+C:\Git\Github\club_scheduling\Dal\bin\Debug\Dal.pdb
+C:\Git\Github\club_scheduling\Dal\bin\Debug\EntityFramework.dll
+C:\Git\Github\club_scheduling\Dal\bin\Debug\EntityFramework.SqlServer.dll
+C:\Git\Github\club_scheduling\Dal\bin\Debug\EntityFramework.xml
+C:\Git\Github\club_scheduling\Dal\bin\Debug\EntityFramework.SqlServer.xml
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.csprojAssemblyReference.cache
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.csproj.CoreCompileInputs.cache
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.csproj.CopyComplete
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.dll
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.pdb
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.Migrations.InitialMigration.resources
+C:\Git\Github\club_scheduling\Dal\obj\Debug\Dal.csproj.GenerateResource.cache
