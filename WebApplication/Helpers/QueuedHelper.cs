@@ -23,6 +23,7 @@ namespace WebApplication.Helpers
                         {
                             User = user
                         });
+                    context.SaveChanges();
                 }
             }
             catch (Exception)
