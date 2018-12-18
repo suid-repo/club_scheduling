@@ -30,6 +30,7 @@ namespace WebApplication.Core
         [Required(ErrorMessageResourceType = typeof(I18N.WebApplication),
               ErrorMessageResourceName = "Event_LevelDateRequired")]
         public virtual ICollection<Level> Levels { get; set; }
+        public virtual ICollection<CoachEvent> CoachEvents { get; set; } 
         public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }
     }
 }

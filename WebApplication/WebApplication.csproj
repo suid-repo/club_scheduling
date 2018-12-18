@@ -177,6 +177,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Core\CoachEvent.cs" />
     <Compile Include="Core\Event.cs" />
     <Compile Include="Core\Family.cs" />
     <Compile Include="Core\Level.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -15,6 +16,10 @@ namespace WebApplication.Models
         public string LastName { get; set; }
         public string BirthDay { get; set; }
         public virtual Family Family { get; set; }
+        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<CoachEvent> CoachEvents { get; set; }
+        public virtual ICollection<QueuedItem> QueuedItems { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -31,6 +36,7 @@ namespace WebApplication.Models
         public DbSet<Family> Families { get; set; }
         public DbSet<Queued> Queueds { get; set; }
         public DbSet<QueuedItem> QueuedItems { get; set; }
+        public DbSet<CoachEvent> CoachEvents { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
