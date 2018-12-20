@@ -15,12 +15,18 @@ namespace WebApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // Does this go here?? [Authorize(Roles = "Owner")]
         // GET: Families
         public ActionResult Index()
         {
+            /*
+             * // Get Current Logged in details
+            ApplicationUser user = getUserDetails();
+            */
             return View(db.Families.ToList());
         }
 
+        [Authorize(Roles = "Owner")]
         // GET: Families/Details/5
         public ActionResult Details(int? id)
         {
@@ -36,15 +42,15 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
+        // When you create a family you get the owner role for that family [Authorize(Roles = "Owner")]
         // GET: Families/Create
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: Families/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // When you create a family you get the owner role for that family [Authorize(Roles = "Owner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Family family)
@@ -58,7 +64,16 @@ namespace WebApplication.Controllers
 
             return View(family);
         }
+        // Get the current user
+        /*
+         * public ApplicationUser getUserDetails()
+        {
+            ApplicationDbContext AppAuthDb = new ApplicationDbContext();
+            return AppAuthDb.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+        }
+        */
 
+        [Authorize(Roles = "Owner")]
         // GET: Families/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,10 +88,9 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
-
         // POST: Families/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize(Roles = "Owner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
@@ -90,6 +104,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
+        [Authorize(Roles = "Owner")]
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -104,8 +119,9 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
-
         // POST: Families/Delete/5
+
+        [Authorize(Roles = "Owner")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
