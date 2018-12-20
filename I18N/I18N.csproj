@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85EBEB98-B280-4160-B84D-8D9E60356A41}</ProjectGuid>
+    <ProjectGuid>{AB1C70E9-1F08-43B7-AD8D-3FD7CC048B85}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>I18N</RootNamespace>
@@ -41,27 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Core.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Core.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Core\Core.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebApplication.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebApplication.resx</DependentUpon>
-    </Compile>
+    <Compile Include="WebApplication.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Core.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Core.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WebApplication.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>WebApplication.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Core.resx" />
+    <EmbeddedResource Include="WebApplication.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
