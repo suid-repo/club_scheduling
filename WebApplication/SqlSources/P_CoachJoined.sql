@@ -33,4 +33,4 @@ AS
 		@userList = @people2Add
 	END
 RETURN 0
-GO
+

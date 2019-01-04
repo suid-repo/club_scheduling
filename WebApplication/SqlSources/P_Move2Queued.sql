@@ -11,4 +11,4 @@ AS
 	AND
 	ApplicationUser_Id IN (SELECT Id FROM @userList)
 RETURN 0
-GO
+

@@ -49,4 +49,3 @@ AS
 	END
 
 RETURN 0
-GO

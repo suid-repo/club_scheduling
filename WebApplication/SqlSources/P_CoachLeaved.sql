@@ -33,4 +33,4 @@ AS
 					@userList = @people2kick
 				END
 RETURN 0
-GO
+

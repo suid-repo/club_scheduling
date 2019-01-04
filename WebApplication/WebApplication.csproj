@@ -266,7 +266,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
-    <EmbeddedResource Include="SqlSources\P_CoachJoigned.sql" />
+    <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachLeaved.sql" />
     <EmbeddedResource Include="SqlSources\P_Move2Event.sql" />
     <EmbeddedResource Include="SqlSources\P_Move2Queued.sql" />

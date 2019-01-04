@@ -96,11 +96,75 @@ namespace WebApplication.Migrations
             {
 
                 using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.UserListTableType.sql"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                    }
+            }
+
+            if(context.Database.SqlQuery<int>("IF object_id(N'P_Move2Event') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_Move2Event.sql"))
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     context.Database.ExecuteSqlCommand(reader.ReadToEnd());
                 }
             }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_Move2Queued') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_Move2Queued.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_CoachJoined') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CoachJoined.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_CoachLeaved') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CoachLeaved.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_CheckQueued') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CheckQueued.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'T_CoachJoigned') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.T_CoachJoigned.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'T_CoachLeaved') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            {
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.T_CoachLeaved.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+            
         }
     }
 }
