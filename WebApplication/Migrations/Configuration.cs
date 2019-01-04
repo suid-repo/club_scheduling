@@ -5,7 +5,9 @@ namespace WebApplication.Migrations
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
+    using System.Reflection;
     using WebApplication.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication.Models.ApplicationDbContext>
@@ -68,8 +70,37 @@ namespace WebApplication.Migrations
                     manager.AddToRoles(firstHeadCoach.Id, new string[] { "Head Coach", "Coach" });
                 }
             }
-                
-            
+
+            SeedAdditionalTableStuff(context);
+        }
+
+        private void SeedAdditionalTableStuff(WebApplication.Models.ApplicationDbContext context)
+        {
+            //if (System.Diagnostics.Debugger.IsAttached == false)
+             //   System.Diagnostics.Debugger.Launch();
+            //Initialize File Reader
+            var assembly = Assembly.GetExecutingAssembly();
+
+            Console.Write(this.GetType().Assembly.GetManifestResourceNames());
+            if (context.Database.SqlQuery<int>("IF TYPE_ID(N'QueuedListTableType') IS NULL SELECT 1 ELSE SELECT 0;").FirstOrDefault() == 1)
+            {
+
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.QueuedListTableType.sql"))
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                    }
+            }
+
+            if (context.Database.SqlQuery<int>("IF TYPE_ID(N'UserListTableType') IS NULL SELECT 1 ELSE SELECT 0;").FirstOrDefault() == 1)
+            {
+
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.UserListTableType.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
         }
     }
 }
