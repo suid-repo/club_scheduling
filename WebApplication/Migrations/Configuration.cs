@@ -8,6 +8,7 @@ namespace WebApplication.Migrations
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using WebApplication.Core;
     using WebApplication.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<WebApplication.Models.ApplicationDbContext>
@@ -71,6 +72,41 @@ namespace WebApplication.Migrations
                 }
             }
 
+            //SEED LEVELS
+            context.Levels.AddOrUpdate(
+                new Level
+                {
+                    Id = 1,
+                    Name = "Adults"
+                },
+                new Level
+                {
+                    Id = 2,
+                    Name = "Advanced"
+                },
+                new Level
+                {
+                    Id = 3,
+                    Name = "Improver"
+                },
+                new Level
+                {
+                    Id = 4,
+                    Name = "Intermediate"
+                },
+                new Level
+                {
+                    Id = 5,
+                    Name = "Kids"
+                },
+                new Level
+                {
+                    Id = 6,
+                    Name = "Learner"
+                });
+
+
+            //SEED STORED PROCEDURE / TRIGGER
             SeedAdditionalTableStuff(context);
         }
 
