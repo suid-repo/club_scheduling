@@ -18,6 +18,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", null, new { @class = "navbar-brand" })</li>
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="nav-item">@Html.ActionLink("Events", "Index", "Events", null, new { @class = "navbar-brand" })</li>
+                    <li class="nav-item">@Html.ActionLink("My Family", "Index", "Families", null, new { @class = "navbar-brand" })</li>
+                }
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "navbar-brand" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "navbar-brand" })</li>
             </ul>

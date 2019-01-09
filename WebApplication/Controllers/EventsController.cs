@@ -37,6 +37,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Events/Create
+        [Authorize(Roles = "Head Coach")]
         public ActionResult Create()
         {
             ViewBag.Levels = FillLevels();
@@ -47,8 +48,9 @@ namespace WebApplication.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Head Coach")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Event @event)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate,Levels")] Event @event)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +63,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Events/Edit/5
+        [Authorize(Roles = "Head Coach")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +82,7 @@ namespace WebApplication.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Head Coach")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,StartDate,EndDate")] Event @event)
         {
@@ -92,6 +96,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Events/Delete/5
+        [Authorize(Roles = "Head Coach")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +113,7 @@ namespace WebApplication.Controllers
 
         // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Head Coach")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
