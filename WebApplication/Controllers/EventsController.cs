@@ -39,6 +39,7 @@ namespace WebApplication.Controllers
         // GET: Events/Create
         public ActionResult Create()
         {
+            ViewBag.Levels = FillLevels();
             return View();
         }
 
@@ -124,5 +125,22 @@ namespace WebApplication.Controllers
             }
             base.Dispose(disposing);
         }
+
+        private static List<SelectListItem> FillLevels()
+        {
+            List<SelectListItem> items = new List<SelectListItem>();
+            using (
+            ApplicationDbContext db = new ApplicationDbContext())
+            {
+                var levels = db.Levels.ToList();
+                foreach (var item in levels)
+                {
+                    items.Add(new SelectListItem()
+                    { Value = item.Id.ToString(), Text = item.Name });
+                }
+            }
+            return items;
+        }
+
     }
 }
