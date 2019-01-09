@@ -40,8 +40,9 @@ namespace WebApplication.Controllers
         [Authorize(Roles = "Head Coach")]
         public ActionResult Create()
         {
-            ViewBag.Levels = FillLevels();
-            return View();
+            EventCreateViewModels model = new EventCreateViewModels();
+            model.Levels = db.Levels.ToList();
+            return View(model);
         }
 
         // POST: Events/Create
@@ -50,16 +51,27 @@ namespace WebApplication.Controllers
         [HttpPost]
         [Authorize(Roles = "Head Coach")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,StartDate,EndDate,Levels")] Event @event)
+        public ActionResult Create([Bind(Include = "Event, SelectedLevels")] EventCreateViewModels eventCreateViewModels)
         {
+            eventCreateViewModels.Levels = db.Levels.ToList();
+
             if (ModelState.IsValid)
             {
-                db.Events.Add(@event);
+                eventCreateViewModels.Event.Levels = new List<Level>();
+
+                foreach (string idString in eventCreateViewModels.SelectedLevels)
+                {
+                    eventCreateViewModels.Event.Levels.Add(eventCreateViewModels.Levels
+                        .Where(l => l.Id == Int32.Parse(idString))
+                        .FirstOrDefault());
+                }
+
+                db.Events.Add(eventCreateViewModels.Event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(@event);
+            
+            return View(eventCreateViewModels);
         }
 
         // GET: Events/Edit/5
@@ -132,7 +144,7 @@ namespace WebApplication.Controllers
             base.Dispose(disposing);
         }
 
-        private static List<SelectListItem> FillLevels()
+        private static IEnumerable<SelectListItem> FillLevels()
         {
             List<SelectListItem> items = new List<SelectListItem>();
             using (

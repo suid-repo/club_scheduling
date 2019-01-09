@@ -27,8 +27,8 @@ namespace WebApplication.Core
               ErrorMessageResourceName = "Event_EndDateRequired")]
         public DateTime EndDate { get; set; }
         [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Core))]
-        [Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
-              ErrorMessageResourceName = "Event_LevelDateRequired")]
+        //[Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
+        //      ErrorMessageResourceName = "Event_LevelDateRequired")]
         public virtual ICollection<Level> Levels { get; set; }
         public virtual ICollection<CoachEvent> CoachEvents { get; set; } 
         public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }
