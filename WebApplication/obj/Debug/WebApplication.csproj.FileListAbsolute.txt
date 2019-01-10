@@ -118,3 +118,4 @@ C:\Git\GitHub\club_scheduling\WebApplication\bin\roslyn\vbc.exe.config
 C:\Git\GitHub\club_scheduling\WebApplication\bin\roslyn\vbc.rsp
 C:\Git\GitHub\club_scheduling\WebApplication\bin\roslyn\VBCSCompiler.exe
 C:\Git\GitHub\club_scheduling\WebApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\Git\GitHub\club_scheduling\WebApplication\obj\Debug\WebApplication.Migrations.EventQueuedLinked.resources

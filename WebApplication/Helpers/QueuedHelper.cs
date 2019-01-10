@@ -12,6 +12,29 @@ namespace WebApplication.Helpers
     public static class QueuedHelper
     {
         // ADD AN USER IN THE QUEUED
+        public static bool Add(ApplicationUser user, int EventId)
+        {
+            try
+            {
+                using (ApplicationDbContext context = new ApplicationDbContext())
+                {
+                    context.Queueds.First(q => q.EventId == EventId).QueuedItems
+                        .Add(new QueuedItem()
+                        {
+                            User = user
+                        });
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        // ADD USERS IN THE QUEUED
         public static bool Add(List<ApplicationUser> users, int EventId)
         {
             try

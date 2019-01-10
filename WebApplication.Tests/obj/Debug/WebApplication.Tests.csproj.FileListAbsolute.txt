@@ -50,3 +50,6 @@ C:\Git\Github\club_scheduling\WebApplication.Tests\obj\Debug\WebApplication.Test
 C:\Git\Github\club_scheduling\WebApplication.Tests\bin\Debug\I18N.dll
 C:\Git\Github\club_scheduling\WebApplication.Tests\bin\Debug\I18N.pdb
 C:\Git\Github\club_scheduling\WebApplication.Tests\bin\Debug\Newtonsoft.Json.pdb
+C:\Git\GitHub\club_scheduling\WebApplication.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Git\GitHub\club_scheduling\WebApplication.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Git\GitHub\club_scheduling\WebApplication.Tests\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll

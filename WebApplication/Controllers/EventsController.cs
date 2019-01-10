@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using WebApplication.Core;
 using WebApplication.Models;
 using Microsoft.AspNet.Identity;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class EventsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -29,19 +31,21 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Event @event = db.Events.Find(id);
-            if (@event == null)
+            EventDetailsViewModel model = new EventDetailsViewModel();
+            model.User = db.Users.Find(User.Identity.GetUserId());
+            model.Event = db.Events.Find(id);
+            if (model.Event == null)
             {
                 return HttpNotFound();
             }
-            return View(@event);
+            return View(model);
         }
 
         // GET: Events/Create
         [Authorize(Roles = "Head Coach")]
         public ActionResult Create()
         {
-            EventCreateViewModels model = new EventCreateViewModels();
+            EventCreateViewModel model = new EventCreateViewModel();
             model.Levels = db.Levels.ToList();
             return View(model);
         }
@@ -52,7 +56,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         [Authorize(Roles = "Head Coach")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Event, SelectedLevels")] EventCreateViewModels eventCreateViewModels)
+        public ActionResult Create([Bind(Include = "Event, SelectedLevels")] EventCreateViewModel eventCreateViewModels)
         {
             eventCreateViewModels.Levels = db.Levels.ToList();
 
@@ -107,7 +111,7 @@ namespace WebApplication.Controllers
             }
             return View(@event);
         }
-        //GET: Events/SubscribeCoach/5
+        //GET: Events/CoachJoin/5
         [Authorize(Roles = "Coach")]
         public ActionResult CoachJoin(int? id)
         {
@@ -138,7 +142,7 @@ namespace WebApplication.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
-        //GET: Events/SubscribeCoach/5
+        //GET: Events/CoachLeave/5
         [Authorize(Roles = "Coach")]
         public ActionResult CoachLeave(int? id)
         {
@@ -160,6 +164,25 @@ namespace WebApplication.Controllers
             db.Entry(@event).State = EntityState.Modified;
             db.SaveChanges();
 
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        //GET: Events/MemberJoin/5
+        public ActionResult MemberJoin(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Event Exist ?
+            if (db.Events.Find(id) == null)
+            {
+                return HttpNotFound();
+            }
+            //User not already register ?
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            //Register the user
+            QueuedHelper.Add(user, id.Value);
             return RedirectToAction("Details", new { id = id });
         }
 

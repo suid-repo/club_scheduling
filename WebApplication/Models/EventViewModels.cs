@@ -8,7 +8,7 @@ using WebApplication.Core;
 
 namespace WebApplication.Models
 {
-    public class EventCreateViewModels
+    public class EventCreateViewModel
     {
         public Event Event { get; set; }
         public List<Level> Levels { get; set; }
@@ -16,5 +16,11 @@ namespace WebApplication.Models
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
               ErrorMessageResourceName = "Event_LevelDateRequired")]
         public string[] SelectedLevels  { get; set; }
+    }
+
+    public class EventDetailsViewModel
+    {
+        public Event Event { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }

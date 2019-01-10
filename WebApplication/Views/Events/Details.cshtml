@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity;
-@model WebApplication.Core.Event
+@model WebApplication.Models.EventDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -8,39 +8,39 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Event - @Model.RegisterUsers.Count/@(Model.CoachEvents.Count*8)</h4>
+    <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count*8)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Event.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Event.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.Event.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Event.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
+            @Html.DisplayNameFor(model => model.Event.StartDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.StartDate)
+            @Html.DisplayFor(model => model.Event.StartDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
+            @Html.DisplayNameFor(model => model.Event.EndDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EndDate)
+            @Html.DisplayFor(model => model.Event.EndDate)
         </dd>
 
     </dl>
@@ -48,33 +48,53 @@
 <div class="row">
     @if (User.IsInRole("Coach"))
     {
-        if (!Model.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
+        if (!Model.Event.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Join as a Coach", "CoachJoin", new { id = Model.Id }, new { @class = "btn btn-success btn-block" })
+                @Html.ActionLink("Join as a Coach", "CoachJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
             </div>
         }
         else //Unsubscribe button
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Leave", "CoachLeave", new { id = Model.Id }, new { @class = "btn btn-secondary     btn-block" })
+                @Html.ActionLink("Leave", "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-block" })
             </div>
         }
     }
     else
     {
-
+        if (!(Model.Event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())) || Model.Event.Queued.QueuedItems.Any(q => q.UserId.Equals(User.Identity.GetUserId()))))
+        {
+            if (Model.User.Family == null) // NO FAMILY OR FAMILY MEMBERS
+            {
+                <div class="col-xs-12 col-md-3 mb-1">
+                    @Html.ActionLink("Join", "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                </div>
+            }
+            else
+            {
+                @*<div class="col-xs-12 col-md-3 mb-1">
+                    @Html.ActionLink("Join", "MemberFamillyJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                </div>*@
+            }
+        }
+        else
+        {
+            <div class="col-xs-12 col-md-3 mb-1">
+                @Html.ActionLink("Leave", "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+            </div>
+        }
     }
     @if (User.IsInRole("Head Coach"))
     {
         @*<div class="col-xs-12 col-md-3  mb-1">
 
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-block" })
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Event.Id }, new { @class = "btn btn-primary btn-block" })
 
-        </div>*@
+            </div>*@
         <div class="col-xs-12 col-md-3  mb-1">
 
-            @Html.ActionLink("Cancel", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger btn-block" })
+            @Html.ActionLink("Cancel", "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
 
         </div>
     }

@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201812181113140_CoachEvent Added.Designer.cs">
       <DependentUpon>201812181113140_CoachEvent Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901102215007_Event Queued Linked.cs" />
+    <Compile Include="Migrations\201901102215007_Event Queued Linked.Designer.cs">
+      <DependentUpon>201901102215007_Event Queued Linked.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EventViewModels.cs" />
@@ -277,6 +281,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <EmbeddedResource Include="Migrations\201901102215007_Event Queued Linked.resx">
+      <DependentUpon>201901102215007_Event Queued Linked.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachLeaved.sql" />

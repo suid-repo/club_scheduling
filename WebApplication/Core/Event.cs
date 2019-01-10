@@ -32,5 +32,6 @@ namespace WebApplication.Core
         public virtual ICollection<Level> Levels { get; set; }
         public virtual ICollection<CoachEvent> CoachEvents { get; set; } 
         public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }
+        public virtual Queued Queued { get; set; }
     }
 }
