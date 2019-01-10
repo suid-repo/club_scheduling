@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Core;
 using WebApplication.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication.Controllers
 {
@@ -105,6 +106,36 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index");
             }
             return View(@event);
+        }
+        //GET: Events/SubscribeCoach/5
+        [Authorize(Roles = "Coach")]
+        public ActionResult SubscribeCoach(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Include(c => c.CoachEvents).Where(e => e.Id == id).FirstOrDefault();
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+            //Cannot Add twice the coach
+            if(@event.CoachEvents.Any(ce => ce.UserId == User.Identity.GetUserId()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            @event.CoachEvents.Add 
+                (
+                    new CoachEvent
+                    {
+                        UserId = User.Identity.GetUserId()
+                    }
+                );
+            db.Entry(@event).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = id });
         }
 
         // GET: Events/Delete/5
