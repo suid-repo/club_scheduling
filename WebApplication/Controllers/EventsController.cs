@@ -138,6 +138,31 @@ namespace WebApplication.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+        //GET: Events/SubscribeCoach/5
+        [Authorize(Roles = "Coach")]
+        public ActionResult UnsubscribeCoach(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Event @event = db.Events.Include(c => c.CoachEvents).Where(e => e.Id == id).FirstOrDefault();
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+            //Cannot remove an none existing coach
+            if (!@event.CoachEvents.Any(ce => ce.UserId == User.Identity.GetUserId()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            @event.CoachEvents.Remove(@event.CoachEvents.Where(c => c.UserId == User.Identity.GetUserId()).First());
+            db.Entry(@event).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = id });
+        }
+
         // GET: Events/Delete/5
         [Authorize(Roles = "Head Coach")]
         public ActionResult Delete(int? id)

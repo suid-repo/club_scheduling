@@ -46,35 +46,35 @@
     </dl>
 </div>
 <div class="row">
-    @if (User.IsInRole("Coach") && !Model.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId())))
+    @if (User.IsInRole("Coach"))
     {
-    <div class="col-xs-12 col-md-3 mb-1">
+        if (!Model.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
+        {
+            <div class="col-xs-12 col-md-3 mb-1">
+                @Html.ActionLink("Subscribe as a Coach", "SubscribeCoach", new { id = Model.Id }, new { @class = "btn btn-success btn-block" })
+            </div>
+        }
+        else //Unsubscribe button
+        {
+            <div class="col-xs-12 col-md-3 mb-1">
+                @Html.ActionLink("Unsubscribe", "UnsubscribeCoach", new { id = Model.Id }, new { @class = "btn btn-secondary     btn-block" })
+            </div>
+        }
+    }
+    else
+    {
 
-        @Html.ActionLink("Subscribe as a Coach", "SubscribeCoach", new { id = Model.Id }, new { @class = "btn btn-success btn-block" })
-
-    </div>
     }
     @if (User.IsInRole("Head Coach"))
     {
-        <div class="col-xs-12 col-md-3  mb-1">
+        @*<div class="col-xs-12 col-md-3  mb-1">
 
             @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-block" })
 
-        </div>
-    }
-    @if (User.IsInRole("Head Coach"))
-    {
+        </div>*@
         <div class="col-xs-12 col-md-3  mb-1">
 
             @Html.ActionLink("Cancel", "Delete", new { id = Model.Id }, new { @class = "btn btn-danger btn-block" })
-
-        </div>
-    }
-    @if (User.IsInRole("Head Coach"))
-    {
-        <div class="col-xs-12 col-md-3  mb-1">
-
-            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-block" })
 
         </div>
     }
