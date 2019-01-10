@@ -51,13 +51,13 @@
         if (!Model.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Subscribe as a Coach", "SubscribeCoach", new { id = Model.Id }, new { @class = "btn btn-success btn-block" })
+                @Html.ActionLink("Join as a Coach", "CoachJoin", new { id = Model.Id }, new { @class = "btn btn-success btn-block" })
             </div>
         }
         else //Unsubscribe button
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Unsubscribe", "UnsubscribeCoach", new { id = Model.Id }, new { @class = "btn btn-secondary     btn-block" })
+                @Html.ActionLink("Leave", "CoachLeave", new { id = Model.Id }, new { @class = "btn btn-secondary     btn-block" })
             </div>
         }
     }

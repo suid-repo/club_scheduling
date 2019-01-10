@@ -109,7 +109,7 @@ namespace WebApplication.Controllers
         }
         //GET: Events/SubscribeCoach/5
         [Authorize(Roles = "Coach")]
-        public ActionResult SubscribeCoach(int? id)
+        public ActionResult CoachJoin(int? id)
         {
             if (id == null)
             {
@@ -140,7 +140,7 @@ namespace WebApplication.Controllers
 
         //GET: Events/SubscribeCoach/5
         [Authorize(Roles = "Coach")]
-        public ActionResult UnsubscribeCoach(int? id)
+        public ActionResult CoachLeave(int? id)
         {
             if (id == null)
             {
