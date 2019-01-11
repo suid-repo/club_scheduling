@@ -71,7 +71,9 @@ namespace WebApplication.Controllers
                         .FirstOrDefault());
                 }
 
-                db.Events.Add(eventCreateViewModels.Event);
+                eventCreateViewModels.Event.Queued = new Queued();
+
+                db.Events.Add(eventCreateViewModels.Event);                
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -182,7 +184,7 @@ namespace WebApplication.Controllers
             //User not already register ?
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
             //Register the user
-            QueuedHelper.Add(user, id.Value);
+            QueuedHelper.Add(db, user, id.Value);
             return RedirectToAction("Details", new { id = id });
         }
 

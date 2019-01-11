@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using WebApplication.Core;
@@ -12,21 +13,20 @@ namespace WebApplication.Helpers
     public static class QueuedHelper
     {
         // ADD AN USER IN THE QUEUED
-        public static bool Add(ApplicationUser user, int EventId)
+        public static bool Add(ApplicationDbContext context, ApplicationUser user, int EventId)
         {
             try
             {
-                using (ApplicationDbContext context = new ApplicationDbContext())
-                {
-                    context.Queueds.First(q => q.EventId == EventId).QueuedItems
-                        .Add(new QueuedItem()
-                        {
-                            User = user
-                        });
-                    context.SaveChanges();
-                }
+                Queued queued = context.Queueds.First(q => q.EventId == EventId);
+                queued.QueuedItems
+                    .Add(new QueuedItem()
+                    {
+                        User = user
+                    });
+                context.Entry(queued).State = EntityState.Modified;
+                context.SaveChanges();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }

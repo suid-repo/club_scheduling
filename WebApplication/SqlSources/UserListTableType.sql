@@ -1,3 +1,3 @@
 ﻿CREATE TYPE [dbo].[UserListTableType] AS TABLE (
-    [Id] INT NULL);
+    [Id] NVARCHAR(128) NULL);
 

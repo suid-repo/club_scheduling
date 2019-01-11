@@ -26,6 +26,8 @@ namespace WebApplication.Core
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
               ErrorMessageResourceName = "Event_EndDateRequired")]
         public DateTime EndDate { get; set; }
+        [Display(Name = "Event_CreationTime", ResourceType = typeof(I18N.Core.Core))]
+        public DateTime CreationTime { get; set; }
         [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Core))]
         //[Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
         //      ErrorMessageResourceName = "Event_LevelDateRequired")]

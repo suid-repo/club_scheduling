@@ -4,7 +4,7 @@ AFTER DELETE
 AS
 BEGIN
 	SET NOCOUNT ON
-	DECLARE @eventIdIserted INT = 0;
+	DECLARE @eventIdInserted INT = 0;
     DECLARE @i INT = 0;
 
 	 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
@@ -14,10 +14,10 @@ BEGIN
 		BEGIN TRY
 			SET @i = @i+1;
 			BEGIN TRANSACTION
-                SELECT TOP(1) @eventIdIserted = EventId FROM deleted;
+                SELECT TOP(1) @eventIdInserted = EventId FROM deleted;
                 
                 EXEC P_CoachLeaved
-                @eventId = @eventIdIserted
+                @eventId = @eventIdInserted
                 COMMIT TRANSACTION
 			BREAK		
 		END TRY

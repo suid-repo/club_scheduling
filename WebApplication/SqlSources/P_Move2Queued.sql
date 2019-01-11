@@ -1,9 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[P_Move2Queued]
 	@eventId INT,
+	@insertedTime BIGINT,
 	@userList [UserListTableType] READONLY
 AS
-	INSERT INTO QueuedItems (UserId, QueuedId)
-	SELECT UL.Id, @eventId
+	INSERT INTO QueuedItems (UserId, QueuedId, [Time])
+	SELECT UL.Id, @eventId, @insertedTime
 	FROM @userList AS UL
 
 	DELETE FROM	ApplicationUserEvents
