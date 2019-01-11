@@ -73,11 +73,11 @@ namespace WebApplication.Controllers
 
                 eventCreateViewModels.Event.Queued = new Queued();
 
-                db.Events.Add(eventCreateViewModels.Event);                
+                db.Events.Add(eventCreateViewModels.Event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
             return View(eventCreateViewModels);
         }
 
@@ -126,12 +126,12 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            //Cannot Add twice the coach
-            if(@event.CoachEvents.Any(ce => ce.UserId == User.Identity.GetUserId()))
+            //PREVENT ADD TWICE THE COACH
+            if (@event.CoachEvents.Any(ce => ce.UserId == User.Identity.GetUserId()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            @event.CoachEvents.Add 
+            @event.CoachEvents.Add
                 (
                     new CoachEvent
                     {
@@ -157,7 +157,7 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            //Cannot remove an none existing coach
+            //PREVENT TO REMOVE A COACH WHO DOES NOT EXIST
             if (!@event.CoachEvents.Any(ce => ce.UserId == User.Identity.GetUserId()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -177,14 +177,56 @@ namespace WebApplication.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Event Exist ?
-            if (db.Events.Find(id) == null)
+            Event @event = db.Events.Find(id);
+            if (@event == null)
             {
                 return HttpNotFound();
             }
-            //User not already register ?
+            //PREVENT REGISTER USER TWICE
+            if (@event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
             //Register the user
             QueuedHelper.Add(db, user, id.Value);
+            return RedirectToAction("Details", new { id = id });
+        }
+
+        //GET: Events/MemberLeave/5
+        public ActionResult MemberLeave(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Event Exist ?
+            Event @event = db.Events.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+                        
+            if (@event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())))
+            {
+                //REMOVE THE USER FROM THE EVENT
+                @event.RegisterUsers.Remove(@event.RegisterUsers.Where(ru => ru.Id.Equals(User.Identity.GetUserId())).First());
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            else if (@event.Queued.QueuedItems.Any(ru => ru.UserId.Equals(User.Identity.GetUserId())))
+            {
+                //LOAD USER DATA
+                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+                //REMOVE THE USER FROM THE QUEUE
+                QueuedHelper.Remove(db, user, id.Value);
+            }
+            else //PREVENT LEAVE AN NONE EXISTING USER
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            
             return RedirectToAction("Details", new { id = id });
         }
 
