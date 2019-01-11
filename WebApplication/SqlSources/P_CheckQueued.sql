@@ -1,19 +1,19 @@
 ﻿CREATE PROCEDURE [dbo].[P_CheckQueued]
 	@queuedId INT = 0
 AS
-	DECLARE @queuedList QueuedListTableType;
-	DECLARE @cursor INT = 0;
+	DECLARE @queuedList QueuedListTableType
+	DECLARE @cursor INT = 0
 
 	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 
 	WHILE (@cursor < 10)
 	BEGIN
-		SET @cursor = @cursor + 1;
+		SET @cursor = @cursor + 1
 		BEGIN TRY
 			BEGIN TRANSACTION
 			-- CHOOSE THE EVENT(S) TO CHECK
 			IF @queuedId > 0
-				INSERT INTO @queuedList VALUES (@QueuedId);
+				INSERT INTO @queuedList VALUES (@QueuedId)
 			ELSE
 				INSERT INTO @queuedList
 				SELECT Q.EventId
@@ -32,18 +32,18 @@ AS
 			WHILE @@FETCH_STATUS = 0
 			BEGIN
 				EXEC P_CoachJoined @queuedId
+				FETCH NEXT FROM MY_CURSOR INTO @queuedId
 			END 
 			CLOSE MY_CURSOR
 			DEALLOCATE MY_CURSOR
-			COMMIT TRANSACTION
+			COMMIT
 			BREAK
 		END TRY
 		BEGIN CATCH
 			ROLLBACK TRANSACTION
 			IF(ERROR_NUMBER() = 1205)
-				CONTINUE;
+				CONTINUE
 			ELSE
-				BREAK;
 				THROW
 		END CATCH
 	END

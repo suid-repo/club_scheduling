@@ -138,7 +138,17 @@ namespace WebApplication.Migrations
                     }
             }
 
-            if(context.Database.SqlQuery<int>("IF object_id(N'P_Move2Event') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            if (context.Database.SqlQuery<int>("IF TYPE_ID(N'FamilyQueuedListTableType') IS NULL SELECT 1 ELSE SELECT 0;").FirstOrDefault() == 1)
+            {
+
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.FamilyQueuedListTableType.sql"))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
+                }
+            }
+
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_Move2Event') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
             {
                 using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_Move2Event.sql"))
                 using (StreamReader reader = new StreamReader(stream))
