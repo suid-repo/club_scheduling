@@ -257,3 +257,6 @@ C:\Git\GitHub\club_scheduling\WebApplication\bin\System.Memory.xml
 C:\Git\GitHub\club_scheduling\WebApplication\bin\System.Numerics.Vectors.xml
 C:\Git\GitHub\club_scheduling\WebApplication\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Git\GitHub\club_scheduling\WebApplication\obj\Debug\WebApplication.Migrations.EventCreationTimeAdded.resources
+C:\Git\GitHub\club_scheduling\WebApplication\bin\SendGrid.dll
+C:\Git\GitHub\club_scheduling\WebApplication\bin\SendGrid.pdb
+C:\Git\GitHub\club_scheduling\WebApplication\bin\SendGrid.xml
