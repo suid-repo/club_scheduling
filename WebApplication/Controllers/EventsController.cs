@@ -252,7 +252,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Find(id);
+            Event @event = db.Events.Include(e => e.CoachEvents).Include(e => e.RegisterUsers).Include(e => e.Queued).Where(e => e.Id == id).FirstOrDefault();
             db.Events.Remove(@event);
             db.SaveChanges();
             return RedirectToAction("Index");
