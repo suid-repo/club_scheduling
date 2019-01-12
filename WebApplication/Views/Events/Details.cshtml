@@ -2,10 +2,10 @@
 @model WebApplication.Models.EventDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = I18N.Core.Event.Event_Details_Title;
 }
 
-<h2>Details</h2>
+<h2>@I18N.Core.Event.Event_Details_Title</h2>
 
 <div>
     <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count*8)</h4>
@@ -51,13 +51,13 @@
         if (!Model.Event.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Join as a Coach", "CoachJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                @Html.ActionLink(I18N.Core.Event.Event_Action_JoinCoach, "CoachJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
             </div>
         }
         else //Unsubscribe button
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Leave", "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-block" })
+                @Html.ActionLink(I18N.Core.Event.Event_Action_LeaveCoach, "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-block" })
             </div>
         }
     }
@@ -68,20 +68,20 @@
             if (Model.User.Family == null) // NO FAMILY OR FAMILY MEMBERS
             {
                 <div class="col-xs-12 col-md-3 mb-1">
-                    @Html.ActionLink("Join", "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                    @Html.ActionLink(I18N.Core.Event.Event_Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
                 </div>
             }
             else
             {
                 @*<div class="col-xs-12 col-md-3 mb-1">
-                    @Html.ActionLink("Join", "MemberFamillyJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
-                </div>*@
+                        @Html.ActionLink(I18N.Core.Event.Event_Action_JoinMember, "MemberFamillyJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                    </div>*@
             }
         }
         else
         {
             <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink("Leave", "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+                @Html.ActionLink(I18N.Core.Event.Event_Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
             </div>
         }
     }
@@ -89,12 +89,12 @@
     {
         @*<div class="col-xs-12 col-md-3  mb-1">
 
-                @Html.ActionLink("Edit", "Edit", new { id = Model.Event.Id }, new { @class = "btn btn-primary btn-block" })
+                @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = Model.Event.Id }, new { @class = "btn btn-primary btn-block" })
 
             </div>*@
         <div class="col-xs-12 col-md-3  mb-1">
 
-            @Html.ActionLink("Cancel", "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+            @Html.ActionLink(I18N.Core.GenericAction.cancel, "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
 
         </div>
     }
@@ -102,5 +102,5 @@
 </div>
 
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(I18N.Core.GenericAction.back2list, "Index")
 </p>

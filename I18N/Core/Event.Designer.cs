@@ -61,20 +61,155 @@ namespace I18N.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Join as a Coach.
+        /// </summary>
+        public static string Event_Action_JoinCoach {
+            get {
+                return ResourceManager.GetString("Event_Action_JoinCoach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join.
+        /// </summary>
+        public static string Event_Action_JoinMember {
+            get {
+                return ResourceManager.GetString("Event_Action_JoinMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave.
+        /// </summary>
+        public static string Event_Action_LeaveCoach {
+            get {
+                return ResourceManager.GetString("Event_Action_LeaveCoach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leave.
+        /// </summary>
+        public static string Event_Action_LeaveMember {
+            get {
+                return ResourceManager.GetString("Event_Action_LeaveMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
-        public static string Event_EndDate {
+        public static string Event_Core_EndDate {
             get {
-                return ResourceManager.GetString("Event_EndDate", resourceCulture);
+                return ResourceManager.GetString("Event_Core_EndDate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The end date is required..
         /// </summary>
-        public static string Event_EndDateRequired {
+        public static string Event_Core_EndDateRequired {
             get {
-                return ResourceManager.GetString("Event_EndDateRequired", resourceCulture);
+                return ResourceManager.GetString("Event_Core_EndDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string Event_Core_Level {
+            get {
+                return ResourceManager.GetString("Event_Core_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to choose at least one practice level..
+        /// </summary>
+        public static string Event_Core_LevelDateRequired {
+            get {
+                return ResourceManager.GetString("Event_Core_LevelDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Event_Core_Name {
+            get {
+                return ResourceManager.GetString("Event_Core_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name field is required..
+        /// </summary>
+        public static string Event_Core_NameRequired {
+            get {
+                return ResourceManager.GetString("Event_Core_NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date.
+        /// </summary>
+        public static string Event_Core_StartDate {
+            get {
+                return ResourceManager.GetString("Event_Core_StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The start date is required..
+        /// </summary>
+        public static string Event_Core_StartDateRequired {
+            get {
+                return ResourceManager.GetString("Event_Core_StartDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create an event.
+        /// </summary>
+        public static string Event_Create_Title {
+            get {
+                return ResourceManager.GetString("Event_Create_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this?.
+        /// </summary>
+        public static string Event_Delete_Dislamer {
+            get {
+                return ResourceManager.GetString("Event_Delete_Dislamer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete this event.
+        /// </summary>
+        public static string Event_Delete_Title {
+            get {
+                return ResourceManager.GetString("Event_Delete_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Event_Details_Title {
+            get {
+                return ResourceManager.GetString("Event_Details_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit this event.
+        /// </summary>
+        public static string Event_Edit_Title {
+            get {
+                return ResourceManager.GetString("Event_Edit_Title", resourceCulture);
             }
         }
         
@@ -102,60 +237,6 @@ namespace I18N.Core {
         public static string Event_Index_To {
             get {
                 return ResourceManager.GetString("Event_Index_To", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Level.
-        /// </summary>
-        public static string Event_Level {
-            get {
-                return ResourceManager.GetString("Event_Level", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You have to choose at least one practice level..
-        /// </summary>
-        public static string Event_LevelDateRequired {
-            get {
-                return ResourceManager.GetString("Event_LevelDateRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Event_Name {
-            get {
-                return ResourceManager.GetString("Event_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The name field is required..
-        /// </summary>
-        public static string Event_NameRequired {
-            get {
-                return ResourceManager.GetString("Event_NameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start date.
-        /// </summary>
-        public static string Event_StartDate {
-            get {
-                return ResourceManager.GetString("Event_StartDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The start date is required..
-        /// </summary>
-        public static string Event_StartDateRequired {
-            get {
-                return ResourceManager.GetString("Event_StartDateRequired", resourceCulture);
             }
         }
     }

@@ -61,7 +61,7 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create new.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string add {
             get {
@@ -84,6 +84,24 @@ namespace I18N.Core {
         public static string cancel {
             get {
                 return ResourceManager.GetString("cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string create {
+            get {
+                return ResourceManager.GetString("create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new.
+        /// </summary>
+        public static string create_new {
+            get {
+                return ResourceManager.GetString("create_new", resourceCulture);
             }
         }
         
@@ -129,6 +147,15 @@ namespace I18N.Core {
         public static string read_more {
             get {
                 return ResourceManager.GetString("read_more", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string save {
+            get {
+                return ResourceManager.GetString("save", resourceCulture);
             }
         }
         

@@ -10,7 +10,7 @@
 @if (User.IsInRole("Head Coach"))
 {
     <p>
-        @Html.ActionLink(I18N.Core.GenericAction.add, "Create", null, new { @class = "btn btn-success btn-sm" })
+        @Html.ActionLink(I18N.Core.GenericAction.create_new, "Create", null, new { @class = "btn btn-success btn-sm" })
     </p>
 }
     <div class="row">

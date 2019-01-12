@@ -13,22 +13,22 @@ namespace WebApplication.Core
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Display(Name="Event_Name", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name="Event_Core_Name", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
-              ErrorMessageResourceName = "Event_NameRequired")]
+              ErrorMessageResourceName = "Event_Core_NameRequired")]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Event_StartDate", ResourceType = typeof(I18N.Core.Event))]
-        [Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
-              ErrorMessageResourceName = "Event_StartDateRequired")]
-        public DateTime StartDate { get; set; }
-        [Display(Name = "Event_EndDate", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "Event_Core_StartDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
-              ErrorMessageResourceName = "Event_EndDateRequired")]
+              ErrorMessageResourceName = "Event_Core_StartDateRequired")]
+        public DateTime StartDate { get; set; }
+        [Display(Name = "Event_Core_EndDate", ResourceType = typeof(I18N.Core.Event))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
+              ErrorMessageResourceName = "Event_Core_EndDateRequired")]
         public DateTime EndDate { get; set; }
-        [Display(Name = "Event_CreationTime", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "Event_Core_CreationTime", ResourceType = typeof(I18N.Core.Event))]
         public DateTime CreationTime { get; set; }
-        [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "Event_Core_Level", ResourceType = typeof(I18N.Core.Event))]
         public virtual ICollection<Level> Levels { get; set; }
         public virtual ICollection<CoachEvent> CoachEvents { get; set; } 
         public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }

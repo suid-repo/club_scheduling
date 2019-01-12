@@ -117,13 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Event_EndDate" xml:space="preserve">
+  <data name="Event_Action_JoinCoach" xml:space="preserve">
+    <value>Join as a Coach</value>
+  </data>
+  <data name="Event_Action_JoinMember" xml:space="preserve">
+    <value>Join</value>
+  </data>
+  <data name="Event_Action_LeaveCoach" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="Event_Action_LeaveMember" xml:space="preserve">
+    <value>Leave</value>
+  </data>
+  <data name="Event_Core_EndDate" xml:space="preserve">
     <value>End date</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_EndDateRequired" xml:space="preserve">
+  <data name="Event_Core_EndDateRequired" xml:space="preserve">
     <value>The end date is required.</value>
     <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Core_Level" xml:space="preserve">
+    <value>Level</value>
+    <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Core_LevelDateRequired" xml:space="preserve">
+    <value>You have to choose at least one practice level.</value>
+    <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Core_Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Core_NameRequired" xml:space="preserve">
+    <value>The name field is required.</value>
+    <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Core_StartDate" xml:space="preserve">
+    <value>Start date</value>
+    <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Core_StartDateRequired" xml:space="preserve">
+    <value>The start date is required.</value>
+    <comment>WebApplication.Core.Event</comment>
+  </data>
+  <data name="Event_Create_Title" xml:space="preserve">
+    <value>Create an event</value>
+  </data>
+  <data name="Event_Delete_Dislamer" xml:space="preserve">
+    <value>Are you sure you want to delete this?</value>
+  </data>
+  <data name="Event_Delete_Title" xml:space="preserve">
+    <value>Delete this event</value>
+  </data>
+  <data name="Event_Details_Title" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Event_Edit_Title" xml:space="preserve">
+    <value>Edit this event</value>
   </data>
   <data name="Event_Index_From" xml:space="preserve">
     <value>From</value>
@@ -133,29 +184,5 @@
   </data>
   <data name="Event_Index_To" xml:space="preserve">
     <value>To</value>
-  </data>
-  <data name="Event_Level" xml:space="preserve">
-    <value>Level</value>
-    <comment>WebApplication.Core.Event</comment>
-  </data>
-  <data name="Event_LevelDateRequired" xml:space="preserve">
-    <value>You have to choose at least one practice level.</value>
-    <comment>WebApplication.Core.Event</comment>
-  </data>
-  <data name="Event_Name" xml:space="preserve">
-    <value>Name</value>
-    <comment>WebApplication.Core.Event</comment>
-  </data>
-  <data name="Event_NameRequired" xml:space="preserve">
-    <value>The name field is required.</value>
-    <comment>WebApplication.Core.Event</comment>
-  </data>
-  <data name="Event_StartDate" xml:space="preserve">
-    <value>Start date</value>
-    <comment>WebApplication.Core.Event</comment>
-  </data>
-  <data name="Event_StartDateRequired" xml:space="preserve">
-    <value>The start date is required.</value>
-    <comment>WebApplication.Core.Event</comment>
   </data>
 </root>
