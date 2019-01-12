@@ -21,13 +21,13 @@ namespace WebApplication.Core
         [Display(Name = "Event_Core_StartDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
               ErrorMessageResourceName = "Event_Core_StartDateRequired")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
         [Display(Name = "Event_Core_EndDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
               ErrorMessageResourceName = "Event_Core_EndDateRequired")]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
         [Display(Name = "Event_Core_CreationTime", ResourceType = typeof(I18N.Core.Event))]
