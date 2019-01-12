@@ -122,7 +122,7 @@
     <comment>WebApplication.Core.Event</comment>
   </data>
   <data name="Event_EndDateRequired" xml:space="preserve">
-    <value>The End date is required</value>
+    <value>The end date is required.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
   <data name="Event_Level" xml:space="preserve">
@@ -138,7 +138,7 @@
     <comment>WebApplication.Core.Event</comment>
   </data>
   <data name="Event_NameRequired" xml:space="preserve">
-    <value>The name field is required</value>
+    <value>The name field is required.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
   <data name="Event_StartDate" xml:space="preserve">
@@ -146,7 +146,7 @@
     <comment>WebApplication.Core.Event</comment>
   </data>
   <data name="Event_StartDateRequired" xml:space="preserve">
-    <value>The Start date is required</value>
+    <value>The start date is required.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
   <data name="Level_Name" xml:space="preserve">
@@ -154,7 +154,7 @@
     <comment>WebApplication.Core.Level</comment>
   </data>
   <data name="Level_NameRequired" xml:space="preserve">
-    <value>The name field is required</value>
+    <value>The name field is required.</value>
     <comment>WebApplication.Core.Level</comment>
   </data>
 </root>

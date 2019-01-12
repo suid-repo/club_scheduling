@@ -70,7 +70,7 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The End date is required.
+        ///   Looks up a localized string similar to The end date is required..
         /// </summary>
         public static string Event_EndDateRequired {
             get {
@@ -106,7 +106,7 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name field is required.
+        ///   Looks up a localized string similar to The name field is required..
         /// </summary>
         public static string Event_NameRequired {
             get {
@@ -124,7 +124,7 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Start date is required.
+        ///   Looks up a localized string similar to The start date is required..
         /// </summary>
         public static string Event_StartDateRequired {
             get {
@@ -142,7 +142,7 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name field is required.
+        ///   Looks up a localized string similar to The name field is required..
         /// </summary>
         public static string Level_NameRequired {
             get {

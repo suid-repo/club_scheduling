@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<WebApplication.Core.Event>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = I18N.Core.Event.Event_Index_Title;
 }
 
-<h2>Index</h2>
+<h2>@I18N.Core.Event.Event_Index_Title</h2>
 
 
 @if (User.IsInRole("Head Coach"))
 {
     <p>
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success btn-sm" })
+        @Html.ActionLink(I18N.Core.GenericAction.add, "Create", null, new { @class = "btn btn-success btn-sm" })
     </p>
 }
     <div class="row">
@@ -30,21 +30,21 @@
                         <p class="card-text">
                             @Html.DisplayFor(modelItem => item.Description)
                             <br />
-                            Start : @Html.DisplayFor(modelItem => item.StartDate)
+                            @I18N.Core.Event.Event_Index_From : @Html.DisplayFor(modelItem => item.StartDate)
                             <br />
-                            End : @Html.DisplayFor(modelItem => item.EndDate)
+                            @I18N.Core.Event.Event_Index_To : @Html.DisplayFor(modelItem => item.EndDate)
                         </p>
                     </div>
                     @*@if (User.IsInRole("Head Coach"))
         {
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
         }*@
 
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink(I18N.Core.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-block" })
 
                     @*@if (User.IsInRole("Head Coach"))
         {
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+            @Html.ActionLink(I18N.Core.GenericAction.delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
         }*@
                 </div>
             </div>

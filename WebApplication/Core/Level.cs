@@ -14,8 +14,8 @@ namespace WebApplication.Core
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { set; get; }
-        [Display(Name = "Level_Name", ResourceType = typeof(I18N.Core.Core))]
-        [Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
+        [Display(Name = "Level_Name", ResourceType = typeof(I18N.Core.Level))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.Level),
               ErrorMessageResourceName = "Level_NameRequired")]
         public string Name { get; set; }
         public virtual ICollection<Event> Events { get; set; }
