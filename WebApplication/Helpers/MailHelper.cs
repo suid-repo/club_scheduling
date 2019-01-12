@@ -41,6 +41,21 @@ namespace WebApplication.Helpers
             return await client.SendEmailAsync(msg);
         }
 
+        public static async Task<Response> SendMailAsync(string subject, string htmlContent, EmailAddress email)
+        {
+            SendGridClient client = GetSendGridClient;
+
+            SendGridMessage msg = new SendGridMessage()
+            {
+                From = new EmailAddress(ConfigurationManager.AppSettings.Get("MailSenderEmail"), ConfigurationManager.AppSettings.Get("MailSenderName")),
+                Subject = subject,
+                HtmlContent = htmlContent
+            };
+            msg.AddTo(email);
+
+            return await client.SendEmailAsync(msg);
+        }
+
         public static async Task<Response> SendMailAsync(string subject, string htmlContent, List<EmailAddress> emails)
         {
             SendGridClient client = GetSendGridClient;
