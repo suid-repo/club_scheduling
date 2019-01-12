@@ -97,6 +97,15 @@ namespace I18N.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creation Time.
+        /// </summary>
+        public static string Event_Core_CreationTime {
+            get {
+                return ResourceManager.GetString("Event_Core_CreationTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
         public static string Event_Core_EndDate {

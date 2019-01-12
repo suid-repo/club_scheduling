@@ -21,13 +21,18 @@ namespace WebApplication.Core
         [Display(Name = "Event_Core_StartDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
               ErrorMessageResourceName = "Event_Core_StartDateRequired")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
         [Display(Name = "Event_Core_EndDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
               ErrorMessageResourceName = "Event_Core_EndDateRequired")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
         [Display(Name = "Event_Core_CreationTime", ResourceType = typeof(I18N.Core.Event))]
-        public DateTime CreationTime { get; set; }
+        [DataType(DataType.DateTime)]
+        public DateTime? CreationTime { get; set; }
         [Display(Name = "Event_Core_Level", ResourceType = typeof(I18N.Core.Event))]
         public virtual ICollection<Level> Levels { get; set; }
         public virtual ICollection<CoachEvent> CoachEvents { get; set; } 

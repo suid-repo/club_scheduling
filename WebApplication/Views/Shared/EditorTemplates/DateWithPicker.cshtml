@@ -5,7 +5,10 @@ new { @class = "date form-control" })
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.date').datepicker("dd/mm/yy");
+        $('.date').datepicker({
+            dateFormat: "dd/mm/yy"
+
+        });
     });
 </script>
 

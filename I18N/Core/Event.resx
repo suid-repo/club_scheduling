@@ -129,6 +129,9 @@
   <data name="Event_Action_LeaveMember" xml:space="preserve">
     <value>Leave</value>
   </data>
+  <data name="Event_Core_CreationTime" xml:space="preserve">
+    <value>Creation Time</value>
+  </data>
   <data name="Event_Core_EndDate" xml:space="preserve">
     <value>End date</value>
     <comment>WebApplication.Core.Event</comment>

@@ -270,9 +270,9 @@
     <Compile Include="Migrations\201901102215007_Event Queued Linked.Designer.cs">
       <DependentUpon>201901102215007_Event Queued Linked.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901111104057_Event Creation Time Added.cs" />
-    <Compile Include="Migrations\201901111104057_Event Creation Time Added.Designer.cs">
-      <DependentUpon>201901111104057_Event Creation Time Added.cs</DependentUpon>
+    <Compile Include="Migrations\201901121533088_Event Creation Time Added.cs" />
+    <Compile Include="Migrations\201901121533088_Event Creation Time Added.Designer.cs">
+      <DependentUpon>201901121533088_Event Creation Time Added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -354,8 +354,8 @@
     <EmbeddedResource Include="Migrations\201901102215007_Event Queued Linked.resx">
       <DependentUpon>201901102215007_Event Queued Linked.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901111104057_Event Creation Time Added.resx">
-      <DependentUpon>201901111104057_Event Creation Time Added.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901121533088_Event Creation Time Added.resx">
+      <DependentUpon>201901121533088_Event Creation Time Added.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
@@ -367,6 +367,7 @@
     <EmbeddedResource Include="SqlSources\T_CoachLeaved.sql" />
     <EmbeddedResource Include="SqlSources\UserListTableType.sql" />
     <EmbeddedResource Include="SqlSources\FamilyQueuedListTableType.sql" />
+    <Content Include="Scripts\jquery.validate.date.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
