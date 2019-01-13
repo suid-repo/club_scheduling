@@ -260,3 +260,10 @@ C:\Git\GitHub\club_scheduling\WebApplication\obj\Debug\WebApplication.Migrations
 C:\Git\GitHub\club_scheduling\WebApplication\bin\SendGrid.dll
 C:\Git\GitHub\club_scheduling\WebApplication\bin\SendGrid.pdb
 C:\Git\GitHub\club_scheduling\WebApplication\bin\SendGrid.xml
+C:\Git\GitHub\club_scheduling\WebApplication\bin\Microsoft.IdentityModel.Logging.dll
+C:\Git\GitHub\club_scheduling\WebApplication\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Git\GitHub\club_scheduling\WebApplication\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Git\GitHub\club_scheduling\WebApplication\bin\Twilio.dll
+C:\Git\GitHub\club_scheduling\WebApplication\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Git\GitHub\club_scheduling\WebApplication\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Git\GitHub\club_scheduling\WebApplication\bin\Twilio.xml
