@@ -31,3 +31,27 @@
 }
 
 </table>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Level</th>
+        <th>Email</th>
+        <th></th>
+    </tr>
+    <tbody>
+        @if (ViewBag.FamilyMembers != null)
+        {
+            foreach (var item in ViewBag.FamilyMembers)
+            {
+        <tr id="row_@item.Id">
+            <td>@item.Name</td>
+            <td>@item.Level</td>
+            <td>@item.Email</td>
+            <td><a href="a" class="btn btn-danger" onclick="ConfirmDelete(@item.Id)"></a></td>
+            <td><a href="a" class="btn btn-success" onclick="AddEditFamilyMember(@item.Id)"></a></td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>
