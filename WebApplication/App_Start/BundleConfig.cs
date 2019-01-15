@@ -22,10 +22,12 @@ namespace WebApplication
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap4-toggle.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap4-toggle.css",
                       "~/Content/jquery-ui.css",
                       "~/Content/jquery-ui-timepicker-addon.css",
                       "~/Content/site.css"));

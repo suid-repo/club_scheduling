@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<WebApplication.Core.Event>
 
 @{
-    ViewBag.Title = I18N.Core.Event.Event_Index_Title;
+    ViewBag.Title = I18N.View.Event.Index_Title;
 }
 
-<h2>@I18N.Core.Event.Event_Index_Title</h2>
+<h2>@I18N.View.Event.Index_Title</h2>
 
 
 @if (User.IsInRole("Head Coach"))
 {
     <p>
-        @Html.ActionLink(I18N.Core.GenericAction.create_new, "Create", null, new { @class = "btn btn-success btn-sm" })
+        @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-success btn-sm" })
     </p>
 }
     <div class="row">
@@ -30,9 +30,9 @@
                         <p class="card-text">
                             @Html.DisplayFor(modelItem => item.Description)
                             <br />
-                            @I18N.Core.Event.Event_Index_From : @Html.DisplayFor(modelItem => item.StartDate)
+                            @I18N.View.Event.Index_From : @Html.DisplayFor(modelItem => item.StartDate)
                             <br />
-                            @I18N.Core.Event.Event_Index_To : @Html.DisplayFor(modelItem => item.EndDate)
+                            @I18N.View.Event.Index_To : @Html.DisplayFor(modelItem => item.EndDate)
                         </p>
                     </div>
                     @*@if (User.IsInRole("Head Coach"))
@@ -40,7 +40,7 @@
             @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
         }*@
 
-                    @Html.ActionLink(I18N.Core.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-block" })
+                    @Html.ActionLink(I18N.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-block" })
 
                     @*@if (User.IsInRole("Head Coach"))
         {

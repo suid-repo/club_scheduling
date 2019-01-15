@@ -1,10 +1,10 @@
 ﻿@model WebApplication.Core.Event
 
 @{
-    ViewBag.Title = I18N.Core.Event.Event_Edit_Title;
+    ViewBag.Title = I18N.View.Event.Edit_Title;
 }
 
-<h2>@I18N.Core.Event.Event_Edit_Title</h2>
+<h2>@I18N.View.Event.Edit_Title</h2>
 
 
 @using (Html.BeginForm())
@@ -50,14 +50,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="@I18N.Core.GenericAction.save" class="btn btn-default" />
+                <input type="submit" value="@I18N.GenericAction.save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink(I18N.Core.GenericAction.back2list, "Index")
+    @Html.ActionLink(I18N.GenericAction.back2list, "Index")
 </div>
 
 @section Scripts {

@@ -61,42 +61,6 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Join as a Coach.
-        /// </summary>
-        public static string Event_Action_JoinCoach {
-            get {
-                return ResourceManager.GetString("Event_Action_JoinCoach", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Join.
-        /// </summary>
-        public static string Event_Action_JoinMember {
-            get {
-                return ResourceManager.GetString("Event_Action_JoinMember", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leave.
-        /// </summary>
-        public static string Event_Action_LeaveCoach {
-            get {
-                return ResourceManager.GetString("Event_Action_LeaveCoach", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leave.
-        /// </summary>
-        public static string Event_Action_LeaveMember {
-            get {
-                return ResourceManager.GetString("Event_Action_LeaveMember", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Creation Time.
         /// </summary>
         public static string Event_Core_CreationTime {
@@ -174,78 +138,6 @@ namespace I18N.Core {
         public static string Event_Core_StartDateRequired {
             get {
                 return ResourceManager.GetString("Event_Core_StartDateRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Create an event.
-        /// </summary>
-        public static string Event_Create_Title {
-            get {
-                return ResourceManager.GetString("Event_Create_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete this?.
-        /// </summary>
-        public static string Event_Delete_Dislamer {
-            get {
-                return ResourceManager.GetString("Event_Delete_Dislamer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete this event.
-        /// </summary>
-        public static string Event_Delete_Title {
-            get {
-                return ResourceManager.GetString("Event_Delete_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Details.
-        /// </summary>
-        public static string Event_Details_Title {
-            get {
-                return ResourceManager.GetString("Event_Details_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit this event.
-        /// </summary>
-        public static string Event_Edit_Title {
-            get {
-                return ResourceManager.GetString("Event_Edit_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to From.
-        /// </summary>
-        public static string Event_Index_From {
-            get {
-                return ResourceManager.GetString("Event_Index_From", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Events List.
-        /// </summary>
-        public static string Event_Index_Title {
-            get {
-                return ResourceManager.GetString("Event_Index_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To.
-        /// </summary>
-        public static string Event_Index_To {
-            get {
-                return ResourceManager.GetString("Event_Index_To", resourceCulture);
             }
         }
     }

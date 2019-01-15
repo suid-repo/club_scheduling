@@ -12,15 +12,21 @@ namespace WebApplication.Models
     {
         public Event Event { get; set; }
         public List<Level> Levels { get; set; }
-        [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Core))]
-        [Required(ErrorMessageResourceType = typeof(I18N.Core.Core),
+        [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Level))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.Level),
               ErrorMessageResourceName = "Event_LevelDateRequired")]
-        public string[] SelectedLevels  { get; set; }
+        public string[] SelectedLevels { get; set; }
     }
 
     public class EventDetailsViewModel
     {
         public Event Event { get; set; }
         public ApplicationUser User { get; set; }
+    }
+
+    public class EventFamilyModalViewModel
+    {
+        public ApplicationUser User { get; set; }
+        public string[] UsersSelected { get; set; }
     }
 }

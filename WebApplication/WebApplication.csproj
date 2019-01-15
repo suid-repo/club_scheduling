@@ -339,6 +339,8 @@
     <Content Include="Content\bootstrap-theme-rtl.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap4-toggle.css" />
+    <Content Include="Content\bootstrap4-toggle.min.css" />
     <Content Include="Content\images\club.jpg" />
     <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
@@ -360,6 +362,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap4-toggle.js" />
+    <Content Include="Scripts\bootstrap4-toggle.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -382,6 +386,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\bootstrap4-toggle.min.js.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -475,6 +480,7 @@
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateWithPicker.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTimeWithPicker.cshtml" />
+    <Content Include="Views\Events\_FamilyModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
