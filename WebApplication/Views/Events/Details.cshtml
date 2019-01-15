@@ -8,7 +8,7 @@
 <h2>@I18N.View.Event.Details_Title</h2>
 
 <div>
-    <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count*8)</h4>
+    <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count * 8)</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -73,9 +73,9 @@
             }
             else
             {
-                @*<div class="col-xs-12 col-md-3 mb-1">
-                        @Html.ActionLink(I18N.Core.Event.Event_Action_JoinMember, "MemberFamillyJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
-                    </div>*@
+                <div class="col-xs-12 col-md-3 mb-1">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMember</button>
+                </div>
             }
         }
         else
@@ -104,3 +104,5 @@
 <p>
     @Html.ActionLink(I18N.GenericAction.back2list, "Index")
 </p>
+
+@{Html.RenderAction("_FamilyModal");}

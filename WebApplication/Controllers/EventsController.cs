@@ -258,6 +258,17 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public PartialViewResult _FamilyModal()
+        {
+            string userId = User.Identity.GetUserId();
+            EventFamilyModalViewModel model = new EventFamilyModalViewModel();
+            model.User = db.Users.Include(u => u.Family).Include(u => u.Family.Users).Where(u => u.Id.Equals(userId)).FirstOrDefault();
+
+
+            return PartialView(model);
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

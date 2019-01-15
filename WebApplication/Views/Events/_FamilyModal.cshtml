@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity;
 @model WebApplication.Models.EventFamilyModalViewModel
 
-<div class="modal" tabindex="-1" role="dialog">
+<div class="modal" id="event-family-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -25,10 +25,10 @@
                         @foreach (var member in Model.User.Family.Users.Where(u => !u.Id.Equals(User.Identity.GetUserId())))
                         {
                             <tr>
-                                <td>@Html.DisplayFor(u => u.User.FirstName)</td>
-                                <td>@Html.DisplayFor(u => u.User.LastName)</td>
+                                <td>@member.FirstName</td>
+                                <td>@member.LastName</td>
                                 <td>Level ?</td>
-                                <td>@Html.DisplayFor(u => u.User.BirthDay)</td>
+                                <td>@member.BirthDay</td>
                                 <td></td>
                             </tr>
                         }
