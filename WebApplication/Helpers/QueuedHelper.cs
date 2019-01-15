@@ -26,7 +26,7 @@ namespace WebApplication.Helpers
                 context.Entry(queued).State = EntityState.Modified;
                 context.SaveChanges();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
