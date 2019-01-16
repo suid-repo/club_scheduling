@@ -11,25 +11,22 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    [Authorize(Roles = "FamilyOwner, FamilyMember")]
     public class FamiliesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // Does this go here?? Both or just FamilyOwner??
-        [Authorize(Roles = "FamilyOwner")]
+        // Does this go here?? [Authorize(Roles = "Owner")]
         // GET: Families
         public ActionResult Index()
         {
             /*
-            Get Current Logged in details
+             * // Get Current Logged in details
             ApplicationUser user = getUserDetails();
             */
-            
             return View(db.Families.ToList());
         }
 
-        [Authorize(Roles = "FamilyOwner, FamilyMember")]
+        [Authorize(Roles = "Owner")]
         // GET: Families/Details/5
         public ActionResult Details(int? id)
         {
@@ -45,24 +42,21 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        // When you create a family the user gets assigned the FamilyOwner role        
+        // When you create a family you get the owner role for that family [Authorize(Roles = "Owner")]
         // GET: Families/Create
         public ActionResult Create()
         {
             return View();
         }
-
         // POST: Families/Create
-        // When you create a family you get the owner role for that family     
+
+        // When you create a family you get the owner role for that family [Authorize(Roles = "Owner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Family family)
         {
             if (ModelState.IsValid)
             {
-                // Make current user family owner
-                // How to assign their role here??
-                user.Roles = "FamilyOwner";
                 db.Families.Add(family);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -71,15 +65,15 @@ namespace WebApplication.Controllers
             return View(family);
         }
         // Get the current user
-        /* need to update this??
-        public ApplicationUser getUserDetails()
+        /*
+         * public ApplicationUser getUserDetails()
         {
             ApplicationDbContext AppAuthDb = new ApplicationDbContext();
             return AppAuthDb.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
         }
         */
 
-        [Authorize(Roles = "FamilyOwner")]
+        [Authorize(Roles = "Owner")]
         // GET: Families/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -94,9 +88,9 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
-
-        [Authorize(Roles = "FamilyOwner")]
         // POST: Families/Edit/5
+
+        [Authorize(Roles = "Owner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
@@ -110,7 +104,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        [Authorize(Roles = "FamilyOwner")]
+        [Authorize(Roles = "Owner")]
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -125,9 +119,9 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
+        // POST: Families/Delete/5
 
-        [Authorize(Roles = "FamilyOwner")]
-        // POST: Families/Delete/5      
+        [Authorize(Roles = "Owner")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
