@@ -268,3 +268,7 @@ I18N/obj/Debug/
 WebApplication/bin/
 
 WebApplication/obj/Debug/
+
+WebApplication\.Tests/bin/Debug/
+
+WebApplication\.Tests/obj/Debug/

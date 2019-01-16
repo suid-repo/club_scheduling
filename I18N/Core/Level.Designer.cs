@@ -61,15 +61,6 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The level is required.
-        /// </summary>
-        public static string Event_LevelRequired {
-            get {
-                return ResourceManager.GetString("Event_LevelRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Level_Name {

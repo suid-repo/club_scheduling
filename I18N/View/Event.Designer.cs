@@ -115,6 +115,24 @@ namespace I18N.View {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string Create_Level {
+            get {
+                return ResourceManager.GetString("Create_Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The level field is required.
+        /// </summary>
+        public static string Create_LevelRequired {
+            get {
+                return ResourceManager.GetString("Create_LevelRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create an event.
         /// </summary>
         public static string Create_Title {

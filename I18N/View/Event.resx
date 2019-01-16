@@ -129,6 +129,12 @@
   <data name="Action_LeaveMember" xml:space="preserve">
     <value>Leave</value>
   </data>
+  <data name="Create_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Create_LevelRequired" xml:space="preserve">
+    <value>The level field is required</value>
+  </data>
   <data name="Create_Title" xml:space="preserve">
     <value>Create an event</value>
   </data>

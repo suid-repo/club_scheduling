@@ -12,9 +12,9 @@ namespace WebApplication.Models
     {
         public Event Event { get; set; }
         public List<Level> Levels { get; set; }
-        [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Level))]
-        [Required(ErrorMessageResourceType = typeof(I18N.Core.Level),
-              ErrorMessageResourceName = "Event_LevelRequired")]
+        [Display(Name = "Create_Level", ResourceType = typeof(I18N.View.Event))]
+        [Required(ErrorMessageResourceType = typeof(I18N.View.Event),
+              ErrorMessageResourceName = "Create_LevelRequired")]
         public string[] SelectedLevels { get; set; }
     }
 
