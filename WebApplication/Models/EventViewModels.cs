@@ -14,7 +14,7 @@ namespace WebApplication.Models
         public List<Level> Levels { get; set; }
         [Display(Name = "Event_Level", ResourceType = typeof(I18N.Core.Level))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Level),
-              ErrorMessageResourceName = "Event_LevelDateRequired")]
+              ErrorMessageResourceName = "Event_LevelRequired")]
         public string[] SelectedLevels { get; set; }
     }
 

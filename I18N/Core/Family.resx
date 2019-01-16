@@ -117,15 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Event_LevelRequired" xml:space="preserve">
-    <value>The level is required</value>
-  </data>
-  <data name="Level_Name" xml:space="preserve">
+  <data name="Family_Name" xml:space="preserve">
     <value>Name</value>
-    <comment>WebApplication.Core.Level</comment>
   </data>
-  <data name="Level_NameRequired" xml:space="preserve">
-    <value>The name field is required.</value>
-    <comment>WebApplication.Core.Level</comment>
+  <data name="Family_NameRequired" xml:space="preserve">
+    <value />
   </data>
 </root>
