@@ -12,8 +12,14 @@ namespace WebApplication.Core
     //THINK ABOUT ATTRIBUTES
     public class Family
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        [Display(Name = "Family_Name", ResourceType = typeof(I18N.WebApplication))]
+        [Required(ErrorMessageResourceType = typeof(I18N.WebApplication),
+              ErrorMessageResourceName = "Family_NameRequired")]
         public string Name { get; set; }
+
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }
