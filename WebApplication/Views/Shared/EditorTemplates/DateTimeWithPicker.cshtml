@@ -1,0 +1,16 @@
+﻿@model DateTime?
+
+@Html.TextBox("", (Model.HasValue ? Model.Value.ToString("dd/mm/yy HH:mm") : string.Empty),
+new { @class = "date form-control" })
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.date')
+            .datetimepicker({
+                dateFormat: "dd/mm/yy",
+                timeFormat: "hh:mm"
+            });
+    });
+</script>
+
+

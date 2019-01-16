@@ -1,8 +1,12 @@
 C:\Git\Github\club_scheduling\I18N\bin\Debug\I18N.dll
 C:\Git\Github\club_scheduling\I18N\bin\Debug\I18N.pdb
-C:\Git\Github\club_scheduling\I18N\obj\Debug\I18N.Core.Core.resources
 C:\Git\Github\club_scheduling\I18N\obj\Debug\I18N.WebApplication.resources
 C:\Git\Github\club_scheduling\I18N\obj\Debug\I18N.csproj.GenerateResource.cache
 C:\Git\Github\club_scheduling\I18N\obj\Debug\I18N.csproj.CoreCompileInputs.cache
 C:\Git\Github\club_scheduling\I18N\obj\Debug\I18N.dll
 C:\Git\Github\club_scheduling\I18N\obj\Debug\I18N.pdb
+C:\Git\GitHub\club_scheduling\I18N\obj\Debug\I18N.Core.Event.resources
+C:\Git\GitHub\club_scheduling\I18N\obj\Debug\I18N.Core.Level.resources
+C:\Git\GitHub\club_scheduling\I18N\obj\Debug\I18N.csprojAssemblyReference.cache
+C:\Git\GitHub\club_scheduling\I18N\obj\Debug\I18N.GenericAction.resources
+C:\Git\GitHub\club_scheduling\I18N\obj\Debug\I18N.View.Event.resources

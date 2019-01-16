@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using SendGrid.Helpers.Mail;
 using WebApplication.Models;
 
 namespace WebApplication
@@ -19,7 +20,7 @@ namespace WebApplication
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            return Helpers.MailHelper.SendMailAsync(message.Subject, message.Body, new EmailAddress(message.Destination));
         }
     }
 
@@ -28,7 +29,7 @@ namespace WebApplication
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
+            return Helpers.SmsHelper.SendSmsAsync(message.Body, message.Destination);
         }
     }
 

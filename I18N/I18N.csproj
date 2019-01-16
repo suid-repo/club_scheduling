@@ -41,13 +41,54 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Core.Designer.cs" />
+    <Compile Include="Core\Event.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Event.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GenericAction.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenericAction.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Level.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Level.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebApplication.Designer.cs" />
+    <Compile Include="View\Event.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Event.resx</DependentUpon>
+    </Compile>
+    <Compile Include="WebApplication.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebApplication.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Core\Core.resx" />
-    <EmbeddedResource Include="WebApplication.resx" />
+    <EmbeddedResource Include="Core\Event.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Event.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenericAction.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GenericAction.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\Level.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Level.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Event.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Event.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebApplication.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WebApplication.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
