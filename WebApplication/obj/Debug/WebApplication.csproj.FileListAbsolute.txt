@@ -267,3 +267,4 @@ C:\Git\GitHub\club_scheduling\WebApplication\bin\Twilio.dll
 C:\Git\GitHub\club_scheduling\WebApplication\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Git\GitHub\club_scheduling\WebApplication\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Git\GitHub\club_scheduling\WebApplication\bin\Twilio.xml
+C:\Git\GitHub\club_scheduling\WebApplication\obj\Debug\WebApplication.Migrations.FamilyCoreUpdated.resources

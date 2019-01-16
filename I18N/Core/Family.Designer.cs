@@ -22,14 +22,14 @@ namespace I18N.Core {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Level {
+    public class Family {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Level() {
+        internal Family() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace I18N.Core {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("I18N.Core.Level", typeof(Level).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("I18N.Core.Family", typeof(Family).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,20 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The level is required.
-        /// </summary>
-        public static string Event_LevelRequired {
-            get {
-                return ResourceManager.GetString("Event_LevelRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string Level_Name {
+        public static string Family_Name {
             get {
-                return ResourceManager.GetString("Level_Name", resourceCulture);
+                return ResourceManager.GetString("Family_Name", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name field is required..
+        ///   Looks up a localized string similar to .
         /// </summary>
-        public static string Level_NameRequired {
+        public static string Family_NameRequired {
             get {
-                return ResourceManager.GetString("Level_NameRequired", resourceCulture);
+                return ResourceManager.GetString("Family_NameRequired", resourceCulture);
             }
         }
     }
