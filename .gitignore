@@ -260,3 +260,11 @@ paket-files/
 __pycache__/
 *.pyc
 *.cache
+
+I18N/bin/Debug/
+
+I18N/obj/Debug/
+
+WebApplication/bin/
+
+WebApplication/obj/Debug/
