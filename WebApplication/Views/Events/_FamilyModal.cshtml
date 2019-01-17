@@ -22,7 +22,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var member in Model.User.Family.Users.Where(u => !u.Id.Equals(User.Identity.GetUserId())))
+                        @*@foreach (var member in Model.User.Family.Users.Where(u => !u.Id.Equals(User.Identity.GetUserId())))
                         {
                             <tr>
                                 <td>@member.FirstName</td>
@@ -31,7 +31,7 @@
                                 <td>@member.BirthDay</td>
                                 <td></td>
                             </tr>
-                        }
+                        }*@
                     </tbody>
                 </table>
 
