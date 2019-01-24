@@ -16,7 +16,8 @@ namespace WebApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // Does this go here?? 
-        [Authorize(Roles = "Owner")]
+        // Head Coach can view list of all families
+        [Authorize(Roles = "Head Coach")]
         // GET: Families
         public ActionResult Index()
         {
@@ -27,11 +28,12 @@ namespace WebApplication.Controllers
             return View(db.Families.ToList());
         }
 
-        [Authorize(Roles = "Owner")]
-        // All family members can see their family details
-        //[Authorize(Roles = "FamilyMember")]
+        [Authorize(Roles = "Head Coach, Member")]
+        // Head Coaches can see every families details,
+        // Members can only see details of the family they are in
         // GET: Families/Details/5
-        // Instead of "my" could details be used instead??
+        // Instead of "my" could details be used instead, there could be a check to only be able
+        // to view details of the family you're in?? Head coaches can view every families details??
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -46,27 +48,19 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        // Get the current user
-        /*
-         * public ApplicationUser getUserDetails()
-        {
-            ApplicationDbContext AppAuthDb = new ApplicationDbContext();
-            return AppAuthDb.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-        }
-        */
-
-        // When you create a family you get given the owner role for that family 
-        [Authorize(Roles = "Owner")]
+        // When you create a family you get given the owner role for that family, how?? 
+        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach??
         // GET: Families/Create
         public ActionResult Create()
         {
             return View();
-            //This will work or needs more??
-            getUserDetails(Roles = "Owner");
+            
+            // If members create the family, how to assign a leader role??
+            
         }
 
+        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach??
         // POST: Families/Create
-        // When you create a family you get the owner role for that family [Authorize(Roles = "Owner")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Family family)
@@ -81,9 +75,12 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Member, Head Coach")] // Family owner/leader can edit their families details here
+        isOwner();
+        // Option to add someone to their family from this view??
+        // Can Head Coach edit other peoples families details??
         // GET: Families/Edit/5
-        // This is where the family owner can edit their family members level etc.
+        // This is where the family owner/leader can edit their family members level etc.
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,7 +96,8 @@ namespace WebApplication.Controllers
         }
 
         // POST: Families/Edit/5
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Member, Head Coach")]
+        isOwner();
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
@@ -113,9 +111,12 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        [Authorize(Roles = "Owner")]
-        // The family owner can delete the family, existing accounts get removed from the family
+        [Authorize(Roles = "Member, Head Coach")]
+        // The right place for this??
+        isOwner();
+        // The family leader can delete the family, existing accounts get removed from the family
         // and unactivated kids accounts get deleted
+        // Head Coach can delete other peoples family members??
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -132,7 +133,8 @@ namespace WebApplication.Controllers
         }
 
         // POST: Families/Delete/5
-        [Authorize(Roles = "Owner")]
+        [Authorize(Roles = "Member, Head Coach")]
+        isOwner();
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -150,6 +152,14 @@ namespace WebApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // Does this get the current user?? If so add a check to see if their family owner/leader, how?
+        private bool isOwner()
+        {
+            ApplicationDbContext AppAuthDb = new ApplicationDbContext();
+            return AppAuthDb.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            // code here to check if the current user is family owner/leader??
         }
     }
 }
