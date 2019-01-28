@@ -76,17 +76,22 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Member, Head Coach")] // Family owner/leader can edit their families details here
-        isOwner();
         // Option to add someone to their family from this view??
         // Can Head Coach edit other peoples families details??
         // GET: Families/Edit/5
         // This is where the family owner/leader can edit their family members level etc.
         public ActionResult Edit(int? id)
         {
+            if (!(User.IsInRole("Head Coach") || isOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+
             Family family = db.Families.Find(id);
             if (family == null)
             {
@@ -97,11 +102,14 @@ namespace WebApplication.Controllers
 
         // POST: Families/Edit/5
         [Authorize(Roles = "Member, Head Coach")]
-        isOwner();
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
         {
+            if (!(User.IsInRole("Head Coach") || isOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(family).State = EntityState.Modified;
@@ -112,18 +120,22 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Member, Head Coach")]
-        // The right place for this??
-        isOwner();
         // The family leader can delete the family, existing accounts get removed from the family
         // and unactivated kids accounts get deleted
         // Head Coach can delete other peoples family members??
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!(User.IsInRole("Head Coach") || isOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            
+
             Family family = db.Families.Find(id);
             if (family == null)
             {
@@ -134,11 +146,15 @@ namespace WebApplication.Controllers
 
         // POST: Families/Delete/5
         [Authorize(Roles = "Member, Head Coach")]
-        isOwner();
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (!(User.IsInRole("Head Coach") || isOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             Family family = db.Families.Find(id);
             db.Families.Remove(family);
             db.SaveChanges();
@@ -157,9 +173,7 @@ namespace WebApplication.Controllers
         // Does this get the current user?? If so add a check to see if their family owner/leader, how?
         private bool isOwner()
         {
-            ApplicationDbContext AppAuthDb = new ApplicationDbContext();
-            return AppAuthDb.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            // code here to check if the current user is family owner/leader??
+            return db.Users.Any(u => u.UserName == User.Identity.Name);
         }
     }
 }
