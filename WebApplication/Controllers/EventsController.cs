@@ -230,6 +230,23 @@ namespace WebApplication.Controllers
             return RedirectToAction("Details", new { id = id });
         }
 
+        // POST: Events/MemberFamilyJoin/
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MemberFamilyJoin([Bind(Include = "EventId,UsersSelected")] EventFamilyModalViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string[] usersSelected = model.UsersSelected.Where(us => !us.Equals("false") && !us.Equals("true")).ToArray();
+
+                QueuedHelper.Add(db, db.Users.Where(u => usersSelected.Any(us => u.Id.Contains(us))).ToList(), model.EventId);
+
+            }
+            return RedirectToAction("Details/" + model.EventId.ToString());
+        }
+
         // GET: Events/Delete/5
         [Authorize(Roles = "Head Coach")]
         public ActionResult Delete(int? id)
@@ -258,12 +275,12 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult _FamilyModal()
+        public PartialViewResult _FamilyModal(int id)
         {
             string userId = User.Identity.GetUserId();
             EventFamilyModalViewModel model = new EventFamilyModalViewModel();
             model.User = db.Users.Include(u => u.Family).Include(u => u.Family.Users).Where(u => u.Id.Equals(userId)).FirstOrDefault();
-
+            model.EventId = id;
 
             return PartialView(model);
         }

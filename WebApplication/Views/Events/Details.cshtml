@@ -105,4 +105,4 @@
     @Html.ActionLink(I18N.GenericAction.back2list, "Index")
 </p>
 
-@{Html.RenderAction("_FamilyModal");}
+@{Html.RenderAction("_FamilyModal", new { id = Model.Event.Id });}
