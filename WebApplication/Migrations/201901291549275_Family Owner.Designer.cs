@@ -7,13 +7,13 @@ namespace WebApplication.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class OwnerFamilyAttr : IMigrationMetadata
+    public sealed partial class FamilyOwner : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(OwnerFamilyAttr));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(FamilyOwner));
         
         string IMigrationMetadata.Id
         {
-            get { return "201901291139237_Owner Family Attr"; }
+            get { return "201901291549275_Family Owner"; }
         }
         
         string IMigrationMetadata.Source

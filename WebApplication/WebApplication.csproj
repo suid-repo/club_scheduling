@@ -323,9 +323,9 @@
     <Compile Include="Migrations\201901291110195_Level Application User Added.Designer.cs">
       <DependentUpon>201901291110195_Level Application User Added.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201901291139237_Owner Family Attr.cs" />
-    <Compile Include="Migrations\201901291139237_Owner Family Attr.Designer.cs">
-      <DependentUpon>201901291139237_Owner Family Attr.cs</DependentUpon>
+    <Compile Include="Migrations\201901291549275_Family Owner.cs" />
+    <Compile Include="Migrations\201901291549275_Family Owner.Designer.cs">
+      <DependentUpon>201901291549275_Family Owner.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -432,8 +432,8 @@
     <EmbeddedResource Include="Migrations\201901291110195_Level Application User Added.resx">
       <DependentUpon>201901291110195_Level Application User Added.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201901291139237_Owner Family Attr.resx">
-      <DependentUpon>201901291139237_Owner Family Attr.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201901291549275_Family Owner.resx">
+      <DependentUpon>201901291549275_Family Owner.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
