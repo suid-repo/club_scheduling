@@ -28,6 +28,6 @@ namespace WebApplication.Models
     {
         public ApplicationUser User { get; set; }
         public string[] UsersSelected { get; set; }
-        public int EventId { get; set; }
+        public Event Event { get; set; }
     }
 }

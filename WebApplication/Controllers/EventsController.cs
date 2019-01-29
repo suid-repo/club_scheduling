@@ -241,10 +241,10 @@ namespace WebApplication.Controllers
             {
                 string[] usersSelected = model.UsersSelected.Where(us => !us.Equals("false") && !us.Equals("true")).ToArray();
 
-                QueuedHelper.Add(db, db.Users.Where(u => usersSelected.Any(us => u.Id.Contains(us))).ToList(), model.EventId);
+                QueuedHelper.Add(db, db.Users.Where(u => usersSelected.Any(us => u.Id.Contains(us))).ToList(), model.Event.Id);
 
             }
-            return RedirectToAction("Details/" + model.EventId.ToString());
+            return RedirectToAction("Details/" + model.Event.Id.ToString());
         }
 
         // GET: Events/Delete/5
@@ -275,12 +275,12 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult _FamilyModal(int id)
+        public PartialViewResult _FamilyModal(Event @event)
         {
             string userId = User.Identity.GetUserId();
             EventFamilyModalViewModel model = new EventFamilyModalViewModel();
             model.User = db.Users.Include(u => u.Family).Include(u => u.Family.Users).Where(u => u.Id.Equals(userId)).FirstOrDefault();
-            model.EventId = id;
+            model.Event = @event;
 
             return PartialView(model);
         }
