@@ -319,6 +319,10 @@
     <Compile Include="Migrations\201901161358212_Family Core Updated.Designer.cs">
       <DependentUpon>201901161358212_Family Core Updated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901291110195_Level Application User Added.cs" />
+    <Compile Include="Migrations\201901291110195_Level Application User Added.Designer.cs">
+      <DependentUpon>201901291110195_Level Application User Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EventViewModels.cs" />
@@ -420,6 +424,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901161358212_Family Core Updated.resx">
       <DependentUpon>201901161358212_Family Core Updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901291110195_Level Application User Added.resx">
+      <DependentUpon>201901291110195_Level Application User Added.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
