@@ -53,10 +53,7 @@ namespace WebApplication.Controllers
         // GET: Families/Create
         public ActionResult Create()
         {
-            return View();
-            
-            // If members create the family, how to assign a leader role??
-            
+            return View();            
         }
 
         [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach?? I don't think so
@@ -67,6 +64,9 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                // HERE ADD THE CURRENT USER AS THE OWNER IN THE family OBJECT
+
+
                 db.Families.Add(family);
                 db.SaveChanges();
                 return RedirectToAction("Index");
