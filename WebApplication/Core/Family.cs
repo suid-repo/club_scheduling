@@ -21,7 +21,7 @@ namespace WebApplication.Core
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Family),
               ErrorMessageResourceName = "Family_NameRequired")]
         public string Name { get; set; }
-
+        public virtual ApplicationUser Owner { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 

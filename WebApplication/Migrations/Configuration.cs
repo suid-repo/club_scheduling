@@ -54,6 +54,15 @@ namespace WebApplication.Migrations
                     });
             }
 
+            if (!roleManager.RoleExists("Member"))
+            {
+                roleManager.Create(
+                    new IdentityRole
+                    {
+                        Name = "Member"
+                    });
+            }
+
             //SEED DEFAULT ADMIN USER IF NO ONE EXIST
             if (!context.Users.Any(u => u.Roles.All(r => r.RoleId == context.Roles.FirstOrDefault(m => m.Name == "Head Coach").Id)))
             {

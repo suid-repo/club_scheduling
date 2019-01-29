@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Core;
 using WebApplication.Models;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication.Controllers
 {
@@ -47,9 +48,8 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
-
-        // When you create a family you get given the owner role for that family, how?? 
-        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach??
+ 
+        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach?? I don't think so*
         // GET: Families/Create
         public ActionResult Create()
         {
@@ -59,7 +59,7 @@ namespace WebApplication.Controllers
             
         }
 
-        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach??
+        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach?? I don't think so
         // POST: Families/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -76,13 +76,13 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Member, Head Coach")] // Family owner/leader can edit their families details here
-        // Option to add someone to their family from this view??
-        // Can Head Coach edit other peoples families details??
+        // Option to add someone to their family from this view?? Yes, may use partial view
+        // Can Head Coach edit other peoples families details?? Yes, super admin should do that
         // GET: Families/Edit/5
         // This is where the family owner/leader can edit their family members level etc.
         public ActionResult Edit(int? id)
         {
-            if (!(User.IsInRole("Head Coach") || isOwner()))
+            if (!(User.IsInRole("Head Coach") || IsOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -106,7 +106,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
         {
-            if (!(User.IsInRole("Head Coach") || isOwner()))
+            if (!(User.IsInRole("Head Coach") || IsOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -122,11 +122,11 @@ namespace WebApplication.Controllers
         [Authorize(Roles = "Member, Head Coach")]
         // The family leader can delete the family, existing accounts get removed from the family
         // and unactivated kids accounts get deleted
-        // Head Coach can delete other peoples family members??
+        // Head Coach can delete other peoples family members?? Yes, a super admin should do that
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (!(User.IsInRole("Head Coach") || isOwner()))
+            if (!(User.IsInRole("Head Coach") || IsOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -150,7 +150,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (!(User.IsInRole("Head Coach") || isOwner()))
+            if (!(User.IsInRole("Head Coach") || IsOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -170,10 +170,13 @@ namespace WebApplication.Controllers
             base.Dispose(disposing);
         }
 
-        // Does this get the current user?? If so add a check to see if their family owner/leader, how?
-        private bool isOwner()
+        /**
+         * <summary>Determine if the current user is the <c>owner of his family</c>.</summary>
+         */
+        private bool IsOwner()
         {
-            return db.Users.Any(u => u.UserName == User.Identity.Name);
+            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+            return User.Identity.Equals(user.Family.Owner.Id);
         }
     }
 }
