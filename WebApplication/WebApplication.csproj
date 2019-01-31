@@ -284,6 +284,7 @@
     <Compile Include="Core\Level.cs" />
     <Compile Include="Core\Queued.cs" />
     <Compile Include="Core\QueuedItem.cs" />
+    <Compile Include="Extentions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

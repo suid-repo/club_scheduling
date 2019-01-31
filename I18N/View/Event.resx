@@ -121,7 +121,10 @@
     <value>Join as a Coach</value>
   </data>
   <data name="Action_JoinMember" xml:space="preserve">
-    <value>Join</value>
+    <value>Join alone</value>
+  </data>
+  <data name="Action_JoinMemberFamily" xml:space="preserve">
+    <value>Join with my family</value>
   </data>
   <data name="Action_LeaveCoach" xml:space="preserve">
     <value>Leave</value>

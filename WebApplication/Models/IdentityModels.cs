@@ -29,6 +29,18 @@ namespace WebApplication.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            //Define the claims
+            List<Claim> customClaims = new List<Claim>
+            {
+                new Claim("FirstName", this.FirstName),
+                new Claim("LastName", this.LastName),
+                new Claim("FamilyId", (this.Family != null) ? this.Family.Id.ToString() : string.Empty),
+                new Claim("IsFamilyOwner", (this.Family != null && this.Id.Equals(this.Family.Owner.Id)).ToString())
+            };
+
+            userIdentity.AddClaims(customClaims);
+
+
             return userIdentity;
         }
     }

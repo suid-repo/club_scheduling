@@ -1,12 +1,10 @@
 ﻿@using Microsoft.AspNet.Identity;
+@using WebApplication.Extentions;
 @model WebApplication.Models.EventDetailsViewModel
-
 @{
     ViewBag.Title = I18N.View.Event.Details_Title;
 }
-
 <h2>@I18N.View.Event.Details_Title</h2>
-
 <div>
     <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count * 8)</h4>
     <hr />
@@ -14,39 +12,31 @@
         <dt>
             @Html.DisplayNameFor(model => model.Event.Name)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Event.Name)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Event.Description)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Event.Description)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Event.StartDate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Event.StartDate)
         </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Event.EndDate)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.Event.EndDate)
         </dd>
-
     </dl>
 </div>
 <div class="row">
-    @if (User.IsInRole("Coach"))
+    @if (User.IsInRole("Coach")) //IF COACH
     {
         if (!Model.Event.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
         {
@@ -63,25 +53,26 @@
     }
     else
     {
+        //USER ONLY ACTION
         if (!(Model.Event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())) || Model.Event.Queued.QueuedItems.Any(q => q.UserId.Equals(User.Identity.GetUserId()))))
         {
-            if (Model.User.Family == null) // NO FAMILY OR FAMILY MEMBERS
-            {
-                <div class="col-xs-12 col-md-3 mb-1">
-                    @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
-                </div>
-            }
-            else
-            {
-                <div class="col-xs-12 col-md-3 mb-1">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMember</button>
-                </div>
-            }
+
+            <div class="col-xs-12 col-md-3 mb-1">
+                @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+            </div>
+
         }
         else
         {
             <div class="col-xs-12 col-md-3 mb-1">
                 @Html.ActionLink(I18N.View.Event.Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+            </div>
+        }
+
+        if (User.Identity.IsFamilyOwner()) // THE USER HAVE A FAMILY
+        {
+            <div class="col-xs-12 col-md-3 mb-1">
+                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button>
             </div>
         }
     }
@@ -93,16 +84,11 @@
 
             </div>*@
         <div class="col-xs-12 col-md-3  mb-1">
-
             @Html.ActionLink(I18N.GenericAction.cancel, "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
-
         </div>
     }
-
 </div>
-
 <p>
     @Html.ActionLink(I18N.GenericAction.back2list, "Index")
 </p>
-
 @{Html.RenderAction("_FamilyModal", Model.Event);}

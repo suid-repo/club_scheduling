@@ -26,7 +26,7 @@ namespace WebApplication.Models
 
     public class EventFamilyModalViewModel
     {
-        public ApplicationUser User { get; set; }
+        public Family Family { get; set; }
         public string[] UsersSelected { get; set; }
         public Event Event { get; set; }
     }

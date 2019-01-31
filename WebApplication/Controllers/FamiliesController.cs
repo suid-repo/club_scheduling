@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using WebApplication.Core;
 using WebApplication.Models;
 using Microsoft.AspNet.Identity;
+using WebApplication.Extentions;
 
 namespace WebApplication.Controllers
 {
@@ -82,7 +83,7 @@ namespace WebApplication.Controllers
         // This is where the family owner/leader can edit their family members level etc.
         public ActionResult Edit(int? id)
         {
-            if (!(User.IsInRole("Head Coach") || IsOwner()))
+            if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -106,7 +107,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
         {
-            if (!(User.IsInRole("Head Coach") || IsOwner()))
+            if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -126,7 +127,7 @@ namespace WebApplication.Controllers
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (!(User.IsInRole("Head Coach") || IsOwner()))
+            if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -150,7 +151,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            if (!(User.IsInRole("Head Coach") || IsOwner()))
+            if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
@@ -168,15 +169,6 @@ namespace WebApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        /**
-         * <summary>Determine if the current user is the <c>owner of his family</c>.</summary>
-         */
-        private bool IsOwner()
-        {
-            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-            return User.Identity.Equals(user.Family.Owner.Id);
         }
     }
 }

@@ -8,8 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Core;
 using WebApplication.Models;
-using Microsoft.AspNet.Identity;
 using WebApplication.Helpers;
+using Microsoft.AspNet.Identity;
+using WebApplication.Extentions;
 
 namespace WebApplication.Controllers
 {
@@ -277,9 +278,8 @@ namespace WebApplication.Controllers
 
         public PartialViewResult _FamilyModal(Event @event)
         {
-            string userId = User.Identity.GetUserId();
             EventFamilyModalViewModel model = new EventFamilyModalViewModel();
-            model.User = db.Users.Include(u => u.Family).Include(u => u.Family.Users).Where(u => u.Id.Equals(userId)).FirstOrDefault();
+            model.Family = db.Families.Find(User.Identity.GetFamilyId());
             model.Event = @event;
 
             return PartialView(model);

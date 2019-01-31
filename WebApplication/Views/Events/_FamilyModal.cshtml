@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity;
-@model WebApplication.Models.EventFamilyModalViewModel
+﻿@model WebApplication.Models.EventFamilyModalViewModel
 
 <div class="modal" id="event-family-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
@@ -20,7 +19,7 @@
                 <div class="modal-body">
                     <table>
                         <tbody>
-                            @foreach (var member in Model.User.Family.Users)
+                            @foreach (var member in Model.Family.Users)
                             {
                                 <tr>
                                     <td>@member.FirstName</td>

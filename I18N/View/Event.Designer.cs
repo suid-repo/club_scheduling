@@ -97,11 +97,20 @@ namespace I18N.View {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Join.
+        ///   Looks up a localized string similar to Join alone.
         /// </summary>
         public static string Action_JoinMember {
             get {
                 return ResourceManager.GetString("Action_JoinMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join with my family.
+        /// </summary>
+        public static string Action_JoinMemberFamily {
+            get {
+                return ResourceManager.GetString("Action_JoinMemberFamily", resourceCulture);
             }
         }
         
