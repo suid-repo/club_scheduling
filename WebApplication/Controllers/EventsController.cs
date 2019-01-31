@@ -235,12 +235,12 @@ namespace WebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MemberFamilyJoin([Bind(Include = "EventId,UsersSelected")] EventFamilyModalViewModel model)
+        public ActionResult MemberFamilyJoin([Bind(Include = "Event,UsersSelected")] EventFamilyModalViewModel model)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            if(model.Event != null && model.UsersSelected != null)
             {
                 string[] usersSelected = model.UsersSelected.Where(us => !us.Equals("false") && !us.Equals("true")).ToArray();
-
                 QueuedHelper.Add(db, db.Users.Where(u => usersSelected.Any(us => u.Id.Contains(us))).ToList(), model.Event.Id);
 
             }

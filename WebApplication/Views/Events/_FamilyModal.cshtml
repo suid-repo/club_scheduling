@@ -2,7 +2,10 @@
 @model WebApplication.Models.EventFamilyModalViewModel
 
 <div class="modal" id="event-family-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-header">
+            @I18N.View.Event._Family_Title
+        </div>
         <div class="modal-content">
             @using (Html.BeginForm("MemberFamilyJoin", "Events", "POST"))
             {
@@ -16,24 +19,33 @@
                 </div>
                 <div class="modal-body">
                     <table>
-                        <thead>
-                            <tr>
-                                <th>@Html.DisplayNameFor(u => u.User.FirstName)</th>
-                                <th>@Html.DisplayNameFor(u => u.User.LastName)</th>
-                                <th>Level ?</th>
-                                <th>@Html.DisplayNameFor(u => u.User.BirthDay)</th>
-                                <th></th>
-                            </tr>
-                        </thead>
                         <tbody>
-                            @foreach (var member in Model.User.Family.Users.Where(u => u.Level != null && Model.Event.Levels.Any(e => e.Id == u.Level.Id)))
+                            @foreach (var member in Model.User.Family.Users)
                             {
                                 <tr>
                                     <td>@member.FirstName</td>
                                     <td>@member.LastName</td>
-                                    <td>Level ?</td>
-                                    <td>@member.BirthDay</td>
-                                    <td>@Html.CheckBox("UsersSelected", new { value = member.Id, data_toggle = "toggle" })</td>
+                                    <td>@member.Level.Name</td>
+                                    @if(member.Level != null && Model.Event.Levels.Any(e => e.Id == member.Level.Id))
+                                    {
+                                        <td>@Html.CheckBox("UsersSelected", new { value = member.Id, data_toggle = "toggle" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.CheckBox("UsersSelected", new { value = member.Id, data_toggle = "toggle", disabled=true })</td>
+                                    }
+                                        <td>
+                                            <small class="text-danger">
+                                                @if (member.Level == null)
+                                                {
+                                                    <text>@I18N.View.Event._Family_Error_NoLevel</text>
+                                                }
+                                                else if (!Model.Event.Levels.Any(e => e.Id == member.Level.Id))
+                                                {
+                                                    <text>@I18N.View.Event._Family_Error_MismatchLevel</text>
+                                                }
+                                            </small>
+                                        </td>
                                 </tr>
                             }
                         </tbody>

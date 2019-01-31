@@ -65,7 +65,7 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 // HERE ADD THE CURRENT USER AS THE OWNER IN THE family OBJECT
-
+                family.Owner = db.Users.First(u => u.Id.Equals(User.Identity.GetUserId()));
 
                 db.Families.Add(family);
                 db.SaveChanges();

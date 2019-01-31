@@ -61,16 +61,25 @@ namespace I18N.View {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to The level of this user does not match with the requirement level of this event..
         /// </summary>
-        public static string _Family_ {
+        public static string _Family_Error_MismatchLevel {
             get {
-                return ResourceManager.GetString("_Family_", resourceCulture);
+                return ResourceManager.GetString("_Family_Error_MismatchLevel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This user have no level set yet..
+        /// </summary>
+        public static string _Family_Error_NoLevel {
+            get {
+                return ResourceManager.GetString("_Family_Error_NoLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the user to join this event.
         /// </summary>
         public static string _Family_Title {
             get {
