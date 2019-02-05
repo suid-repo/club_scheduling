@@ -16,25 +16,19 @@ namespace WebApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // Does this go here?? 
-        // Head Coach can view list of all families
+        // Head Coach can view list of all families, only head coach can
         [Authorize(Roles = "Head Coach")]
         // GET: Families
         public ActionResult Index()
         {
-            /*
-             * // Get Current Logged in details
-            ApplicationUser user = getUserDetails();
-            */
             return View(db.Families.ToList());
         }
 
         [Authorize(Roles = "Head Coach, Member")]
-        // Head Coaches can see every families details,
-        // Members can only see details of the family they are in
+        // Members can only see details of the family they are in, do in a seperate "my" method
         // GET: Families/Details/5
-        // Instead of "my" could details be used instead, there could be a check to only be able
-        // to view details of the family you're in?? Head coaches can view every families details??
+        // Here head coaches can see details of every family, need a seperate "my" method 
+        // for a member to see their own family details, or a way to do both here??
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,19 +38,22 @@ namespace WebApplication.Controllers
             Family family = db.Families.Find(id);
             if (family == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             return View(family);
         }
  
-        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach?? I don't think so*
+        [Authorize(Roles = "Member")] 
+        // Only members can create families, head coaches and coaches will need a
+        // member account seperate from their coach account to do this
         // GET: Families/Create
         public ActionResult Create()
         {
             return View();            
         }
 
-        [Authorize(Roles = "Member")] // Head Coach should be able to create a family as well? And Coach?? I don't think so
+        [Authorize(Roles = "Member")]
+        // Same as above
         // POST: Families/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,6 +63,7 @@ namespace WebApplication.Controllers
             {
                 // HERE ADD THE CURRENT USER AS THE OWNER IN THE family OBJECT
                 family.Owner = db.Users.First(u => u.Id.Equals(User.Identity.GetUserId()));
+                // Now whoever creates a family will automatically be set as the family owner
 
                 db.Families.Add(family);
                 db.SaveChanges();
@@ -75,11 +73,11 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        [Authorize(Roles = "Member, Head Coach")] // Family owner/leader can edit their families details here
+        [Authorize(Roles = "Member, Head Coach")] // Family owner can edit their families details here
         // Option to add someone to their family from this view?? Yes, may use partial view
         // Can Head Coach edit other peoples families details?? Yes, super admin should do that
         // GET: Families/Edit/5
-        // This is where the family owner/leader can edit their family members level etc.
+        // This is where the family owner can edit their family members level etc.
         public ActionResult Edit(int? id)
         {
             if (!(User.IsInRole("Head Coach") || IsOwner()))
@@ -95,12 +93,13 @@ namespace WebApplication.Controllers
             Family family = db.Families.Find(id);
             if (family == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             return View(family);
         }
 
         // POST: Families/Edit/5
+        // Same as above
         [Authorize(Roles = "Member, Head Coach")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -120,7 +119,7 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Member, Head Coach")]
-        // The family leader can delete the family, existing accounts get removed from the family
+        // The family owner can delete the family, existing accounts get removed from the family
         // and unactivated kids accounts get deleted
         // Head Coach can delete other peoples family members?? Yes, a super admin should do that
         // GET: Families/Delete/5
@@ -145,6 +144,7 @@ namespace WebApplication.Controllers
         }
 
         // POST: Families/Delete/5
+        // Same as above
         [Authorize(Roles = "Member, Head Coach")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -158,6 +158,7 @@ namespace WebApplication.Controllers
             Family family = db.Families.Find(id);
             db.Families.Remove(family);
             db.SaveChanges();
+            // Family has been deleted, existing accounts still exist just not in a family
             return RedirectToAction("Index");
         }
 
@@ -175,8 +176,15 @@ namespace WebApplication.Controllers
          */
         private bool IsOwner()
         {
+            // A method to check if the current user is the family owner
             ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
             return User.Identity.Equals(user.Family.Owner.Id);
         }
+
+        // The "My" method, is it an ActionResult method or a standard method??
+        //public ActionResult My(int? id)
+        //{
+
+        //}
     }
 }
