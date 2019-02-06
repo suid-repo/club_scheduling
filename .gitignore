@@ -272,3 +272,10 @@ WebApplication/obj/Debug/
 WebApplication\.Tests/bin/Debug/
 
 WebApplication\.Tests/obj/Debug/
+.vs/slnx.sqlite
+.vs/VSWorkspaceState.json
+.vs/ProjectSettings.json
+.vs/config/applicationhost.config
+.vs/ClubScheduling/v15/Server/sqlite3/storage.ide
+.vs/ClubScheduling/v15/Server/sqlite3/db.lock
+.vs/club_scheduling/v15/.suo
