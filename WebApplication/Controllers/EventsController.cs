@@ -315,7 +315,8 @@ namespace WebApplication.Controllers
         public PartialViewResult _FamilyJoinModal(Event @event)
         {
             EventFamilyJoinModalViewModel model = new EventFamilyJoinModalViewModel();
-            model.Family = db.Families.Find(User.Identity.GetFamilyId());
+            int? familyId = User.Identity.GetFamilyId();
+            model.Family = db.Families.Find(familyId.Value);
             model.Event = @event;
 
             return PartialView(model);
