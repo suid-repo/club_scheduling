@@ -41,11 +41,11 @@ namespace WebApplication.Extentions
         {
             var claim = ((ClaimsIdentity)identity).FindFirst("FamilyId");
             // Test for null to avoid issues during local testing
-            if (claim == null)
+            if (claim == null || claim.Value == string.Empty)
             {
                 return null;
             }
-
+            
             return int.Parse(claim.Value);
         }
 

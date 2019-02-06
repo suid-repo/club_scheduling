@@ -267,10 +267,10 @@ namespace WebApplication.Controllers
                 }
                 else
                 {
-                    //REMOVE THE USER FROM THE EVENT
+                    //REMOVE THE USER FROM THE EVENT -- 
                     model.Event = db.Events.Find(model.Event.Id);
 
-                    foreach (ApplicationUser user in model.Users2Kick)
+                    foreach (ApplicationUser user in GetUsers2Kick(model.Event.Id))
                     {
                         model.Event.RegisterUsers.Remove(user);
                     }
