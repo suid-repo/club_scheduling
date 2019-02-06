@@ -54,26 +54,41 @@
     else
     {
         //USER ONLY ACTION
-        if (!(Model.Event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())) || Model.Event.Queued.QueuedItems.Any(q => q.UserId.Equals(User.Identity.GetUserId()))))
+        if (Model.User.Level != null && Model.Event.Levels.Any(e => e.Id == Model.User.Level.Id))
         {
+            if (!Model.IsJoigned2Event)
+            {
 
-            <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
-            </div>
+                <div class="col-xs-12 col-md-3 mb-1">
+                    @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                </div>
 
+            }
+            else
+            {
+                <div class="col-xs-12 col-md-3 mb-1">
+                    @Html.ActionLink(I18N.View.Event.Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+                </div>
+            }
         }
-        else
-        {
-            <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink(I18N.View.Event.Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
-            </div>
-        }
+
 
         if (User.Identity.IsFamilyOwner()) // THE USER HAVE A FAMILY
         {
-            <div class="col-xs-12 col-md-3 mb-1">
-                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button>
-            </div>
+            if (!Model.IsFamilyJoigned2Event)
+            {
+                Html.RenderAction("_FamilyJoinModal", Model.Event);
+                <div class="col-xs-12 col-md-3 mb-1">
+                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button>
+                </div>                
+            }
+            else
+            {
+                Html.RenderAction("_FamilyLeaveModal", Model.Event);
+                <div class="col-xs-12 col-md-3 mb-1">
+                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_LeaveMemberFamily</button>
+                </div>
+            }
         }
     }
     @if (User.IsInRole("Head Coach"))
@@ -91,4 +106,3 @@
 <p>
     @Html.ActionLink(I18N.GenericAction.back2list, "Index")
 </p>
-@{Html.RenderAction("_FamilyModal", Model.Event);}

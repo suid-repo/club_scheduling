@@ -3,7 +3,7 @@
 <div class="modal" id="event-family-modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-header">
-            @I18N.View.Event._Family_Title
+            @I18N.View.Event._FamilyJoin_Title
         </div>
         <div class="modal-content">
             @using (Html.BeginForm("MemberFamilyJoin", "Events", "POST"))
@@ -11,7 +11,7 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.Event.Id)
                 <div class="modal-header">
-                    <h5 class="modal-title">@I18N.View.Event._Family_Title</h5>
+                    <h5 class="modal-title">@I18N.View.Event._FamilyJoin_Title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -37,11 +37,11 @@
                                             <small class="text-danger">
                                                 @if (member.Level == null)
                                                 {
-                                                    <text>@I18N.View.Event._Family_Error_NoLevel</text>
+                                                    <text>@I18N.View.Event._FamilyJoin_Error_NoLevel</text>
                                                 }
                                                 else if (!Model.Event.Levels.Any(e => e.Id == member.Level.Id))
                                                 {
-                                                    <text>@I18N.View.Event._Family_Error_MismatchLevel</text>
+                                                    <text>@I18N.View.Event._FamilyJoin_Error_MismatchLevel</text>
                                                 }
                                             </small>
                                         </td>

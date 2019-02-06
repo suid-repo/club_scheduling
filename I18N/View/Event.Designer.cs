@@ -63,27 +63,45 @@ namespace I18N.View {
         /// <summary>
         ///   Looks up a localized string similar to The level of this user does not match with the requirement level of this event..
         /// </summary>
-        public static string _Family_Error_MismatchLevel {
+        public static string _FamilyJoin_Error_MismatchLevel {
             get {
-                return ResourceManager.GetString("_Family_Error_MismatchLevel", resourceCulture);
+                return ResourceManager.GetString("_FamilyJoin_Error_MismatchLevel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This user have no level set yet..
         /// </summary>
-        public static string _Family_Error_NoLevel {
+        public static string _FamilyJoin_Error_NoLevel {
             get {
-                return ResourceManager.GetString("_Family_Error_NoLevel", resourceCulture);
+                return ResourceManager.GetString("_FamilyJoin_Error_NoLevel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Select the user to join this event.
         /// </summary>
-        public static string _Family_Title {
+        public static string _FamilyJoin_Title {
             get {
-                return ResourceManager.GetString("_Family_Title", resourceCulture);
+                return ResourceManager.GetString("_FamilyJoin_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following user(s) will leave this event :.
+        /// </summary>
+        public static string _FamilyLeave_Dislaimer {
+            get {
+                return ResourceManager.GetString("_FamilyLeave_Dislaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure to cancel your registration ?.
+        /// </summary>
+        public static string _FamilyLeave_Title {
+            get {
+                return ResourceManager.GetString("_FamilyLeave_Title", resourceCulture);
             }
         }
         
@@ -129,6 +147,15 @@ namespace I18N.View {
         public static string Action_LeaveMember {
             get {
                 return ResourceManager.GetString("Action_LeaveMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel family booking.
+        /// </summary>
+        public static string Action_LeaveMemberFamily {
+            get {
+                return ResourceManager.GetString("Action_LeaveMemberFamily", resourceCulture);
             }
         }
         

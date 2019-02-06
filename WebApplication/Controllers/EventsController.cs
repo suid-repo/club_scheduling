@@ -39,6 +39,11 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
+
+
+            model.IsJoigned2Event = IsJoined2Event(model.Event.Id);
+            model.IsFamilyJoigned2Event = IsFamilyJoined2Event(model.Event.Id);
+
             return View(model);
         }
 
@@ -207,7 +212,7 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
-                        
+
             if (@event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())))
             {
                 //REMOVE THE USER FROM THE EVENT
@@ -226,8 +231,8 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
-            
+
+
             return RedirectToAction("Details", new { id = id });
         }
 
@@ -236,13 +241,44 @@ namespace WebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MemberFamilyJoin([Bind(Include = "Event,UsersSelected")] EventFamilyModalViewModel model)
+        public ActionResult MemberFamilyJoin([Bind(Include = "Event,UsersSelected")] EventFamilyJoinModalViewModel model)
         {
             //if (ModelState.IsValid)
-            if(model.Event != null && model.UsersSelected != null)
+            if (model.Event != null && model.UsersSelected != null)
             {
                 string[] usersSelected = model.UsersSelected.Where(us => !us.Equals("false") && !us.Equals("true")).ToArray();
                 QueuedHelper.Add(db, db.Users.Where(u => usersSelected.Any(us => u.Id.Contains(us))).ToList(), model.Event.Id);
+
+            }
+            return RedirectToAction("Details/" + model.Event.Id.ToString());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MemberFamilyLeave([Bind(Include = "Event, Users2Kick, IsInQueued")] EventFamilyLeaveModalViewModel model)
+        {
+            //if (ModelState.IsValid)
+            if (model.Event != null)
+            {
+                if (model.IsInQueued)
+                {
+
+                    QueuedHelper.Remove(db, GetUsers2Kick(model.Event.Id), model.Event.Id);
+                }
+                else
+                {
+                    //REMOVE THE USER FROM THE EVENT
+                    model.Event = db.Events.Find(model.Event.Id);
+
+                    foreach (ApplicationUser user in model.Users2Kick)
+                    {
+                        model.Event.RegisterUsers.Remove(user);
+                    }
+
+
+                    db.Entry(model.Event).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
 
             }
             return RedirectToAction("Details/" + model.Event.Id.ToString());
@@ -276,11 +312,30 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
-        public PartialViewResult _FamilyModal(Event @event)
+        public PartialViewResult _FamilyJoinModal(Event @event)
         {
-            EventFamilyModalViewModel model = new EventFamilyModalViewModel();
+            EventFamilyJoinModalViewModel model = new EventFamilyJoinModalViewModel();
             model.Family = db.Families.Find(User.Identity.GetFamilyId());
             model.Event = @event;
+
+            return PartialView(model);
+        }
+
+        public PartialViewResult _FamilyLeaveModal(Event @event)
+        {
+            EventFamilyLeaveModalViewModel model = new EventFamilyLeaveModalViewModel();
+            model.Event = @event;
+
+            try
+            {
+
+                model.Users2Kick = GetUsers2Kick(@event.Id);
+                model.IsInQueued = IsInQueued(@event.Id);
+            }
+            catch(Exception)
+            {
+                return null;
+            }
 
             return PartialView(model);
         }
@@ -311,5 +366,69 @@ namespace WebApplication.Controllers
             return items;
         }
 
+        /**
+         * <summary>Return <c>true</c> if the user is in the Queue or Registred to the specified Event</summary>
+         */
+        private bool IsJoined2Event(int eventId)
+        {
+
+            Event @event = db.Events.Include(e => e.RegisterUsers)
+                .Include(e => e.Queued)
+                .Where(e => e.Id == eventId).FirstOrDefault();
+
+            return @event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())) || @event.Queued.QueuedItems.Any(q => q.UserId.Equals(User.Identity.GetUserId()));
+
+        }
+
+        /**
+         * <summary>Return <c>true</c> if 1 member of the family's user is in the Queue or Registred to the specified Event</summary>
+         */
+        private bool IsFamilyJoined2Event(int eventId)
+        {
+
+            Event @event = db.Events.Include(e => e.RegisterUsers)
+                .Include(e => e.Queued)
+                .Where(e => e.Id == eventId).FirstOrDefault();
+
+            return @event.RegisterUsers.Any(ru => ru.Family.Id.Equals(User.Identity.GetFamilyId())) || @event.Queued.QueuedItems.Any(q => q.User.Family.Id == User.Identity.GetFamilyId());
+
+        }
+
+        /**
+         * 
+         */
+        private List<ApplicationUser> GetUsers2Kick(int eventId)
+        {
+            Event @event = db.Events.Find(eventId);
+            if (@event.RegisterUsers.Any(ru => ru.Family.Id == User.Identity.GetFamilyId()))
+            {
+                return @event.RegisterUsers.Where(u => u.Family.Id == User.Identity.GetFamilyId()).ToList();
+
+            }
+            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == User.Identity.GetFamilyId()))
+            {
+                return @event.Queued.QueuedItems.Select(u => u.User).Where(qi => qi.Family.Id == User.Identity.GetFamilyId()).ToList();
+
+            }
+            throw new Exception("User is not in the queued either event");
+        }
+
+        /**
+         * 
+         */
+        private bool IsInQueued(int eventId)
+        {
+            Event @event = db.Events.Find(eventId);
+            if (@event.RegisterUsers.Any(ru => ru.Family.Id == User.Identity.GetFamilyId()))
+            {
+                return false;
+            }
+            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == User.Identity.GetFamilyId()))
+            {
+                return true;
+            }
+
+            throw new Exception("User is not in the queued either event");
+        }
     }
 }

@@ -22,12 +22,22 @@ namespace WebApplication.Models
     {
         public Event Event { get; set; }
         public ApplicationUser User { get; set; }
+
+        public bool IsJoigned2Event { get; set; }
+        public bool IsFamilyJoigned2Event { get; set; }
     }
 
-    public class EventFamilyModalViewModel
+    public class EventFamilyJoinModalViewModel
     {
         public Family Family { get; set; }
         public string[] UsersSelected { get; set; }
         public Event Event { get; set; }
+    }
+
+    public class EventFamilyLeaveModalViewModel
+    {
+        public List<ApplicationUser> Users2Kick { get; set; }
+        public Event Event { get; set; }
+        public bool IsInQueued { get; set; }
     }
 }

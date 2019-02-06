@@ -132,6 +132,9 @@
   <data name="Action_LeaveMember" xml:space="preserve">
     <value>Leave</value>
   </data>
+  <data name="Action_LeaveMemberFamily" xml:space="preserve">
+    <value>Cancel family booking</value>
+  </data>
   <data name="Create_Level" xml:space="preserve">
     <value>Level</value>
   </data>
@@ -162,13 +165,19 @@
   <data name="Index_To" xml:space="preserve">
     <value>To</value>
   </data>
-  <data name="_Family_Error_MismatchLevel" xml:space="preserve">
+  <data name="_FamilyJoin_Error_MismatchLevel" xml:space="preserve">
     <value>The level of this user does not match with the requirement level of this event.</value>
   </data>
-  <data name="_Family_Error_NoLevel" xml:space="preserve">
+  <data name="_FamilyJoin_Error_NoLevel" xml:space="preserve">
     <value>This user have no level set yet.</value>
   </data>
-  <data name="_Family_Title" xml:space="preserve">
+  <data name="_FamilyJoin_Title" xml:space="preserve">
     <value>Select the user to join this event</value>
+  </data>
+  <data name="_FamilyLeave_Dislaimer" xml:space="preserve">
+    <value>The following user(s) will leave this event :</value>
+  </data>
+  <data name="_FamilyLeave_Title" xml:space="preserve">
+    <value>Are you sure to cancel your registration ?</value>
   </data>
 </root>
