@@ -1,0 +1,34 @@
+﻿@model WebApplication.Core.Family
+
+@{
+    ViewBag.Title = "MyFamily";
+}
+
+<h2>Your family details</h2>
+
+<div>
+    <h4>Family</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -504,6 +504,7 @@
     <Content Include="Views\Shared\EditorTemplates\DateTimeWithPicker.cshtml" />
     <Content Include="Views\Events\_FamilyJoinModal.cshtml" />
     <Content Include="Views\Events\_FamilyLeaveModal.cshtml" />
+    <Content Include="Views\Families\MyFamily.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
