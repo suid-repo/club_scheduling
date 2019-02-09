@@ -21,11 +21,10 @@ namespace WebApplication.Helpers
 
 
         //TO DO 
-        private static async Task<Response> SendMailTemplateAsync(string templateName, List<EmailAddress> emails)
+        private static async Task<Response> SendMailTemplateAsync(string templateName, List<string[]> templateData, string subject, List<EmailAddress> emails)
         {
             //LOAD TEMPLATE EMAIL
-
-            //REPLACE PATTERN
+            string content = PopulateBody(templateName, templateData);
 
             //SEND THE EMAIL
             SendGridClient client = GetSendGridClient;
@@ -33,8 +32,8 @@ namespace WebApplication.Helpers
             SendGridMessage msg = new SendGridMessage()
             {
                 From = new EmailAddress(ConfigurationManager.AppSettings.Get("MailSenderEmail"), ConfigurationManager.AppSettings.Get("MailSenderName")),
-                Subject = "",
-                HtmlContent = ""
+                Subject = subject,
+                HtmlContent = content
             };
             msg.AddBccs(emails);
 
@@ -69,6 +68,26 @@ namespace WebApplication.Helpers
             msg.AddBccs(emails);
 
             return await client.SendEmailAsync(msg);
+        }
+
+
+        /*
+         * Allow us to merge the body of the template file
+         * Replace the html tags define by string[0] by the value contains in string[1]
+         */
+        private void PopulateBody(string fileLocation, List<string[]> data)
+        {
+
+            using (StreamReader reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(String.Format("~/Template/{0}.html", fileLocation))))
+            {
+                this.Contenu = reader.ReadToEnd();
+            }
+
+            foreach (string[] line in data)
+            {
+                this.Contenu = this.Contenu.Replace(line[0], line[1]);
+            }
+
         }
     }
 }
