@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -75,19 +76,21 @@ namespace WebApplication.Helpers
          * Allow us to merge the body of the template file
          * Replace the html tags define by string[0] by the value contains in string[1]
          */
-        private void PopulateBody(string fileLocation, List<string[]> data)
+        private static string PopulateBody(string fileLocation, List<string[]> data)
         {
+            string content = string.Empty;
 
             using (StreamReader reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(String.Format("~/Template/{0}.html", fileLocation))))
             {
-                this.Contenu = reader.ReadToEnd();
+                content = reader.ReadToEnd();
             }
 
             foreach (string[] line in data)
             {
-                this.Contenu = this.Contenu.Replace(line[0], line[1]);
+                content = content.Replace(line[0], line[1]);
             }
 
+            return content;
         }
     }
 }
