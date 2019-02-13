@@ -1,34 +1,38 @@
 ﻿@model WebApplication.Core.Family
-
+@* I18N *@
 @{
     ViewBag.Title = "MyFamily";
 }
-
 <h2>Your family details</h2>
-
 <div>
+    @*USE THE HEADER IN VIEWS/USERS/DETAILS *@
     <h4>Family</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+    @if (Model != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            @*USE A FOR EACH STATEMENT*@
+            <dt>
+                @Html.DisplayNameFor(model => model.Users)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Users)
+            </dd>
+        </dl>
+    }
+    else
+    {
+        @*NO FAMILLY FOR THS USER*@
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Users)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Users)
-        </dd>
-
-    </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink(I18N.GenericAction.back2list, "Index")
 </p>
