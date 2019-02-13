@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
             return View(db.Families.ToList());
         }
 
-        [Authorize(Roles = "Head Coach, Member")]
+        [Authorize(Roles = "Head Coach")]
         // Members can only see details of the family they are in, do in a seperate "my" method
         // GET: Families/Details/5
         // Here head coaches can see details of every family, need a seperate "my" method 
@@ -74,7 +74,7 @@ namespace WebApplication.Controllers
             return View(family);
         }
 
-        [Authorize(Roles = "Member, Head Coach")] // Family owner can edit their families details here
+        [Authorize(Roles = "Head Coach, Member")] // Family owner can edit their families details here
         // Option to add someone to their family from this view?? Yes, may use partial view
         // Can Head Coach edit other peoples families details?? Yes, super admin should do that
         // GET: Families/Edit/5
@@ -170,6 +170,18 @@ namespace WebApplication.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult MyFamily()
+        {
+            int? familyId= User.Identity.GetFamilyId();
+            Family family = null;
+            if (familyId != null)
+            {
+               family = db.Families.Find(familyId);
+            }                          
+           
+            return View(family);
         }
     }
 }
