@@ -65,5 +65,6 @@ namespace WebApplication.Models
         {
             return new ApplicationDbContext();
         }
+        
     }
 }

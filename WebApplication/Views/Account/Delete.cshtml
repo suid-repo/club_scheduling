@@ -1,0 +1,22 @@
+﻿@model WebApplication.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete your account?</h3>
+<div>
+    <h4>ApplicationUser</h4>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @Html.ActionLink(@I18N.GenericAction.cancel, "Index", new { @class = "btn btn-secondary" })
+            <button type="submit" class="btn btn-danger">@I18N.GenericAction.yes</button>
+        </div>
+    }
+</div>
