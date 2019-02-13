@@ -278,6 +278,7 @@
     <Compile Include="Controllers\FamiliesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Core\CoachEvent.cs" />
     <Compile Include="Core\Event.cs" />
     <Compile Include="Core\Family.cs" />
@@ -327,6 +328,10 @@
     <Compile Include="Migrations\201901291549275_Family Owner.cs" />
     <Compile Include="Migrations\201901291549275_Family Owner.Designer.cs">
       <DependentUpon>201901291549275_Family Owner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902131250575_Birthday Date Type.cs" />
+    <Compile Include="Migrations\201902131250575_Birthday Date Type.Designer.cs">
+      <DependentUpon>201902131250575_Birthday Date Type.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -436,6 +441,9 @@
     <EmbeddedResource Include="Migrations\201901291549275_Family Owner.resx">
       <DependentUpon>201901291549275_Family Owner.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902131250575_Birthday Date Type.resx">
+      <DependentUpon>201902131250575_Birthday Date Type.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachLeaved.sql" />
@@ -504,6 +512,11 @@
     <Content Include="Views\Shared\EditorTemplates\DateTimeWithPicker.cshtml" />
     <Content Include="Views\Events\_FamilyJoinModal.cshtml" />
     <Content Include="Views\Events\_FamilyLeaveModal.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
