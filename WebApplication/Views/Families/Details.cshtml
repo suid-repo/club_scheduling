@@ -7,7 +7,16 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Family</h4>
+    <div class="row">
+        <div class="col">
+            <div class="float-md-left">
+                <h4>My Family</h4>
+            </div>
+            <div class="float-md-right">
+                @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -23,21 +32,17 @@
         </dt>
 
         <dd>
-            
-                @if (Model.Users.Count > 0)
-                {
-                    Html.RenderPartial("_UserList", Model.Users);
-                }
-                else
-                {
-                    <p>No users</p>
-                }
-           
+
+            @if (Model.Users.Count > 0)
+            {
+                Html.RenderPartial("_UserList", Model.Users);
+            }
+            else
+            {
+                <p>No users</p>
+            }
+
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
