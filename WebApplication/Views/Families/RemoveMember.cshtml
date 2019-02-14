@@ -49,7 +49,8 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
+        @Html.HiddenFor(model => model.Family.Id)
+        @Html.HiddenFor(model => model.Id)
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
             @if (User.IsInRole("Head Coach"))

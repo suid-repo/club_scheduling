@@ -163,6 +163,50 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult RemoveMember(string id)
+        {
+            if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            ApplicationUser user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        // POST: Families/RemoveMember/5
+        [Authorize(Roles = "Member, Head Coach")]
+        [HttpPost, ActionName("RemoveMember")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveMemberConfirmed([Bind(Include = "Id, Family")] ApplicationUser user)
+        {
+            if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            Family family = db.Families.Find(user.Family.Id);
+            family.Users.Remove(user);
+            db.Entry(family).State = EntityState.Modified;
+            db.SaveChanges();
+            if (User.IsInRole("Head Coach"))
+            {
+                return RedirectToAction("Details", new { id = family.Id });
+            }
+            else
+            {
+                return RedirectToAction("MyFamily");
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
