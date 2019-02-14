@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using WebApplication.Models;
 using System.Xml.Serialization;
 using System.IO;
+using System.Net;
 
 namespace WebApplication.Controllers
 {
@@ -414,6 +415,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed()
         {
+            return new HttpStatusCodeResult(HttpStatusCode.NotImplemented);
             // First verify user is not owner of a family
             //If yes, DO Action
 
@@ -435,13 +437,16 @@ namespace WebApplication.Controllers
 
         public ActionResult DownloadMyData()
         {
-            XmlSerializer xs = new XmlSerializer(typeof(ApplicationUser));
-            MemoryStream memoryStream = new MemoryStream();
-            ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
 
-            xs.Serialize(memoryStream, user);
+            return new HttpStatusCodeResult(HttpStatusCode.NotImplemented);
 
-            return File(memoryStream.ToArray(), "application/xml", "mydata.xml");
+            //XmlSerializer xs = new XmlSerializer(typeof(ApplicationUser));
+            //MemoryStream memoryStream = new MemoryStream();
+            //ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
+
+            //xs.Serialize(memoryStream, user);
+
+            //return File(memoryStream.ToArray(), "application/xml", "mydata.xml");
         }
 
         protected override void Dispose(bool disposing)
