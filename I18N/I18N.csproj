@@ -67,6 +67,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Event.resx</DependentUpon>
     </Compile>
+    <Compile Include="View\Family.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Family.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\User.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,6 +103,10 @@
     <EmbeddedResource Include="View\Event.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Event.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Family.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Family.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

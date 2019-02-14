@@ -1,105 +1,43 @@
 ﻿@model WebApplication.Core.Family
-@* I18N *@
+
 @{
     ViewBag.Title = "MyFamily";
 }
-<h2>Your family details</h2>
+
+<h2>MyFamily</h2>
+
 <div>
-    @*USE THE HEADER IN VIEWS/USERS/DETAILS *@
-    <div class="row">
-        <div class="col">
-            <div class="float-md-left">
-                <h4>Your Family</h4>
-            </div>
-            <div class="float-md-right">
-                @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
-            </div>
-        </div>
-    </div>
+    <h4>Family</h4>
     <hr />
     @if (Model != null)
     {
-    <dl class="dl-horizontal">
-        @*USE A FOR EACH STATEMENT*@
-        @foreach (var item in Model.Users)
-        {
+        <dl class="dl-horizontal">
             <dt>
-                @*@Html.DisplayNameFor(model => model.Name)*@
-                @item.UserName
-                @*Would this work?? Cannot seem to locate specific users using 'DisplayNameFor'*@
-                @Html.DisplayText(item.UserName)
+                @Html.DisplayNameFor(model => model.Name)
             </dt>
+
             <dd>
-                @*@Html.DisplayFor(model => model.Name)*@
-                @item.UserName
-                @Html.DisplayText(item.UserName)
+                @Html.DisplayFor(model => model.Name)
             </dd>
-            <dt>
-                @Html.DisplayForModel(item.FirstName, item.LastName)
-                @item.FirstName @item.LastName
-            </dt>
-            <dd>
-                @*@Html.DisplayFor(item.FirstName, item.LastName)*@
-                @item.FirstName @item.LastName
-            </dd>
-            <dt>
-                @Html.DisplayForModel(item.Level)
-                @item.Level
-            </dt>
-            <dd>
-                @*@Html.DisplayFor(item.Level)*@
-                @item.Level
-            </dd>
-            <dt>
-                @Html.DisplayForModel(item.BirthDay)
-                @item.BirthDay
-            </dt>
-            <dd>
-                @*@Html.DisplayFor(item.Birthday)*@
-                @item.BirthDay
-            </dd>
-            <dt>
-                @Html.DisplayForModel(item.Email)
-                @item.Email
-            </dt>
-            <dd>
-                @*@Html.DisplayFor(item.Email)*@
-                @item.Email
-            </dd>
-            <dt>
-                @Html.DisplayForModel(item.PhoneNumber)
-                @item.PhoneNumber
-            </dt>
-            <dd>
-                @*@Html.DisplayFor(item.PhoneNumber)*@
-                @item.PhoneNumber
-            </dd>
-        }
-        @*
-        <dt>
-            @Html.DisplayNameFor(model => model.Users)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Users)
-        </dd>
-        *@
-    </dl>
+
+        </dl>
+        <div>
+            @if (Model.Users.Count > 0)
+            {
+                Html.RenderPartial("_UserList", Model.Users);
+            }
+            else
+            {
+                <p>No users</p>
+            }
+        </div>
     }
     else
     {
-        @*NO FAMILLY FOR THS USER*@
-        @*Informing the user they are not in a family, and asking if they want to
-            create one while also providing the link*@
-        <h5>You are not in a family, would you like to create one?</h5>
-        <p>
-            @Html.ActionLink(I18N.GenericAction.create, "Create")
-        </p>
+        <p>No Family</p>
     }
-
 </div>
 <p>
-    @* Don't need this edit action link because of the header??
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    *@
-    @Html.ActionLink(I18N.GenericAction.back2list, "Index")
+    @Html.ActionLink("Back to List", "Index")
 </p>

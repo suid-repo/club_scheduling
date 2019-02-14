@@ -185,5 +185,10 @@ namespace WebApplication.Controllers
            
             return View(family);
         }
+
+        public PartialViewResult _UserList(IEnumerable<ApplicationUser> model)
+        {
+            return PartialView(model);
+        }
     }
 }

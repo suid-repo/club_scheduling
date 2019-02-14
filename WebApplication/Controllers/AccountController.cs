@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication.Models;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace WebApplication.Controllers
 {
@@ -416,7 +418,7 @@ namespace WebApplication.Controllers
 
             await _userManager.DeleteAsync(user);
 
-            return RedirectToAction("LogOff");
+            return LogOff();
         }
 
         //
@@ -425,6 +427,17 @@ namespace WebApplication.Controllers
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        public ActionResult DownloadMyData()
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(ApplicationUser));
+            MemoryStream memoryStream = new MemoryStream();
+            ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
+
+            xs.Serialize(memoryStream, user);
+
+            return File(memoryStream.ToArray(), "application/xml", "mydata.xml");
         }
 
         protected override void Dispose(bool disposing)

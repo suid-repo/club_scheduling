@@ -517,8 +517,9 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Families\MyFamily.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Families\MyFamily.cshtml" />
+    <Content Include="Views\Families\_UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
