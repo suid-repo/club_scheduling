@@ -1,5 +1,5 @@
 ﻿@model WebApplication.Core.Family
-
+@using WebApplication.Extentions;
 @{
     ViewBag.Title = "Details";
 }
@@ -13,7 +13,10 @@
                 <h4>My Family</h4>
             </div>
             <div class="float-md-right">
-                @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                @if (User.Identity.IsFamilyOwner())
+                {
+                    @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                }
             </div>
         </div>
     </div>
