@@ -5,7 +5,16 @@
 <h2>@ViewBag.Title.</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+    <div class="row">
+        <div class="col">
+            <div class="float-md-left">
+                <h4>Change your account settings</h4>
+            </div>
+            <div class="float-md-right">
+                @Html.ActionLink(I18N.View.User.Action_DeleteAccount, "Delete", null, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+    </div>
     <hr />
     <dl class="dl-horizontal">
         <dt>Password:</dt>
@@ -34,7 +43,6 @@
 
              Uncomment the following block after you have set up two-factor authentication
         *@
-
         <dt>Phone Number:</dt>
         <dd>
             @(Model.PhoneNumber ?? "None")
@@ -53,7 +61,6 @@
                 <text>[ @Html.ActionLink("Add", "AddPhoneNumber") ]</text>
             }
         </dd>
-
         <dt>Two-Factor Authentication:</dt>
         <dd>
             @*<p>

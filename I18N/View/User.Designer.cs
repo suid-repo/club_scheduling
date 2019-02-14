@@ -59,5 +59,14 @@ namespace I18N.View {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete my account.
+        /// </summary>
+        public static string Action_DeleteAccount {
+            get {
+                return ResourceManager.GetString("Action_DeleteAccount", resourceCulture);
+            }
+        }
     }
 }
