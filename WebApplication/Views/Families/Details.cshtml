@@ -23,7 +23,16 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Users)
+            
+                @if (Model.Users.Count > 0)
+                {
+                    Html.RenderPartial("_UserList", Model.Users);
+                }
+                else
+                {
+                    <p>No users</p>
+                }
+           
         </dd>
 
     </dl>
