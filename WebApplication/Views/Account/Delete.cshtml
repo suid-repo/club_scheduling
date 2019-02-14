@@ -15,7 +15,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            @Html.ActionLink(@I18N.GenericAction.cancel, "Index", new { @class = "btn btn-secondary" })
+            @Html.ActionLink(@I18N.GenericAction.cancel, "Index", "Manage", null, new { @class = "btn btn-secondary" })
             <button type="submit" class="btn btn-danger">@I18N.GenericAction.yes</button>
         </div>
     }

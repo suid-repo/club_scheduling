@@ -65,7 +65,5 @@ namespace WebApplication.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<WebApplication.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
