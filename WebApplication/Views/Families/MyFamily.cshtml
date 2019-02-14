@@ -40,8 +40,8 @@
     }
     else
     {
-        <p>You are not in a family, would you like to create one?</p>
-        <p> @Html.ActionLink(I18N.GenericAction.create, "Create", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })</p>
+        <p>@I18N.View.Family.MyFamily_Create_Disclaimer</p>
+        <p>@Html.ActionLink(I18N.GenericAction.create, "Create", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })</p>
     }
 </div>
 <p>
