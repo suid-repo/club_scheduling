@@ -26,10 +26,10 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Head Coach")]
-        // Members can only see details of the family they are in, do in a seperate "my" method
+        // Members can only see details of the family they are in, which is handled
+        // in a seperate method called "MyFamily"
         // GET: Families/Details/5
-        // Here head coaches can see details of every family, need a seperate "my" method 
-        // for a member to see their own family details, or a way to do both here??
+        // Here head coaches can see details of every family
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -174,6 +174,8 @@ namespace WebApplication.Controllers
 
         public ActionResult MyFamily()
         {
+            // When you click the MyFamily tab this method checks what family you are you and 
+            // displays the information of that family
             int? familyId= User.Identity.GetFamilyId();
             Family family = null;
             if (familyId != null)
