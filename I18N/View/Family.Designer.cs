@@ -59,5 +59,14 @@ namespace I18N.View {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not in a family, would you like to create one?.
+        /// </summary>
+        public static string MyFamily_Create_Disclaimer {
+            get {
+                return ResourceManager.GetString("MyFamily_Create_Disclaimer", resourceCulture);
+            }
+        }
     }
 }

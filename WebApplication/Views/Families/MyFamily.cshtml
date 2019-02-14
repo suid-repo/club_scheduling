@@ -40,10 +40,11 @@
     }
     else
     {
-        <p>No Family</p>
+        <p>@I18N.View.Family.MyFamily_Create_Disclaimer</p>
+        <p>@Html.ActionLink(I18N.GenericAction.create, "Create", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })</p>
     }
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
     @Html.ActionLink("Back to List", "Index")
 </p>
