@@ -336,6 +336,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EventViewModels.cs" />
+    <Compile Include="Models\FamilyViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -521,6 +522,8 @@
     <Content Include="Views\Families\MyFamily.cshtml" />
     <Content Include="Views\Families\_UserList.cshtml" />
     <Content Include="Views\Families\RemoveMember.cshtml" />
+    <Content Include="Views\Families\AddMember.cshtml" />
+    <Content Include="Views\Families\_CreateMember2Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
