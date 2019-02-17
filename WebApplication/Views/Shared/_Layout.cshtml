@@ -23,6 +23,10 @@
                 {
                     <li class="nav-item">@Html.ActionLink("Events", "Index", "Events", null, new { @class = "navbar-brand" })</li>
                     <li class="nav-item">@Html.ActionLink("My Family", "Index", "Families", null, new { @class = "navbar-brand" })</li>
+                    if (User.IsInRole("Head Coach"))
+                    {
+                        <li class="nav-item">@Html.ActionLink("Users", "Index", "Users", null, new { @class = "navbar-brand" })</li>
+                    }
                 }
                 <li class="nav-item">@Html.ActionLink("About", "About", "Home", null, new { @class = "navbar-brand" })</li>
                 <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", null, new { @class = "navbar-brand" })</li>

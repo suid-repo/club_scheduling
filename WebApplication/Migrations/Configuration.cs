@@ -114,6 +114,7 @@ namespace WebApplication.Migrations
                     Name = "Learner"
                 });
 
+            context.SaveChanges();
 
             //SEED STORED PROCEDURE / TRIGGER
             SeedAdditionalTableStuff(context);
