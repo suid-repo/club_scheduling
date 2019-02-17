@@ -167,7 +167,7 @@ namespace WebApplication.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    await AccountHelper.SendConfirmationMail(UserManager, Request, user.Id);
+                    await AccountHelper.SendConfirmationMailAsync(Request, user.Id);
                     return RedirectToAction("Index", "Home");
                     //return View("DisplayEmail");
                 }

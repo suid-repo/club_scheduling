@@ -6,9 +6,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using WebApplication.Helpers;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -57,28 +59,10 @@ namespace WebApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "FirstName,LastName,BirthDay,Email")] ApplicationUser applicationUser)
-        {/*NEED TO CORRECT*/
+        {
             if (ModelState.IsValid)
             {
-                PasswordHasher ps = new PasswordHasher();
-
-                applicationUser.UserName = applicationUser.Email;
-                applicationUser.SecurityStamp = Guid.NewGuid().ToString();
-                applicationUser.PasswordHash = ps.HashPassword(Membership.GeneratePassword(10, 1));
-                
-                if (Manager.Create(applicationUser).Succeeded)
-                {
-                    Manager.AddToRole(applicationUser.Id, "Member");
-
-                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    string code = Manager.GenerateEmailConfirmationToken(applicationUser.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = applicationUser.Id, code = code }, protocol: Request.Url.Scheme);
-                    Manager.SendEmail(applicationUser.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                }
+                AccountHelper.RegisterUser(Request, applicationUser.Email, null, applicationUser.FirstName, applicationUser.LastName, applicationUser.BirthDay);
 
                 return RedirectToAction("Index");
             }
