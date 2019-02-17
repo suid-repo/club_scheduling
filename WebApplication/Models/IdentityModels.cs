@@ -35,8 +35,8 @@ namespace WebApplication.Models
             //Define the claims
             List<Claim> customClaims = new List<Claim>
             {
-                new Claim("FirstName", this.FirstName),
-                new Claim("LastName", this.LastName),
+                new Claim("FirstName", (this.FirstName != null) ? this.FirstName : string.Empty),
+                new Claim("LastName", (this.LastName != null) ? this.LastName : string.Empty),
                 new Claim("FamilyId", (this.Family != null) ? this.Family.Id.ToString() : string.Empty),
                 new Claim("IsFamilyOwner", (this.Family != null && this.Id.Equals(this.Family.Owner.Id)).ToString())
             };
