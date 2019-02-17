@@ -15,11 +15,12 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "Head Coach")]
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserManager<ApplicationUser> Manager { get; set; }
-
+        
         public UsersController()
         {
             Manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));

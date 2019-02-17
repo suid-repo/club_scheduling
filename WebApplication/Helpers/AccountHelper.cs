@@ -192,5 +192,27 @@ namespace WebApplication.Helpers
 
             return true;
         }
+
+        public static bool SendForgotPasswordConfirmationMail(HttpRequestBase request, string userId)
+        {
+            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            string code = UserManager.GeneratePasswordResetToken(userId);
+            var callbackUrl = UrlHelper.Action("ResetPassword", "Account", new { userId = userId, code = code }, protocol: request.Url.Scheme);
+            UserManager.SendEmailAsync(userId, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return true;
+        }
+
+        public static async Task<bool> SendForgotPasswordConfirmationMailAsync(HttpRequestBase request, string userId)
+        {
+            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+            // Send an email with this link
+            string code = await UserManager.GeneratePasswordResetTokenAsync(userId);
+            var callbackUrl = UrlHelper.Action("ResetPassword", "Account", new { userId = userId, code = code }, protocol: request.Url.Scheme);
+            await UserManager.SendEmailAsync(userId, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+            return true;
+        }
     }
 }
