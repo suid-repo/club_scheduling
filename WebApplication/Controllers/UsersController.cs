@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -15,6 +16,12 @@ namespace WebApplication.Controllers
     public class UsersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private UserManager<ApplicationUser> Manager { get; set; }
+
+        public UsersController()
+        {
+            Manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+        }
 
         // GET: Users
         public ActionResult Index()
@@ -41,7 +48,6 @@ namespace WebApplication.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Families, "Id", "Name");
             return View();
         }
 
@@ -54,8 +60,26 @@ namespace WebApplication.Controllers
         {/*NEED TO CORRECT*/
             if (ModelState.IsValid)
             {
-                db.Users.Add(applicationUser);
-                db.SaveChanges();
+                PasswordHasher ps = new PasswordHasher();
+
+                applicationUser.UserName = applicationUser.Email;
+                applicationUser.SecurityStamp = Guid.NewGuid().ToString();
+                applicationUser.PasswordHash = ps.HashPassword(Membership.GeneratePassword(10, 1));
+                
+                if (Manager.Create(applicationUser).Succeeded)
+                {
+                    Manager.AddToRole(applicationUser.Id, "Member");
+
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    string code = Manager.GenerateEmailConfirmationToken(applicationUser.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = applicationUser.Id, code = code }, protocol: Request.Url.Scheme);
+                    Manager.SendEmail(applicationUser.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -70,9 +94,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var manager =
-                new UserManager<ApplicationUser>(
-                    new UserStore<ApplicationUser>(db));
+            
 
             UserEditViewModel model = new UserEditViewModel();
             model.User = db.Users.Find(id);
@@ -83,11 +105,11 @@ namespace WebApplication.Controllers
 
             model.Roles = FillRoles();
 
-            if (manager.IsInRole(model.User.Id, "Head Coach"))
+            if (Manager.IsInRole(model.User.Id, "Head Coach"))
             {
                 model.SelectedRole = "Head Coach";
             }
-            else if (manager.IsInRole(model.User.Id, "Coach"))
+            else if (Manager.IsInRole(model.User.Id, "Coach"))
             {
                 model.SelectedRole = "Coach";
             }
@@ -186,23 +208,19 @@ namespace WebApplication.Controllers
         {
             string[] roles = { "Head Coach", "Coach", "Member" };
 
-            var manager =
-            new UserManager<ApplicationUser>(
-                new UserStore<ApplicationUser>(db));
-
-            manager.RemoveFromRoles(userId, roles);
+            Manager.RemoveFromRoles(userId, roles);
 
             if(role.Equals("Head Coach"))
             {
-                manager.AddToRoles(userId, roles);
+                Manager.AddToRoles(userId, roles);
             }
             else if(role.Equals("Coach"))
             {
-                manager.AddToRole(userId, "Coach");
+                Manager.AddToRole(userId, "Coach");
             }
             else
             {
-                manager.AddToRole(userId, "Member");
+                Manager.AddToRole(userId, "Member");
             }
 
         }

@@ -12,6 +12,7 @@ using WebApplication.Models;
 using System.Xml.Serialization;
 using System.IO;
 using System.Net;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
@@ -166,10 +167,7 @@ namespace WebApplication.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    await AccountHelper.SendConfirmationMail(UserManager, Request, user.Id);
                     return RedirectToAction("Index", "Home");
                     //return View("DisplayEmail");
                 }
