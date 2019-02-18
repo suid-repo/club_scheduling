@@ -120,4 +120,7 @@
   <data name="Action_DeleteAccount" xml:space="preserve">
     <value>Delete my account</value>
   </data>
+  <data name="Action_DownloadMyData" xml:space="preserve">
+    <value>Download my data</value>
+  </data>
 </root>

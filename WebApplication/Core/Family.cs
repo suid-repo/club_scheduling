@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,8 +23,10 @@ namespace WebApplication.Core
               ErrorMessageResourceName = "Family_NameRequired")]
         public string Name { get; set; }
         [InverseProperty("OwnFamily"), Required]
+        [JsonIgnore]
         public virtual ApplicationUser Owner { get; set; }
         [InverseProperty("Family")]
+        [JsonIgnore]
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 

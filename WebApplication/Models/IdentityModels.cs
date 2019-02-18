@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Newtonsoft.Json;
 using WebApplication.Core;
 
 namespace WebApplication.Models
@@ -20,11 +21,13 @@ namespace WebApplication.Models
         public DateTime? BirthDay { get; set; }
         
         public virtual Family Family { get; set; }
+        [JsonIgnore]
         public virtual Family OwnFamily { get; set; }
         public virtual Level Level { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<CoachEvent> CoachEvents { get; set; }
+        [JsonIgnore]
         public virtual ICollection<QueuedItem> QueuedItems { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

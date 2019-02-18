@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,7 +19,9 @@ namespace WebApplication.Core
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Level),
               ErrorMessageResourceName = "Level_NameRequired")]
         public string Name { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Event> Events { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ApplicationUser> Users { get; set; }
     }
 }

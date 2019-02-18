@@ -68,5 +68,14 @@ namespace I18N.View {
                 return ResourceManager.GetString("Action_DeleteAccount", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download my data.
+        /// </summary>
+        public static string Action_DownloadMyData {
+            get {
+                return ResourceManager.GetString("Action_DownloadMyData", resourceCulture);
+            }
+        }
     }
 }

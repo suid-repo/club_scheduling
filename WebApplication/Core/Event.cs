@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -35,8 +36,11 @@ namespace WebApplication.Core
         public DateTime? CreationTime { get; set; }
         [Display(Name = "Event_Core_Level", ResourceType = typeof(I18N.Core.Event))]
         public virtual ICollection<Level> Levels { get; set; }
-        public virtual ICollection<CoachEvent> CoachEvents { get; set; } 
+        [JsonIgnore]
+        public virtual ICollection<CoachEvent> CoachEvents { get; set; }
+        [JsonIgnore]
         public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }
+        [JsonIgnore]
         public virtual Queued Queued { get; set; }
     }
 }

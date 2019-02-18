@@ -11,6 +11,7 @@
                 <h4>Change your account settings</h4>
             </div>
             <div class="float-md-right">
+                @Html.ActionLink(I18N.View.User.Action_DownloadMyData, "DownloadMyData", "Account", null, new { @class = "btn btn-secondary btn-sm" })
                 @Html.ActionLink(I18N.View.User.Action_DeleteAccount, "Delete", "Account", null, new { @class = "btn btn-danger btn-sm" })
             </div>
         </div>

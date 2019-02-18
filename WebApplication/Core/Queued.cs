@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,7 +16,7 @@ namespace WebApplication.Core
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int EventId { get; set; }
         public virtual Event Event { get; set; }
-
+        [JsonIgnore]
         public virtual ICollection<QueuedItem> QueuedItems { get; set; }
     }
 }
