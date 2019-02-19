@@ -38,6 +38,9 @@ namespace WebApplication
             bundles.Add(new StyleBundle("~/Content/css-rtl").Include(
                       "~/Content/bootstrap-rtl.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/pagedlist").Include(
+                      "~/Content/PagedList.css"));
         }
     }
 }

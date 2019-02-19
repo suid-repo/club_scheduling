@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -20,17 +22,51 @@ namespace WebApplication.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserManager<ApplicationUser> Manager { get; set; }
-        
+
         public UsersController()
         {
             Manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
         }
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Index([Bind(Include = "search, page")]string search, int? page)
         {
-            var applicationUsers = db.Users.Include(a => a.OwnFamily);
-            return View(applicationUsers.ToList());
+            try
+            {
+                int pageSize = int.Parse(ConfigurationManager.AppSettings.Get("PageSize"));
+                int pageNumber = page ?? 1;
+                ViewBag.CurrentSearch = search;
+
+                //IEnumerable<ApplicationUser> applicationUsers = db.Users.Include(a => a.OwnFamily);
+
+                IQueryable<ApplicationUser> applicationUsers = db.Users;
+
+                if (!string.IsNullOrEmpty(search))
+                {
+                    applicationUsers = applicationUsers.Where
+                        (
+                            u => u.FirstName.StartsWith(search) ||
+                                 u.LastName.StartsWith(search) ||
+                                 u.Email.StartsWith(search)
+                        );
+                }
+
+                applicationUsers = applicationUsers.OrderBy(u => u.FirstName).ThenBy(u => u.LastName);
+
+                return View(applicationUsers.ToPagedList(pageNumber, pageSize));
+            }
+            catch (ArgumentNullException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "PageSize seems to did not be set.");
+            }
+            catch (FormatException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "PageSize seems to not be valid integer.");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
 
         // GET: Users/Details/5
@@ -79,7 +115,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
 
             UserEditViewModel model = new UserEditViewModel();
             model.User = db.Users.Find(id);
@@ -195,11 +231,11 @@ namespace WebApplication.Controllers
 
             Manager.RemoveFromRoles(userId, roles);
 
-            if(role.Equals("Head Coach"))
+            if (role.Equals("Head Coach"))
             {
                 Manager.AddToRoles(userId, roles);
             }
-            else if(role.Equals("Coach"))
+            else if (role.Equals("Coach"))
             {
                 Manager.AddToRole(userId, "Coach");
             }
