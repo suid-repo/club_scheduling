@@ -68,6 +68,7 @@ namespace WebApplication.Controllers
 
                 db.Families.Add(family);
                 db.SaveChanges();
+                // Why does it return to index here? Should it not return to MyFamily?
                 return RedirectToAction("Index");
             }
 
@@ -75,7 +76,7 @@ namespace WebApplication.Controllers
         }
 
         [Authorize(Roles = "Head Coach, Member")] // Family owner can edit their families details here
-        // Option to add someone to their family from this view?? Yes, may use partial view
+        // There will be options to add existing members or create a new account to add to the family here
         // Can Head Coach edit other peoples families details?? Yes, super admin should do that
         // GET: Families/Edit/5
         // This is where the family owner can edit their family members level etc.
@@ -114,6 +115,7 @@ namespace WebApplication.Controllers
             {
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
+                // Same question as above about index here?
                 return RedirectToAction("Index");
             }
             return View(family);
@@ -121,7 +123,7 @@ namespace WebApplication.Controllers
 
         [Authorize(Roles = "Member, Head Coach")]
         // The family owner can delete the family, existing accounts get removed from the family
-        // and unactivated kids accounts get deleted
+        // and unactivated accounts get deleted
         // Head Coach can delete other peoples family members?? Yes, a super admin should do that
         // GET: Families/Delete/5
         public ActionResult Delete(int? id)
