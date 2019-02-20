@@ -69,7 +69,7 @@ namespace WebApplication.Helpers
             return false;
         }
 
-        public static bool RegisterFakeUser(ApplicationDbContext dbContext, string firstName, string lastName, DateTime birthday)
+        public static bool RegisterFakeUser(string firstName, string lastName, DateTime birthday)
         {
             
             PasswordHasher ps = new PasswordHasher();
