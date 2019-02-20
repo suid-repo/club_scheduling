@@ -95,6 +95,7 @@ namespace WebApplication.Models
         [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
               ErrorMessageResourceName = "BirthdayRequired")]
         [DataType(DataType.Date)]
+            
         public DateTime? BirthDay { get; set; }
     }
 
