@@ -1,6 +1,9 @@
-﻿using System;
+﻿using MvcValidationExtensions.Attribute;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Configuration;
 
 namespace WebApplication.Models
 {
@@ -95,8 +98,19 @@ namespace WebApplication.Models
         [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
               ErrorMessageResourceName = "BirthdayRequired")]
         [DataType(DataType.Date)]
-            
+        [LessThanEqualTo("RegistrationAgeLimit", ErrorMessageResourceType = typeof(I18N.Core.User),
+            ErrorMessageResourceName = "BirthdayRegistrationAgeLimit")]
         public DateTime? BirthDay { get; set; }
+
+        [NotMapped]
+        public DateTime RegistrationAgeLimit
+        {
+            get
+            {
+                DateTime date = DateTime.Now;
+                return date.AddYears(-8).Date;
+            }
+        }
     }
 
     public class ResetPasswordViewModel

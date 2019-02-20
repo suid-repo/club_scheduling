@@ -120,6 +120,9 @@
   <data name="Birthday" xml:space="preserve">
     <value>Birthday</value>
   </data>
+  <data name="BirthdayRegistrationAgeLimit" xml:space="preserve">
+    <value>You have not reach the age limitation.</value>
+  </data>
   <data name="BirthdayRequired" xml:space="preserve">
     <value>The birthday field is required</value>
   </data>

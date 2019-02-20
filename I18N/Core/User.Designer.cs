@@ -70,6 +70,15 @@ namespace I18N.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have not reach the age limitation..
+        /// </summary>
+        public static string BirthdayRegistrationAgeLimit {
+            get {
+                return ResourceManager.GetString("BirthdayRegistrationAgeLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The birthday field is required.
         /// </summary>
         public static string BirthdayRequired {
