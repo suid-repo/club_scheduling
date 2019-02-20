@@ -236,5 +236,32 @@ namespace WebApplication.Controllers
         {
             return PartialView(model);
         }
+
+        // GET: Families/AddMember/5
+        public ActionResult AddMember()
+        {
+            FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
+            model.InviteUser = new ApplicationUser();
+            return View(model);
+        }
+
+        // POST: Families/AddMember/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddMember([Bind(Include = "InviteCode")] string inviteCode)
+        {
+            if (ModelState.IsValid)
+            {                             
+                           
+            }
+            FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
+            model.InviteUser = new ApplicationUser();
+            return View(model);
+        }
+
+        public PartialViewResult _CreateMember2Add(ApplicationUser user)
+        {
+            return PartialView(user);
+        }
     }
 }

@@ -97,6 +97,15 @@ namespace I18N.Core {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invite code.
+        /// </summary>
+        public static string InviteCode {
+            get {
+                return ResourceManager.GetString("InviteCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Lastname.
         /// </summary>
         public static string LastName {

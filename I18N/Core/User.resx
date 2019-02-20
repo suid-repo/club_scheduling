@@ -129,6 +129,9 @@
   <data name="FirstNameRequired" xml:space="preserve">
     <value>The firstname field is required</value>
   </data>
+  <data name="InviteCode" xml:space="preserve">
+    <value>Invite code</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Lastname</value>
   </data>
