@@ -252,11 +252,11 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {                             
-                FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
-                model.InviteUser = new ApplicationUser();
-                return View(model);               
+                           
             }
-
+            FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
+            model.InviteUser = new ApplicationUser();
+            return View(model);
         }
 
         public PartialViewResult _CreateMember2Add(ApplicationUser user)

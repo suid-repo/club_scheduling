@@ -28,7 +28,8 @@ namespace WebApplication.Models
               ErrorMessageResourceName = "BirthdayRequired")]
         [DataType(DataType.Date)]
         public DateTime? BirthDay { get; set; }
-        
+        [Display(Name = "InviteCode", ResourceType = typeof(I18N.Core.User))]
+        public string InviteCode { get; set; }
         public virtual Family Family { get; set; }
         [JsonIgnore]
         public virtual Family OwnFamily { get; set; }
