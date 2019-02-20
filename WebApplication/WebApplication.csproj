@@ -340,6 +340,10 @@
     <Compile Include="Migrations\201902131250575_Birthday Date Type.Designer.cs">
       <DependentUpon>201902131250575_Birthday Date Type.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902201435395_User I18N.cs" />
+    <Compile Include="Migrations\201902201435395_User I18N.Designer.cs">
+      <DependentUpon>201902201435395_User I18N.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EventViewModels.cs" />
@@ -453,6 +457,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902131250575_Birthday Date Type.resx">
       <DependentUpon>201902131250575_Birthday Date Type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201435395_User I18N.resx">
+      <DependentUpon>201902201435395_User I18N.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
