@@ -18,7 +18,7 @@ using WebApplication.Models;
 namespace WebApplication.Controllers
 {
     [Authorize(Roles = "Head Coach")]
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserManager<ApplicationUser> Manager { get; set; }

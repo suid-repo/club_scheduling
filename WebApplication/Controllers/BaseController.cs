@@ -22,15 +22,15 @@ namespace WebApplication.Controllers
             cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
 
 
-            if (RouteData.Values["culture"] as string != cultureName)
-            {
+            //if (RouteData.Values["culture"] as string != cultureName)
+            //{
 
-                // Force a valid culture in the URL
-                RouteData.Values["culture"] = cultureName.ToLowerInvariant(); // lower case too
+            //    // Force a valid culture in the URL
+            //    RouteData.Values["culture"] = cultureName.ToLowerInvariant(); // lower case too
 
-                // Redirect user
-                Response.RedirectToRoute(RouteData.Values);
-            }
+            //    // Redirect user
+            //    Response.RedirectToRoute(RouteData.Values);
+            //}
 
 
             // Modify current thread's cultures            
