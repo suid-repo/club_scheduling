@@ -69,7 +69,7 @@ namespace WebApplication.Helpers
             return false;
         }
 
-        public static bool RegisterFakeUser(string firstName, string lastName, DateTime birthday)
+        public static string RegisterFakeUser(string firstName, string lastName, DateTime birthday)
         {
             
             PasswordHasher ps = new PasswordHasher();
@@ -90,10 +90,10 @@ namespace WebApplication.Helpers
                 user = UserManager.FindByEmail(email);
                 AddUser2DefaultRole(user.Id);
 
-                return true;
+                return user.Id;
             }
 
-            return false;
+            return null;
         }
 
         public static async Task<bool> RegisterUserAsync(HttpRequestBase request, string email, string password, string firstName, string lastName, DateTime? birthday)
@@ -129,7 +129,7 @@ namespace WebApplication.Helpers
             return false;
         }
 
-        public static async Task<bool> RegisterFakeUserAsync(string firstName, string lastName, DateTime birthday)
+        public static async Task<string> RegisterFakeUserAsync(string firstName, string lastName, DateTime birthday)
         {
             
             PasswordHasher ps = new PasswordHasher();
@@ -150,10 +150,10 @@ namespace WebApplication.Helpers
                 user = await UserManager.FindByEmailAsync(email);
                 await AddUser2DefaultRoleAsync(user.Id);
 
-                return true;
+                return user.Id;
             }
 
-            return false;
+            return null;
         }
 
         public static bool AddUser2DefaultRole(string userId)

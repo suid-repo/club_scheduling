@@ -10,6 +10,8 @@ using WebApplication.Core;
 using WebApplication.Models;
 using Microsoft.AspNet.Identity;
 using WebApplication.Extentions;
+using System.Configuration;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
@@ -147,7 +149,6 @@ namespace WebApplication.Controllers
         }
 
         // POST: Families/Delete/5
-        // Same as above
         [Authorize(Roles = "Member, Head Coach")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -165,6 +166,8 @@ namespace WebApplication.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Families/RemoveMember/5
+        [Authorize(Roles = "Member, Head Coach")]
         public ActionResult RemoveMember(string id)
         {
             if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
@@ -218,9 +221,11 @@ namespace WebApplication.Controllers
             base.Dispose(disposing);
         }
 
+        // GET: Families/MyFamiy/5
+        [Authorize(Roles = "Member")]
         public ActionResult MyFamily()
         {
-            // When you click the MyFamily tab this method checks what family you are you and 
+            // When you click the MyFamily tab this method checks what family you are in and 
             // displays the information of that family
             int? familyId= User.Identity.GetFamilyId();
             Family family = null;
@@ -238,24 +243,94 @@ namespace WebApplication.Controllers
         }
 
         // GET: Families/AddMember/5
+        [Authorize(Roles = "Member")]
         public ActionResult AddMember()
         {
+            if (!(User.Identity.IsFamilyOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
             model.InviteUser = new ApplicationUser();
             return View(model);
         }
 
         // POST: Families/AddMember/5
+        [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMember([Bind(Include = "InviteCode")] string inviteCode)
+        public ActionResult AddMember([Bind(Include = "InviteCode")] FamilyAddMemberViewModel model)
         {
-            if (ModelState.IsValid)
-            {                             
-                           
+            if (!(User.Identity.IsFamilyOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-            FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
+            int? familyId = User.Identity.GetFamilyId();
+            Family family = db.Families.Find(familyId);
+            if (family.Users.Count() >= int.Parse(ConfigurationManager.AppSettings.Get("MaxFamilySize")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = db.Users.Where(u => u.InviteCode.Equals(model.InviteCode)).FirstOrDefault();
+                if (user == null)
+                {
+                    ModelState.AddModelError("InviteCode", "Invite Code is not valid");
+                }
+                else if (user.Family != null)
+                {
+                    ModelState.AddModelError("InviteCode", "This user is already in a family");
+                    user.InviteCode = null;
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    
+                    family.Users.Add(user);
+                    db.Entry(family).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("MyFamily");
+                }               
+            }           
             model.InviteUser = new ApplicationUser();
+            return View(model);
+        }
+
+        // POST: Families/AddMember/5
+        [Authorize(Roles = "Member")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddMember([Bind(Include = "FirstName, LastName, Birthday")] ApplicationUser model)
+        {
+            if (!(User.Identity.IsFamilyOwner()))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            int? familyId = User.Identity.GetFamilyId();
+            Family family = db.Families.Find(familyId);
+            if (family.Users.Count() >= int.Parse(ConfigurationManager.AppSettings.Get("MaxFamilySize")))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (ModelState.IsValid)
+            {
+                string userId =
+                AccountHelper.RegisterFakeUser(model.FirstName, model.LastName, model.BirthDay.Value);
+                ApplicationUser user = db.Users.Find(userId);
+                family.Users.Add(model);
+                db.Entry(family).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("MyFamily");
+            }
+
+            FamilyAddMemberViewModel viewModel = new FamilyAddMemberViewModel();
+            viewModel.InviteUser = model;
             return View(model);
         }
 
