@@ -72,6 +72,9 @@ namespace WebApplication.Migrations
                     Email = "admin@localhost.com",
                     PasswordHash = ps.HashPassword("Admin$1"),
                     EmailConfirmed = true,
+                    FirstName = "HeadCoach",
+                    LastName = "SuperAdmin",
+                    BirthDay = DateTime.Now,
                     SecurityStamp = Guid.NewGuid().ToString()
                 };
 
