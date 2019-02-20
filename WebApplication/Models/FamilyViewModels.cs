@@ -8,5 +8,6 @@ namespace WebApplication.Models
     public class FamilyAddMemberViewModel
     {
         public string InviteCode { get; set; }
+        public ApplicationUser InviteUser { get; set; }
     }
 }
