@@ -15,9 +15,9 @@ namespace WebApplication.Core
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { set; get; }
-        [Display(Name = "Level_Name", ResourceType = typeof(I18N.Core.Level))]
+        [Display(Name = "Name", ResourceType = typeof(I18N.Core.Level))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Level),
-              ErrorMessageResourceName = "Level_NameRequired")]
+              ErrorMessageResourceName = "NameRequired")]
         public string Name { get; set; }
         [JsonIgnore]
         public virtual ICollection<Event> Events { get; set; }

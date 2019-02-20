@@ -1,11 +1,11 @@
 ﻿@using PagedList.Mvc
 @model PagedList.IPagedList<WebApplication.Models.ApplicationUser>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = I18N.View.User.Index_Title;
 }
 
 @Styles.Render("~/Content/pagedlist")
-<h2>Index</h2>
+<h2>@I18N.View.User.Index_Title</h2>
 <div class="row">
     <div class="col">
         <div class="float-md-left">
@@ -13,7 +13,7 @@
             {
                 @Html.Label("search", I18N.GenericAction.search, new { @class = "" }) 
                 @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" }) 
-                <button type="submit" value="search" class="btn btn-primary mb-2">Filter</button>
+                <button type="submit" value="search" class="btn btn-primary mb-2">@I18N.GenericAction.filter</button>
             }
         </div>
         <div class="float-md-right">
@@ -80,7 +80,7 @@
     }
 </table>
 <div class="page-count">
-     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+     @I18N.GenericLabel.page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @I18N.GenericLabel.of @Model.PageCount
 </div>
 <div class="pagination">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentSearch }))

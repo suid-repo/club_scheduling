@@ -1,16 +1,16 @@
 ﻿@model WebApplication.Models.ApplicationUser
 
 @{
-    ViewBag.Title = I18N.GenericAction.details;
+    ViewBag.Title = I18N.View.User.Details_Title;
 }
 
-<h2>@I18N.GenericAction.details</h2>
+<h2>@I18N.View.User.Details_Title</h2>
 
 <div>
     <div class="row">
         <div class="col">
             <div class="float-md-left">
-                <h4>ApplicationUser</h4>
+                <h4>@I18N.View.User.Details_Subtitle</h4>
             </div>
             <div class="float-md-right">
                 @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
@@ -96,11 +96,11 @@
         <dd>
             @if (Model.TwoFactorEnabled)
             {
-                <text>Yes</text>
+                @I18N.GenericAction.yes
             }
             else
             {
-                <text>No</text>
+                @I18N.GenericAction.no
             }
         </dd>
 

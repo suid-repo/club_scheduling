@@ -63,81 +63,81 @@ namespace I18N.Core {
         /// <summary>
         ///   Looks up a localized string similar to Creation Time.
         /// </summary>
-        public static string Event_Core_CreationTime {
+        public static string CreationTime {
             get {
-                return ResourceManager.GetString("Event_Core_CreationTime", resourceCulture);
+                return ResourceManager.GetString("CreationTime", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
-        public static string Event_Core_EndDate {
+        public static string EndDate {
             get {
-                return ResourceManager.GetString("Event_Core_EndDate", resourceCulture);
+                return ResourceManager.GetString("EndDate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The end date is required..
         /// </summary>
-        public static string Event_Core_EndDateRequired {
+        public static string EndDateRequired {
             get {
-                return ResourceManager.GetString("Event_Core_EndDateRequired", resourceCulture);
+                return ResourceManager.GetString("EndDateRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Level.
         /// </summary>
-        public static string Event_Core_Level {
+        public static string Level {
             get {
-                return ResourceManager.GetString("Event_Core_Level", resourceCulture);
+                return ResourceManager.GetString("Level", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to You have to choose at least one practice level..
         /// </summary>
-        public static string Event_Core_LevelDateRequired {
+        public static string LevelDateRequired {
             get {
-                return ResourceManager.GetString("Event_Core_LevelDateRequired", resourceCulture);
+                return ResourceManager.GetString("LevelDateRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
-        public static string Event_Core_Name {
+        public static string Name {
             get {
-                return ResourceManager.GetString("Event_Core_Name", resourceCulture);
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The name field is required..
         /// </summary>
-        public static string Event_Core_NameRequired {
+        public static string NameRequired {
             get {
-                return ResourceManager.GetString("Event_Core_NameRequired", resourceCulture);
+                return ResourceManager.GetString("NameRequired", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Start date.
         /// </summary>
-        public static string Event_Core_StartDate {
+        public static string StartDate {
             get {
-                return ResourceManager.GetString("Event_Core_StartDate", resourceCulture);
+                return ResourceManager.GetString("StartDate", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to The start date is required..
         /// </summary>
-        public static string Event_Core_StartDateRequired {
+        public static string StartDateRequired {
             get {
-                return ResourceManager.GetString("Event_Core_StartDateRequired", resourceCulture);
+                return ResourceManager.GetString("StartDateRequired", resourceCulture);
             }
         }
     }

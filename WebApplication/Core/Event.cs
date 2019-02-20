@@ -14,27 +14,27 @@ namespace WebApplication.Core
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Display(Name="Event_Core_Name", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name="Name", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
-              ErrorMessageResourceName = "Event_Core_NameRequired")]
+              ErrorMessageResourceName = "NameRequired")]
         public string Name { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Event_Core_StartDate", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "StartDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
-              ErrorMessageResourceName = "Event_Core_StartDateRequired")]
+              ErrorMessageResourceName = "StartDateRequired")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
-        [Display(Name = "Event_Core_EndDate", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "EndDate", ResourceType = typeof(I18N.Core.Event))]
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Event),
-              ErrorMessageResourceName = "Event_Core_EndDateRequired")]
+              ErrorMessageResourceName = "EndDateRequired")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy HH:mm}")]
         [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
-        [Display(Name = "Event_Core_CreationTime", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "CreationTime", ResourceType = typeof(I18N.Core.Event))]
         [DataType(DataType.DateTime)]
         public DateTime? CreationTime { get; set; }
-        [Display(Name = "Event_Core_Level", ResourceType = typeof(I18N.Core.Event))]
+        [Display(Name = "Level", ResourceType = typeof(I18N.Core.Event))]
         public virtual ICollection<Level> Levels { get; set; }
         [JsonIgnore]
         public virtual ICollection<CoachEvent> CoachEvents { get; set; }

@@ -51,6 +51,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Family.resx</DependentUpon>
     </Compile>
+    <Compile Include="Core\User.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>User.resx</DependentUpon>
+    </Compile>
     <Compile Include="GenericAction.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -60,6 +65,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Level.resx</DependentUpon>
+    </Compile>
+    <Compile Include="GenericLabel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GenericLabel.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Event.Designer.cs">
@@ -92,6 +102,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Family.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Core\User.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>User.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="GenericAction.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GenericAction.Designer.cs</LastGenOutput>
@@ -99,6 +113,10 @@
     <EmbeddedResource Include="Core\Level.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Level.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenericLabel.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GenericLabel.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Event.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

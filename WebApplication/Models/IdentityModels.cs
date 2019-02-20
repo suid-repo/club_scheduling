@@ -15,14 +15,24 @@ namespace WebApplication.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Display(Name = "FirstName", ResourceType = typeof(I18N.Core.User))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
+              ErrorMessageResourceName = "FirstNameRequired")]
         public string FirstName { get; set; }
+        [Display(Name = "LastName", ResourceType = typeof(I18N.Core.User))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
+              ErrorMessageResourceName = "LastNameRequired")]
         public string LastName { get; set; }
+        [Display(Name = "Birthday", ResourceType = typeof(I18N.Core.User))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
+              ErrorMessageResourceName = "BirthdayRequired")]
         [DataType(DataType.Date)]
         public DateTime? BirthDay { get; set; }
         
         public virtual Family Family { get; set; }
         [JsonIgnore]
         public virtual Family OwnFamily { get; set; }
+        [Display(Name = "FirstName", ResourceType = typeof(I18N.Core.User))]
         public virtual Level Level { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace I18N.Core {
+namespace I18N {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace I18N.Core {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Level {
+    public class GenericLabel {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Level() {
+        internal GenericLabel() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace I18N.Core {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("I18N.Core.Level", typeof(Level).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("I18N.GenericLabel", typeof(GenericLabel).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,29 @@ namespace I18N.Core {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to of.
         /// </summary>
-        public static string Name {
+        public static string of {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("of", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The name field is required..
+        ///   Looks up a localized string similar to Page.
         /// </summary>
-        public static string NameRequired {
+        public static string page {
             get {
-                return ResourceManager.GetString("NameRequired", resourceCulture);
+                return ResourceManager.GetString("page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pages.
+        /// </summary>
+        public static string pages {
+            get {
+                return ResourceManager.GetString("pages", resourceCulture);
             }
         }
     }

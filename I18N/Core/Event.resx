@@ -117,38 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Event_Core_CreationTime" xml:space="preserve">
+  <data name="CreationTime" xml:space="preserve">
     <value>Creation Time</value>
   </data>
-  <data name="Event_Core_EndDate" xml:space="preserve">
+  <data name="EndDate" xml:space="preserve">
     <value>End date</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_EndDateRequired" xml:space="preserve">
+  <data name="EndDateRequired" xml:space="preserve">
     <value>The end date is required.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_Level" xml:space="preserve">
+  <data name="Level" xml:space="preserve">
     <value>Level</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_LevelDateRequired" xml:space="preserve">
+  <data name="LevelDateRequired" xml:space="preserve">
     <value>You have to choose at least one practice level.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_NameRequired" xml:space="preserve">
+  <data name="NameRequired" xml:space="preserve">
     <value>The name field is required.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_StartDate" xml:space="preserve">
+  <data name="StartDate" xml:space="preserve">
     <value>Start date</value>
     <comment>WebApplication.Core.Event</comment>
   </data>
-  <data name="Event_Core_StartDateRequired" xml:space="preserve">
+  <data name="StartDateRequired" xml:space="preserve">
     <value>The start date is required.</value>
     <comment>WebApplication.Core.Event</comment>
   </data>

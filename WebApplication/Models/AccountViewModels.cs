@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApplication.Models
@@ -79,6 +80,22 @@ namespace WebApplication.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "FirstName", ResourceType = typeof(I18N.Core.User))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
+              ErrorMessageResourceName = "FirstNameRequired")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "LastName", ResourceType = typeof(I18N.Core.User))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
+              ErrorMessageResourceName = "LastNameRequired")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Birthday", ResourceType = typeof(I18N.Core.User))]
+        [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
+              ErrorMessageResourceName = "BirthdayRequired")]
+        [DataType(DataType.Date)]
+        public DateTime? BirthDay { get; set; }
     }
 
     public class ResetPasswordViewModel
