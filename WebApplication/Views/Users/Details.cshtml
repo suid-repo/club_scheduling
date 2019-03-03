@@ -3,116 +3,124 @@
 @{
     ViewBag.Title = I18N.View.User.Details_Title;
 }
+<div class="post-single">
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+        </div>
+        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+        <div class="post-body">
 
-<h2>@I18N.View.User.Details_Title</h2>
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <div class="float-md-left">
+                            <h4>@I18N.View.User.Details_Subtitle</h4>
+                        </div>
+                        <div class="float-md-right">
+                            @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
 
-<div>
-    <div class="row">
-        <div class="col">
-            <div class="float-md-left">
-                <h4>@I18N.View.User.Details_Subtitle</h4>
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BirthDay)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BirthDay)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.EmailConfirmed)
+                    </dt>
+
+                    <dd>
+                        @if (Model.EmailConfirmed)
+                        {
+                            @I18N.GenericAction.yes
+                        }
+                        else
+                        {
+                            @I18N.GenericAction.no
+                        }
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PhoneNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PhoneNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                    </dt>
+
+                    <dd>
+                        @if (Model.PhoneNumberConfirmed)
+                        {
+                            @I18N.GenericAction.yes
+                        }
+                        else
+                        {
+                            @I18N.GenericAction.no
+                        }
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                    </dt>
+
+                    <dd>
+                        @if (Model.TwoFactorEnabled)
+                        {
+                            @I18N.GenericAction.yes
+                        }
+                        else
+                        {
+                            @I18N.GenericAction.no
+                        }
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AccessFailedCount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AccessFailedCount)
+                    </dd>
+                </dl>
             </div>
-            <div class="float-md-right">
-                @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
-            </div>
+            <p>
+                @Html.ActionLink(I18N.GenericAction.back2list, "Index")
+            </p>
         </div>
     </div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BirthDay)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailConfirmed)
-        </dt>
-
-        <dd>
-            @if (Model.EmailConfirmed)
-            {
-                @I18N.GenericAction.yes
-            }
-            else
-            {
-                @I18N.GenericAction.no
-            }
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-        </dt>
-
-        <dd>
-            @if (Model.PhoneNumberConfirmed)
-            {
-                @I18N.GenericAction.yes
-            }
-            else
-            {
-                @I18N.GenericAction.no
-            }
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-        </dt>
-
-        <dd>
-            @if (Model.TwoFactorEnabled)
-            {
-                @I18N.GenericAction.yes
-            }
-            else
-            {
-                @I18N.GenericAction.no
-            }
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AccessFailedCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AccessFailedCount)
-        </dd>
-    </dl>
 </div>
-<p>
-    @Html.ActionLink(I18N.GenericAction.back2list, "Index")
-</p>

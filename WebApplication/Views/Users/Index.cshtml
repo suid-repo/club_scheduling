@@ -3,85 +3,94 @@
 @{
     ViewBag.Title = I18N.View.User.Index_Title;
 }
-
 @Styles.Render("~/Content/pagedlist")
-<h2>@I18N.View.User.Index_Title</h2>
-<div class="row">
-    <div class="col">
-        <div class="float-md-left">
-            @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { @class = "form-inline" }))
-            {
-                @Html.Label("search", I18N.GenericAction.search, new { @class = "" }) 
-                @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" }) 
-                <button type="submit" value="search" class="btn btn-primary mb-2">@I18N.GenericAction.filter</button>
-            }
+<div class="post-single">
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
         </div>
-        <div class="float-md-right">
-            @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-primary btn-sm" })
+        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+        <div class="post-body">
+            <div class="row">
+                <div class="col">
+                    <div class="float-md-left">
+                        @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { @class = "form-inline" }))
+                        {
+                            @Html.Label("search", I18N.GenericAction.search, new { @class = "" })
+                            @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" })
+                            <button type="submit" value="search" class="btn btn-primary mb-2">@I18N.GenericAction.filter</button>
+                        }
+                    </div>
+                    <div class="float-md-right">
+                        @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-primary btn-sm" })
+                    </div>
+                </div>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().EmailConfirmed)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().BirthDay)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().PhoneNumber)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @if (item.EmailConfirmed)
+                            {
+                                <text>@I18N.GenericAction.yes</text>
+                            }
+                            else
+                            {
+                                <text>@I18N.GenericAction.no</text>
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthDay)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink(I18N.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink(I18N.GenericAction.delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="page-count">
+                @I18N.GenericLabel.page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @I18N.GenericLabel.of @Model.PageCount
+            </div>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentSearch }))
+            </div>
         </div>
     </div>
 </div>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().EmailConfirmed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().BirthDay)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstOrDefault().PhoneNumber)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @if (item.EmailConfirmed)
-                {
-                    <text>@I18N.GenericAction.yes</text>
-                }
-                else
-                {
-                    <text>@I18N.GenericAction.no</text>
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BirthDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
-                @Html.ActionLink(I18N.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
-                @Html.ActionLink(I18N.GenericAction.delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
-            </td>
-        </tr>
-    }
-</table>
-<div class="page-count">
-     @I18N.GenericLabel.page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @I18N.GenericLabel.of @Model.PageCount
-</div>
-<div class="pagination">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentSearch }))
-</div>
+
