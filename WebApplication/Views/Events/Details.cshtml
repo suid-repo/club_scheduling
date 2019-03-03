@@ -4,105 +4,115 @@
 @{
     ViewBag.Title = I18N.View.Event.Details_Title;
 }
-<h2>@I18N.View.Event.Details_Title</h2>
-<div>
-    <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count * 8)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Event.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Event.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Event.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Event.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Event.StartDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Event.StartDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Event.EndDate)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Event.EndDate)
-        </dd>
-    </dl>
-</div>
-<div class="row">
-    @if (User.IsInRole("Coach")) //IF COACH
-    {
-        if (!Model.Event.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
-        {
-            <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink(I18N.View.Event.Action_JoinCoach, "CoachJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
-            </div>
-        }
-        else //Unsubscribe button
-        {
-            <div class="col-xs-12 col-md-3 mb-1">
-                @Html.ActionLink(I18N.View.Event.Action_LeaveCoach, "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-block" })
-            </div>
-        }
-    }
-    else
-    {
-        //USER ONLY ACTION
-        if (Model.User.Level != null && Model.Event.Levels.Any(e => e.Id == Model.User.Level.Id))
-        {
-            if (!Model.IsJoigned2Event)
-            {
-
-                <div class="col-xs-12 col-md-3 mb-1">
-                    @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
-                </div>
-
-            }
-            else
-            {
-                <div class="col-xs-12 col-md-3 mb-1">
-                    @Html.ActionLink(I18N.View.Event.Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
-                </div>
-            }
-        }
-
-
-        if (User.Identity.IsFamilyOwner()) // THE USER HAVE A FAMILY
-        {
-            if (!Model.IsFamilyJoigned2Event)
-            {
-                Html.RenderAction("_FamilyJoinModal", Model.Event);
-                <div class="col-xs-12 col-md-3 mb-1">
-                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button>
-                </div>                
-            }
-            else
-            {
-                Html.RenderAction("_FamilyLeaveModal", Model.Event);
-                <div class="col-xs-12 col-md-3 mb-1">
-                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_LeaveMemberFamily</button>
-                </div>
-            }
-        }
-    }
-    @if (User.IsInRole("Head Coach"))
-    {
-        @*<div class="col-xs-12 col-md-3  mb-1">
-
-                @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = Model.Event.Id }, new { @class = "btn btn-primary btn-block" })
-
-            </div>*@
-        <div class="col-xs-12 col-md-3  mb-1">
-            @Html.ActionLink(I18N.GenericAction.cancel, "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+<div class="post-single">
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
         </div>
-    }
+        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+        <div class="post-body">
+            <div>
+                <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count * 8)</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.Name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.Description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.StartDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.StartDate)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.EndDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.EndDate)
+                    </dd>
+                </dl>
+            </div>
+            <div class="row">
+                @if (User.IsInRole("Coach")) //IF COACH
+                {
+                    if (!Model.Event.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
+                    {
+                        <div class="col-xs-12 col-md-3 mb-1">
+                            @Html.ActionLink(I18N.View.Event.Action_JoinCoach, "CoachJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                        </div>
+                    }
+                    else //Unsubscribe button
+                    {
+                        <div class="col-xs-12 col-md-3 mb-1">
+                            @Html.ActionLink(I18N.View.Event.Action_LeaveCoach, "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-block" })
+                        </div>
+                    }
+                }
+                else
+                {
+                    //USER ONLY ACTION
+                    if (Model.User.Level != null && Model.Event.Levels.Any(e => e.Id == Model.User.Level.Id))
+                    {
+                        if (!Model.IsJoigned2Event)
+                        {
+
+                            <div class="col-xs-12 col-md-3 mb-1">
+                                @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-block" })
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="col-xs-12 col-md-3 mb-1">
+                                @Html.ActionLink(I18N.View.Event.Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+                            </div>
+                        }
+                    }
+
+
+                    if (User.Identity.IsFamilyOwner()) // THE USER HAVE A FAMILY
+                    {
+                        if (!Model.IsFamilyJoigned2Event)
+                        {
+                            Html.RenderAction("_FamilyJoinModal", Model.Event);
+                            <div class="col-xs-12 col-md-3 mb-1">
+                                <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button>
+                            </div>
+                        }
+                        else
+                        {
+                            Html.RenderAction("_FamilyLeaveModal", Model.Event);
+                            <div class="col-xs-12 col-md-3 mb-1">
+                                <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_LeaveMemberFamily</button>
+                            </div>
+                        }
+                    }
+                }
+                @if (User.IsInRole("Head Coach"))
+                {
+                    @*<div class="col-xs-12 col-md-3  mb-1">
+
+                    @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = Model.Event.Id }, new { @class = "btn btn-primary btn-block" })
+
+                </div>*@
+                    <div class="col-xs-12 col-md-3  mb-1">
+                        @Html.ActionLink(I18N.GenericAction.cancel, "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-block" })
+                    </div>
+                }
+            </div>
+            <p>
+                @Html.ActionLink(I18N.GenericAction.back2list, "Index")
+            </p>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink(I18N.GenericAction.back2list, "Index")
-</p>
+

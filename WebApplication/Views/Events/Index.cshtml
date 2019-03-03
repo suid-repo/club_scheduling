@@ -1,54 +1,58 @@
 ﻿@model IEnumerable<WebApplication.Core.Event>
-
 @{
     ViewBag.Title = I18N.View.Event.Index_Title;
 }
 
-<h2>@I18N.View.Event.Index_Title</h2>
-
-
-@if (User.IsInRole("Head Coach"))
-{
-    <p>
-        @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-success btn-sm" })
-    </p>
-}
-    <div class="row">
-        @foreach (var item in Model)
+<div class="post-single">
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+        </div>
+        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+        @if (User.IsInRole("Head Coach"))
         {
-            <div class="col-xs-12 col-md-4">
-                <div class="card">
-                    <img class="card-img-top" src="~/Content/images/logo.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">
-                            @foreach (var level in item.Levels)
-                            {
-                                @Html.DisplayFor(modelItem => level.Name)<text> /</text>
-                            }
-                        </h6>
-                        <p class="card-text">
-                            @Html.DisplayFor(modelItem => item.Description)
-                            <br />
-                            @I18N.View.Event.Index_From : @Html.DisplayFor(modelItem => item.StartDate)
-                            <br />
-                            @I18N.View.Event.Index_To : @Html.DisplayFor(modelItem => item.EndDate)
-                        </p>
-                    </div>
-                    @*@if (User.IsInRole("Head Coach"))
-        {
-            @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
-        }*@
-
-                    @Html.ActionLink(I18N.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-block" })
-
-                    @*@if (User.IsInRole("Head Coach"))
-        {
-            @Html.ActionLink(I18N.Core.GenericAction.delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
-        }*@
-                </div>
-            </div>
+            <p>
+                @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-success btn-sm" })
+            </p>
         }
-        
+        <div class="post-body">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-12 col-md-4">
+                        <div class="card">
+                            <img class="card-img-top" src="~/Content/images/logo.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    @foreach (var level in item.Levels)
+                                    {
+                                        @Html.DisplayFor(modelItem => level.Name)<text> /</text>
+                                    }
+                                </h6>
+                                <p class="card-text">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                    <br />
+                                    @I18N.View.Event.Index_From : @Html.DisplayFor(modelItem => item.StartDate)
+                                    <br />
+                                    @I18N.View.Event.Index_To : @Html.DisplayFor(modelItem => item.EndDate)
+                                </p>
+                            </div>
+                            @*@if (User.IsInRole("Head Coach"))
+                            {
+                                @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                            }*@
+                            @Html.ActionLink(I18N.GenericAction.details, "Details", new { id = item.Id }, new { @class = "btn btn-primary btn-block" })
+                            @*@if (User.IsInRole("Head Coach"))
+                            {
+                                @Html.ActionLink(I18N.Core.GenericAction.delete, "Delete", new { id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                            }*@
+                        </div>
+                    </div>
+                }
 
+            </div>
+        </div>
     </div>
+</div>
+
