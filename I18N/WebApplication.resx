@@ -123,10 +123,97 @@
   <data name="About_Title" xml:space="preserve">
     <value>About</value>
   </data>
+  <data name="Constitution_Coaches" xml:space="preserve">
+    <value>Coaches:</value>
+  </data>
+  <data name="Constitution_Coaches_Text" xml:space="preserve">
+    <value>must guide the young sports people in their charge to move forward in fitness, skill, and understanding of sport.  Coaches must develop the members’ appreciation for surfing and the ocean. A successful season can be measured by the amount the participants move forward, by the quality of their effort, and by their joy in participating. Wins and losses fall where they may, but hopefully they’ve learned to love to be active.</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li1" xml:space="preserve">
+    <value>Respect the rights, dignity and worth of others;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li2" xml:space="preserve">
+    <value>Be fair, equitable, considerate and honest in all Dealings with others.</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li3" xml:space="preserve">
+    <value>Be professional in, and accept responsibility for actions;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li4" xml:space="preserve">
+    <value>Use facilities and equipment for their proper purposes, and care for and maintain such facilities and equipment correctly;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li5" xml:space="preserve">
+    <value>Refrain from anything which may abuse, intimidate or harass others;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li6" xml:space="preserve">
+    <value>Preserve and protect the standing and reputation of the County Sligo Surf Club;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li7" xml:space="preserve">
+    <value>Understand the consequences of any breach of County Sligo Surf Club’s Member Protection Policy or Code of Conduct; ***</value>
+  </data>
+  <data name="Constitution_FairPlayPolicy1" xml:space="preserve">
+    <value>The County Sligo Surf Club  is committed to providing a Fair Play sporting environment in which all individuals involved are treated with dignity and respect. Every participant’s experience should be positive; all participants should have an opportunity to contribute and every participant should experience success. Our sports programs encourage participation in the joy of the sport and the learning of good sportsmanship and appreciation for the ocean.</value>
+  </data>
+  <data name="Constitution_FairPlayPolicy2" xml:space="preserve">
+    <value>The County Sligo Surf Club has a zero tolerance policy regarding harassment: generally defined as comment, conduct, or gesture directed toward an individual or group of individuals, which is insulting, intimidating, humiliating, malicious, degrading, or offensive.</value>
+  </data>
+  <data name="Constitution_FairPlayPolicy3" xml:space="preserve">
+    <value>The County Sligo Surf Club believes in catering to the needs of all children and young people, from beginners to the most proficient. Special provisions may be required for children and young people who are disadvantaged or whose participation is limited for any reason.</value>
+  </data>
+  <data name="Constitution_KeepSportFun" xml:space="preserve">
+    <value>Keep sport fun – it’s why we do it</value>
+  </data>
+  <data name="Constitution_Parents" xml:space="preserve">
+    <value>Parents:</value>
+  </data>
+  <data name="Constitution_Parents_Li1" xml:space="preserve">
+    <value>Encourage children in their efforts in sport</value>
+  </data>
+  <data name="Constitution_Parents_Li10" xml:space="preserve">
+    <value>Remember that we are all capable of making mistakes</value>
+  </data>
+  <data name="Constitution_Parents_Li2" xml:space="preserve">
+    <value>Treat my child the same regardless of whether she/he has won or lost</value>
+  </data>
+  <data name="Constitution_Parents_Li3" xml:space="preserve">
+    <value>Watch my child play and let him/her enjoy the sport</value>
+  </data>
+  <data name="Constitution_Parents_Li4" xml:space="preserve">
+    <value>Show my appreciation to people who volunteer their time so my child can play</value>
+  </data>
+  <data name="Constitution_Parents_Li5" xml:space="preserve">
+    <value>Remember that my child plays sport for his/her reasons not mine</value>
+  </data>
+  <data name="Constitution_Parents_Li6" xml:space="preserve">
+    <value>Be a positive role model for my child</value>
+  </data>
+  <data name="Constitution_Parents_Li7" xml:space="preserve">
+    <value>Never place undue pressure on my child to play or perform</value>
+  </data>
+  <data name="Constitution_Parents_Li8" xml:space="preserve">
+    <value>Respect that people are involved in sport mostly for fun and enjoyment</value>
+  </data>
+  <data name="Constitution_Parents_Li9" xml:space="preserve">
+    <value>Support good play and applaud good performance from all participants</value>
+  </data>
+  <data name="Constitution_Title" xml:space="preserve">
+    <value>Our Constitution and Policies</value>
+  </data>
+  <data name="Constitution_Title_CodeOfConduct" xml:space="preserve">
+    <value>CODE OF CONDUCT FOR MEMBERS</value>
+  </data>
+  <data name="Constitution_Title_FairPlayPolicy" xml:space="preserve">
+    <value>FAIR PLAY POLICY – County Sligo Surf Club Code of Conduct</value>
+  </data>
+  <data name="Constitution_TripleStars" xml:space="preserve">
+    <value>*** County Sligo Surf Club, (sitting committee) reserves the right to terminate a membership, or enact a three strikes policy towards any member who fails to adhere to County Sligo Surf Club’s Code of Conduct.</value>
+  </data>
   <data name="Contact_Subtitle" xml:space="preserve">
     <value>Your contact page.</value>
   </data>
   <data name="Contact_Title" xml:space="preserve">
     <value>Contact</value>
+  </data>
+  <data name="LogIn_Title" xml:space="preserve">
+    <value>Log In</value>
   </data>
 </root>

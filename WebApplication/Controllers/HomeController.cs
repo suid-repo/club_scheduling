@@ -25,5 +25,12 @@ namespace WebApplication.Controllers
 
             return View();
         }
+
+        public ActionResult Constitution()
+        {
+            ViewBag.Message = I18N.WebApplication.Constitution_Title;
+
+            return View();
+        }
     }
 }

@@ -3,20 +3,27 @@
 @{
     ViewBag.Title = "Delete";
 }
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete your account?</h3>
-<div>
-    <h4>ApplicationUser</h4>
-    <hr />
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            @Html.ActionLink(@I18N.GenericAction.cancel, "Index", "Manage", null, new { @class = "btn btn-secondary" })
-            <button type="submit" class="btn btn-danger">@I18N.GenericAction.yes</button>
+<div class="post-single">
+    <div class="post-details">
+        <div class="post-meta d-flex justify-content-between">
+            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
         </div>
-    }
+        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+        <div class="post-body">
+            <h3>Are you sure you want to delete your account?</h3>
+            <div>
+                <h4>ApplicationUser</h4>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink(@I18N.GenericAction.cancel, "Index", "Manage", null, new { @class = "btn btn-secondary" })
+                        <button type="submit" class="btn btn-danger">@I18N.GenericAction.yes</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>

@@ -17,3 +17,12 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.home-cover {
+    text-align: center;
+    max-height: 350px;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom:15px;
+}
