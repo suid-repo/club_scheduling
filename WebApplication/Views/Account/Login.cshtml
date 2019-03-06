@@ -3,20 +3,19 @@
 @{
     ViewBag.Title = "Log in";
 }
-<div class="post-single">
+<div class="post-single mt-5">
     <div class="post-details">
-        <div class="post-meta d-flex justify-content-between">
-            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+        <div class="row">
+            <div class="pull-left"><h1>@ViewBag.Title</h1></div>
         </div>
-        <h1>@I18N.WebApplication.LogIn_Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
         <div class="post-body">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 pl-0">
                     <div id="loginForm">
                         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                         {
                             @Html.AntiForgeryToken()
-                            <h4>Use a local account to log in.</h4>
+                            <h4>Use a local account to log in</h4>
                             <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group">
@@ -43,7 +42,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Log in" class="btn btn-default" />
+                                    <input type="submit" value="Log in" class="btn btn-primary" />
                                 </div>
                             </div>
                             <p>
@@ -57,9 +56,9 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <section id="socialLoginForm">
+                    <div>
                         @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                    </section>
+                    </div>
                 </div>
             </div>
         </div>

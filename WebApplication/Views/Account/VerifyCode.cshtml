@@ -4,10 +4,9 @@
 }
 <div class="post-single">
     <div class="post-details">
-        <div class="post-meta d-flex justify-content-between">
-            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+        <div class="row">
+            <div class="pull-left"><h1>@ViewBag.Title</h1></div>
         </div>
-        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
         <div class="post-body">
             @using (Html.BeginForm("VerifyCode", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
@@ -33,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" class="btn btn-default" value="Submit" />
+                        <input type="submit" class="btn btn-primary" value="Submit" />
                     </div>
                 </div>
             }
