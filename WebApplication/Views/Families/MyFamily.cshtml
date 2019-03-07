@@ -4,10 +4,10 @@
     ViewBag.Title = "MyFamily";
 }
 
-<h2>MyFamily</h2>
+<h2>@I18N.View.Family.MyFamily_Title</h2>
 
 <div>
-    <h4>Family</h4>
+    <h4>@I18N.View.Family.MyFamily_Subtitle</h4>
     <div class="float-md-right">
         @if (User.Identity.IsFamilyOwner())
         {
@@ -37,7 +37,7 @@
                 }
                 else
                 {
-                    <p>No users</p>
+                    <p>@I18N.View.Family.MyFamily_Body_NoUsers</p>
                 }
 
             </dd>

@@ -61,11 +61,209 @@ namespace I18N.View {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add an existing account via invite code.
+        /// </summary>
+        public static string Action_AddMember {
+            get {
+                return ResourceManager.GetString("Action_AddMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display information about your family.
+        /// </summary>
+        public static string Action_MyFamily {
+            get {
+                return ResourceManager.GetString("Action_MyFamily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove this member from the family.
+        /// </summary>
+        public static string Action_RemoveMember {
+            get {
+                return ResourceManager.GetString("Action_RemoveMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add member via Invite Code.
+        /// </summary>
+        public static string AddMember_Subtitle {
+            get {
+                return ResourceManager.GetString("AddMember_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Member.
+        /// </summary>
+        public static string AddMember_Title {
+            get {
+                return ResourceManager.GetString("AddMember_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Family.
+        /// </summary>
+        public static string Create_Subtitle {
+            get {
+                return ResourceManager.GetString("Create_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string Create_Title {
+            get {
+                return ResourceManager.GetString("Create_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this family?.
+        /// </summary>
+        public static string Delete_Subtitle {
+            get {
+                return ResourceManager.GetString("Delete_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Family.
+        /// </summary>
+        public static string Delete_Subtitle2 {
+            get {
+                return ResourceManager.GetString("Delete_Subtitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete_Title {
+            get {
+                return ResourceManager.GetString("Delete_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No users.
+        /// </summary>
+        public static string Details_Body_NoUsers {
+            get {
+                return ResourceManager.GetString("Details_Body_NoUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Family.
+        /// </summary>
+        public static string Details_Subtitle {
+            get {
+                return ResourceManager.GetString("Details_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Details_Title {
+            get {
+                return ResourceManager.GetString("Details_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Family.
+        /// </summary>
+        public static string Edit_Subtitle {
+            get {
+                return ResourceManager.GetString("Edit_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit_Title {
+            get {
+                return ResourceManager.GetString("Edit_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Index.
+        /// </summary>
+        public static string Index_Title {
+            get {
+                return ResourceManager.GetString("Index_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No users.
+        /// </summary>
+        public static string MyFamily_Body_NoUsers {
+            get {
+                return ResourceManager.GetString("MyFamily_Body_NoUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are not in a family, would you like to create one?.
         /// </summary>
         public static string MyFamily_Create_Disclaimer {
             get {
                 return ResourceManager.GetString("MyFamily_Create_Disclaimer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Family.
+        /// </summary>
+        public static string MyFamily_Subtitle {
+            get {
+                return ResourceManager.GetString("MyFamily_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to My Family.
+        /// </summary>
+        public static string MyFamily_Title {
+            get {
+                return ResourceManager.GetString("MyFamily_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this member?.
+        /// </summary>
+        public static string RemoveMember_Subtitle {
+            get {
+                return ResourceManager.GetString("RemoveMember_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member.
+        /// </summary>
+        public static string RemoveMember_Subtitle2 {
+            get {
+                return ResourceManager.GetString("RemoveMember_Subtitle2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove Member.
+        /// </summary>
+        public static string RemoveMember_Title {
+            get {
+                return ResourceManager.GetString("RemoveMember_Title", resourceCulture);
             }
         }
     }
