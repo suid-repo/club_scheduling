@@ -40,6 +40,7 @@ namespace WebApplication
                       "~/Content/jquery.fancybox.css",
                       "~/Content/fontastic.css",
                       "~/Content/style.blue.css",
+                      "~/Content/custom.css",
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-rtl").Include(

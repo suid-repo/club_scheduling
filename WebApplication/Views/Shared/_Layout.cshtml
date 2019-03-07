@@ -44,7 +44,7 @@
                         @if (Request.IsAuthenticated)
                         {
                             <li class="nav-item">@Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link" })</li>
-                            <li class="nav-item">@Html.ActionLink("My Family", "Index", "Families", null, new { @class = "nav-link" })</li>
+                            @*<li class="nav-item">@Html.ActionLink("My Family", "Index", "Families", null, new { @class = "nav-link" })</li>*@
                             if (User.IsInRole("Head Coach"))
                             {
                                 <li class="nav-item">@Html.ActionLink("Users", "Index", "Users", null, new { @class = "nav-link" })</li>
@@ -111,22 +111,25 @@
                 </div>
                 <div class="col-md-4">
                     <div class="latest-posts">
+                        <h6>
+                            GET IN TOUCH
+                        </h6>
                         <a href="#">
                             <div class="post d-flex align-items-center">
-                                <div class="image"><a href="https://www.facebook.com/CountySligoSurfClub/" target="_blank"><i class="fa fa-2x fa-facebook"></i></a></div>
+                                <div class="image" style="border:none;"><a href="https://www.facebook.com/CountySligoSurfClub/" target="_blank"><i class="fa fa-2x fa-facebook"></i></a></div>
                                 <div class="title"><strong>Facebook</strong></div>
                             </div>
                         </a><a href="#">
                             <div class="post d-flex align-items-center">
-                                <div class="image"><a href="https://www.instagram.com/countysligosurfclub/" target="_blank"><i class="fa fa-2x fa-instagram"></i></a></div>
+                                <div class="image" style="border:none;"><a href="https://www.instagram.com/countysligosurfclub/" target="_blank"><i class="fa fa-2x fa-instagram"></i></a></div>
                                 <div class="title"><strong>Instagram</strong></div>
                             </div>
                         </a>@*<a href="#">
-                            <div class="post d-flex align-items-center">
-                                <div class="image"><img src="img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
-                                <div class="title"><strong>Best coffee shops in Sydney</strong><span class="date last-meta">October 26, 2016</span></div>
-                            </div>
-                        </a>*@
+            <div class="post d-flex align-items-center">
+                <div class="image"><img src="img/small-thumbnail-3.jpg" alt="..." class="img-fluid"></div>
+                <div class="title"><strong>Best coffee shops in Sydney</strong><span class="date last-meta">October 26, 2016</span></div>
+            </div>
+        </a>*@
                     </div>
                 </div>
             </div>
