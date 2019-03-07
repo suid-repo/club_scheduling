@@ -44,12 +44,21 @@
                         @if (Request.IsAuthenticated)
                         {
                             <li class="nav-item">@Html.ActionLink("Events", "Index", "Events", null, new { @class = "nav-link" })</li>
-                            @*<li class="nav-item">@Html.ActionLink("My Family", "Index", "Families", null, new { @class = "nav-link" })</li>*@
+
+                            if (User.IsInRole("Head Coach"))
+                            {
+                                <li class="nav-item">@Html.ActionLink("Families", "Index", "Families", null, new { @class = "nav-link" })</li>
+                            }
+                            else if (!User.IsInRole("Coach"))
+                            {
+                                <li class="nav-item">@Html.ActionLink("My Family", "MyFamily", "Families", null, new { @class = "nav-link" })</li>
+                            }
                             if (User.IsInRole("Head Coach"))
                             {
                                 <li class="nav-item">@Html.ActionLink("Users", "Index", "Users", null, new { @class = "nav-link" })</li>
                             }
-                        }
+                         }
+
                     </ul>
                     @Html.Partial("_LoginPartial")
                     @*<div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>*@
