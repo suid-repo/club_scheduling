@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -6,6 +7,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using WebApplication.Core;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -232,7 +234,8 @@ namespace WebApplication.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
-            }
+            }           
+
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
@@ -267,11 +270,28 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangeLevel(ChangeLevelViewModel model)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(model);
             }
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
 
+            Level level = null;
+            using (ApplicationDbContext db = new ApplicationDbContext())
+            {
+                level = db.Levels.Where(l => l.Id == model.SelectedLevel).FirstOrDefault();
+                db.Entry(level).State = EntityState.Detached;
+            }
+
+            user.Level = level;
+
+            IdentityResult result = await UserManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangeLevelSuccess });
+            }
+            AddErrors(result);
             return View(model);
         }
 
