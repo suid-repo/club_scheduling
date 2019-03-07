@@ -61,6 +61,15 @@ namespace I18N {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Define.
+        /// </summary>
+        public static string NotDefine {
+            get {
+                return ResourceManager.GetString("NotDefine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to of.
         /// </summary>
         public static string of {

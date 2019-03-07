@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using WebApplication.Core;
 
 namespace WebApplication.Models
 {
@@ -12,6 +13,7 @@ namespace WebApplication.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public Level Level { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -56,6 +58,14 @@ namespace WebApplication.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class ChangeLevelViewModel
+    {
+        [Required]
+        public int SelectedLevel { get; set; }
+
+        public List<Level> Levels { get; set; }
     }
 
     public class AddPhoneNumberViewModel

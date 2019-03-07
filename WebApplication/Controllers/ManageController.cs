@@ -57,6 +57,7 @@ namespace WebApplication.Controllers
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                : message == ManageMessageId.ChangeLevelSuccess ? "Your level has been changed."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
@@ -64,13 +65,15 @@ namespace WebApplication.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            ApplicationUser user = await UserManager.FindByIdAsync(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Level = user.Level
             };
             return View(model);
         }
@@ -244,6 +247,34 @@ namespace WebApplication.Controllers
             return View(model);
         }
 
+        public ActionResult ChangeLevel()
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = UserManager.FindById(userId);
+
+            ChangeLevelViewModel model = new ChangeLevelViewModel();
+            using (ApplicationDbContext context = new ApplicationDbContext())
+            {
+                model.Levels = context.Levels.ToList();
+            }
+                model.SelectedLevel = user.Level.Id;
+            return View(model);
+        }
+
+        //
+        // POST: /Manage/ChangeLevel
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeLevel(ChangeLevelViewModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return View(model);
+        }
+
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
@@ -377,6 +408,7 @@ namespace WebApplication.Controllers
         {
             AddPhoneSuccess,
             ChangePasswordSuccess,
+            ChangeLevelSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
