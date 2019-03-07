@@ -6,26 +6,25 @@
 @Styles.Render("~/Content/pagedlist")
 <div class="post-single">
     <div class="post-details">
-        <div class="post-meta d-flex justify-content-between">
-            <div class="category"><a href="#">Business</a><a href="#">Financial</a></div>
+        <div class="row">
+            <div class="pull-left"><h1>@ViewBag.Title</h1></div>
         </div>
-        <h1>@ViewBag.Title<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
-        <div class="post-body">
-            <div class="row">
-                <div class="col">
-                    <div class="float-md-left">
-                        @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { @class = "form-inline" }))
-                        {
-                            @Html.Label("search", I18N.GenericAction.search, new { @class = "" })
-                            @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" })
-                            <button type="submit" value="search" class="btn btn-primary mb-2">@I18N.GenericAction.filter</button>
-                        }
-                    </div>
-                    <div class="float-md-right">
-                        @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-primary btn-sm" })
-                    </div>
+        <div class="row">
+            <div class="col">
+                <div class="float-md-left">
+                    @using (Html.BeginForm("Index", "Users", FormMethod.Get, new { @class = "form-inline" }))
+                    {
+                        @Html.Label("search", I18N.GenericAction.search, new { @class = "" })
+                        @Html.TextBox("search", ViewBag.CurrentSearch as string, new { @class = "form-control" })
+                        <button type="submit" value="search" class="btn btn-primary mb-2">@I18N.GenericAction.filter</button>
+                    }
+                </div>
+                <div class="float-md-right">
+                    @Html.ActionLink(I18N.GenericAction.create_new, "Create", null, new { @class = "btn btn-primary btn-sm" })
                 </div>
             </div>
+        </div>
+        <div class="post-body">
             <table class="table">
                 <tr>
                     <th>
