@@ -1,0 +1,28 @@
+﻿@model WebApplication.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div class="post-single">
+    <div class="post-details">
+        <div class="row">
+            <div class="pull-left"><h1>@ViewBag.Title</h1></div>
+        </div>
+        <div class="post-body">
+            <h3>Are you sure you want to delete your account?</h3>
+            <div>
+                <h4>ApplicationUser</h4>
+                <hr />
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        @Html.ActionLink(@I18N.GenericAction.cancel, "Index", "Manage", null, new { @class = "btn btn-secondary" })
+                        <button type="submit" class="btn btn-danger">@I18N.GenericAction.yes</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

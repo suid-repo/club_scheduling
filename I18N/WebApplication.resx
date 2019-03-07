@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="About_Subtitle" xml:space="preserve">
+    <value>Your application description page.</value>
+  </data>
+  <data name="About_Title" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Constitution_Coaches" xml:space="preserve">
+    <value>Coaches:</value>
+  </data>
+  <data name="Constitution_Coaches_Text" xml:space="preserve">
+    <value>must guide the young sports people in their charge to move forward in fitness, skill, and understanding of sport.  Coaches must develop the members’ appreciation for surfing and the ocean. A successful season can be measured by the amount the participants move forward, by the quality of their effort, and by their joy in participating. Wins and losses fall where they may, but hopefully they’ve learned to love to be active.</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li1" xml:space="preserve">
+    <value>Respect the rights, dignity and worth of others;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li2" xml:space="preserve">
+    <value>Be fair, equitable, considerate and honest in all Dealings with others.</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li3" xml:space="preserve">
+    <value>Be professional in, and accept responsibility for actions;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li4" xml:space="preserve">
+    <value>Use facilities and equipment for their proper purposes, and care for and maintain such facilities and equipment correctly;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li5" xml:space="preserve">
+    <value>Refrain from anything which may abuse, intimidate or harass others;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li6" xml:space="preserve">
+    <value>Preserve and protect the standing and reputation of the County Sligo Surf Club;</value>
+  </data>
+  <data name="Constitution_CodeOfConduct_Li7" xml:space="preserve">
+    <value>Understand the consequences of any breach of County Sligo Surf Club’s Member Protection Policy or Code of Conduct; ***</value>
+  </data>
+  <data name="Constitution_FairPlayPolicy1" xml:space="preserve">
+    <value>The County Sligo Surf Club  is committed to providing a Fair Play sporting environment in which all individuals involved are treated with dignity and respect. Every participant’s experience should be positive; all participants should have an opportunity to contribute and every participant should experience success. Our sports programs encourage participation in the joy of the sport and the learning of good sportsmanship and appreciation for the ocean.</value>
+  </data>
+  <data name="Constitution_FairPlayPolicy2" xml:space="preserve">
+    <value>The County Sligo Surf Club has a zero tolerance policy regarding harassment: generally defined as comment, conduct, or gesture directed toward an individual or group of individuals, which is insulting, intimidating, humiliating, malicious, degrading, or offensive.</value>
+  </data>
+  <data name="Constitution_FairPlayPolicy3" xml:space="preserve">
+    <value>The County Sligo Surf Club believes in catering to the needs of all children and young people, from beginners to the most proficient. Special provisions may be required for children and young people who are disadvantaged or whose participation is limited for any reason.</value>
+  </data>
+  <data name="Constitution_KeepSportFun" xml:space="preserve">
+    <value>Keep sport fun – it’s why we do it</value>
+  </data>
+  <data name="Constitution_Parents" xml:space="preserve">
+    <value>Parents:</value>
+  </data>
+  <data name="Constitution_Parents_Li1" xml:space="preserve">
+    <value>Encourage children in their efforts in sport</value>
+  </data>
+  <data name="Constitution_Parents_Li10" xml:space="preserve">
+    <value>Remember that we are all capable of making mistakes</value>
+  </data>
+  <data name="Constitution_Parents_Li2" xml:space="preserve">
+    <value>Treat my child the same regardless of whether she/he has won or lost</value>
+  </data>
+  <data name="Constitution_Parents_Li3" xml:space="preserve">
+    <value>Watch my child play and let him/her enjoy the sport</value>
+  </data>
+  <data name="Constitution_Parents_Li4" xml:space="preserve">
+    <value>Show my appreciation to people who volunteer their time so my child can play</value>
+  </data>
+  <data name="Constitution_Parents_Li5" xml:space="preserve">
+    <value>Remember that my child plays sport for his/her reasons not mine</value>
+  </data>
+  <data name="Constitution_Parents_Li6" xml:space="preserve">
+    <value>Be a positive role model for my child</value>
+  </data>
+  <data name="Constitution_Parents_Li7" xml:space="preserve">
+    <value>Never place undue pressure on my child to play or perform</value>
+  </data>
+  <data name="Constitution_Parents_Li8" xml:space="preserve">
+    <value>Respect that people are involved in sport mostly for fun and enjoyment</value>
+  </data>
+  <data name="Constitution_Parents_Li9" xml:space="preserve">
+    <value>Support good play and applaud good performance from all participants</value>
+  </data>
+  <data name="Constitution_Title" xml:space="preserve">
+    <value>Our Constitution and Policies</value>
+  </data>
+  <data name="Constitution_Title_CodeOfConduct" xml:space="preserve">
+    <value>CODE OF CONDUCT FOR MEMBERS</value>
+  </data>
+  <data name="Constitution_Title_FairPlayPolicy" xml:space="preserve">
+    <value>FAIR PLAY POLICY – County Sligo Surf Club Code of Conduct</value>
+  </data>
+  <data name="Constitution_TripleStars" xml:space="preserve">
+    <value>*** County Sligo Surf Club, (sitting committee) reserves the right to terminate a membership, or enact a three strikes policy towards any member who fails to adhere to County Sligo Surf Club’s Code of Conduct.</value>
+  </data>
+  <data name="Contact_Subtitle" xml:space="preserve">
+    <value>Your contact page.</value>
+  </data>
+  <data name="Contact_Title" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="LogIn_Title" xml:space="preserve">
+    <value>Log In</value>
+  </data>
+</root>

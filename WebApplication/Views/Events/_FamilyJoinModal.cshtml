@@ -1,0 +1,60 @@
+﻿@model WebApplication.Models.EventFamilyJoinModalViewModel
+
+<div class="modal" id="event-family-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-header">
+            @I18N.View.Event._FamilyJoin_Title
+        </div>
+        <div class="modal-content">
+            @using (Html.BeginForm("MemberFamilyJoin", "Events", "POST"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Event.Id)
+                <div class="modal-header">
+                    <h5 class="modal-title">@I18N.View.Event._FamilyJoin_Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tbody>
+                            @foreach (var member in Model.Family.Users)
+                            {
+                                <tr>
+                                    <td>@member.FirstName</td>
+                                    <td>@member.LastName</td>
+                                    <td>@member.Level.Name</td>
+                                    @if(member.Level != null && Model.Event.Levels.Any(e => e.Id == member.Level.Id))
+                                    {
+                                        <td>@Html.CheckBox("UsersSelected", new { value = member.Id, data_toggle = "toggle" })</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Html.CheckBox("UsersSelected", new { value = member.Id, data_toggle = "toggle", disabled=true })</td>
+                                    }
+                                        <td>
+                                            <small class="text-danger">
+                                                @if (member.Level == null)
+                                                {
+                                                    <text>@I18N.View.Event._FamilyJoin_Error_NoLevel</text>
+                                                }
+                                                else if (!Model.Event.Levels.Any(e => e.Id == member.Level.Id))
+                                                {
+                                                    <text>@I18N.View.Event._FamilyJoin_Error_MismatchLevel</text>
+                                                }
+                                            </small>
+                                        </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@I18N.GenericAction.cancel</button>
+                    <button type="submit" class="btn btn-primary">@I18N.View.Event.Action_JoinMemberFamily</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
