@@ -22,7 +22,7 @@ namespace WebApplication.Helpers
 
 
         //TO DO 
-        private static async Task<Response> SendMailTemplateAsync(string templateName, List<string[]> templateData, string subject, List<EmailAddress> emails)
+        public static async Task SendMailTemplateAsync(string templateName, List<string[]> templateData, string subject, List<EmailAddress> emails)
         {
             //LOAD TEMPLATE EMAIL
             string content = PopulateBody(templateName, templateData);
@@ -30,15 +30,17 @@ namespace WebApplication.Helpers
             //SEND THE EMAIL
             SendGridClient client = GetSendGridClient;
 
-            SendGridMessage msg = new SendGridMessage()
+            foreach(EmailAddress email in emails)
             {
-                From = new EmailAddress(ConfigurationManager.AppSettings.Get("MailSenderEmail"), ConfigurationManager.AppSettings.Get("MailSenderName")),
-                Subject = subject,
-                HtmlContent = content
-            };
-            msg.AddBccs(emails);
-
-            return await client.SendEmailAsync(msg);
+                SendGridMessage msg = new SendGridMessage()
+                {
+                    From = new EmailAddress(ConfigurationManager.AppSettings.Get("MailSenderEmail"), ConfigurationManager.AppSettings.Get("MailSenderName")),
+                    Subject = subject,
+                    HtmlContent = content
+                };
+                msg.AddTo(email);
+                await client.SendEmailAsync(msg);
+            }
         }
 
         public static async Task<Response> SendMailAsync(string subject, string htmlContent, EmailAddress email)
@@ -80,14 +82,14 @@ namespace WebApplication.Helpers
         {
             string content = string.Empty;
 
-            using (StreamReader reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(String.Format("~/Template/{0}.html", fileLocation))))
+            using (StreamReader reader = new StreamReader(System.Web.HttpContext.Current.Server.MapPath(String.Format("~/Templates/{0}.html", fileLocation))))
             {
                 content = reader.ReadToEnd();
             }
 
             foreach (string[] line in data)
             {
-                content = content.Replace(line[0], line[1]);
+                content = content.Replace("{{"+line[0]+"}}", line[1]);
             }
 
             return content;

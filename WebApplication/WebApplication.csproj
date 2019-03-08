@@ -524,6 +524,7 @@
     <EmbeddedResource Include="SqlSources\UserListTableType.sql" />
     <EmbeddedResource Include="SqlSources\FamilyQueuedListTableType.sql" />
     <Content Include="Scripts\jquery.validate.date.js" />
+    <Content Include="Templates\AlertCoachEventCreated.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -11,6 +11,7 @@ using WebApplication.Models;
 using WebApplication.Helpers;
 using Microsoft.AspNet.Identity;
 using WebApplication.Extentions;
+using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
@@ -62,7 +63,7 @@ namespace WebApplication.Controllers
         [HttpPost]
         [Authorize(Roles = "Head Coach")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Event, SelectedLevels")] EventCreateViewModel eventCreateViewModels)
+        public async Task<ActionResult> Create([Bind(Include = "Event, SelectedLevels")] EventCreateViewModel eventCreateViewModels)
         {
             eventCreateViewModels.Levels = db.Levels.ToList();
 
@@ -81,6 +82,14 @@ namespace WebApplication.Controllers
 
                 db.Events.Add(eventCreateViewModels.Event);
                 db.SaveChanges();
+
+                List<string[]> templateData = new List<string[]>
+                {
+                    new string[] { "event_name", eventCreateViewModels.Event.Name },
+                     new string[] {"event_link", this.Url.Action("Details", "Events", new { id = eventCreateViewModels.Event.Id }, this.Request.Url.Scheme) }
+
+                };
+                await SendMail2Coaches("AlertCoachEventCreated", templateData);
                 return RedirectToAction("Index");
             }
 
@@ -430,6 +439,26 @@ namespace WebApplication.Controllers
             }
 
             throw new Exception("User is not in the queued either event");
+        }
+
+        /**
+         * 
+         */
+         private async Task SendMail2Coaches(string templateName, List<string[]> templateData)
+        {
+            var coachRole = db.Roles.Where(r => r.Name.Equals("Coach")).FirstOrDefault();
+
+            List<ApplicationUser> coaches = db.Users.Where(u => u.Roles.Any(r => r.RoleId == coachRole.Id)).ToList();
+
+            List<SendGrid.Helpers.Mail.EmailAddress> coachesEmails = new List<SendGrid.Helpers.Mail.EmailAddress>();
+
+            foreach (ApplicationUser coach in coaches)
+            {
+                coachesEmails.Add(new SendGrid.Helpers.Mail.EmailAddress(coach.Email, coach.FirstName));
+            }
+
+            await MailHelper.SendMailTemplateAsync(templateName, templateData, "A new event is created", coachesEmails);
+            
         }
     }
 }
