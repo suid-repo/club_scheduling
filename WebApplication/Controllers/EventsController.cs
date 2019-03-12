@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace WebApplication.Controllers
 {
     [Authorize]
-    public class EventsController : Controller
+    public class EventsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

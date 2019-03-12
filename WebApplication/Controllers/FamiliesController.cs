@@ -15,7 +15,7 @@ using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
-    public class FamiliesController : Controller
+    public class FamiliesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
