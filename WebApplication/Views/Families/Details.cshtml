@@ -1,0 +1,49 @@
+﻿@model WebApplication.Core.Family
+@using WebApplication.Extentions;
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@I18N.View.Family.Details_Title</h2>
+
+<div>
+    <div class="row">
+        <div class="col">
+            <div class="float-md-left">
+                <h4>@I18N.View.Family.Details_Subtitle</h4>
+            </div>
+            <div class="float-md-right">
+                @if (User.Identity.IsFamilyOwner())
+                {
+                    @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                }
+            </div>
+        </div>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users)
+        </dt>
+
+        <dd>
+            @if (Model.Users.Count > 0)
+            {
+                Html.RenderPartial("_UserList", Model.Users);
+            }
+            else
+            {
+                <p>@I18N.View.Family.Details_Body_NoUsers</p>
+            }
+
+        </dd>
+    </dl>
+</div>

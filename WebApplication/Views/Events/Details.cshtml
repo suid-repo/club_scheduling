@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNet.Identity;
+@using WebApplication.Extentions;
+@model WebApplication.Models.EventDetailsViewModel
+@{
+    ViewBag.Title = I18N.View.Event.Details_Title;
+}
+<div class="post-single">
+    <div class="post-details">
+        <div class="row">
+            <div class="pull-left"><h1>@ViewBag.Title</h1></div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="float-md-right">
+                        @if (User.IsInRole("Coach")) //IF COACH
+                        {
+                            if (!Model.Event.CoachEvents.Any(ce => ce.UserId.Equals(User.Identity.GetUserId()))) //Subscribe as a coach
+                            {
+                                @Html.ActionLink(I18N.View.Event.Action_JoinCoach, "CoachJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-sm" }) 
+
+                            }
+                            else //Unsubscribe button
+                            {
+                                @Html.ActionLink(I18N.View.Event.Action_LeaveCoach, "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-sm" }) 
+
+                            }
+                        }
+                        else
+                        {
+                            //USER ONLY ACTION
+                            if (Model.User.Level != null && Model.Event.Levels.Any(e => e.Id == Model.User.Level.Id))
+                            {
+                                if (!Model.IsJoigned2Event)
+                                {
+
+                                    @Html.ActionLink(I18N.View.Event.Action_JoinMember, "MemberJoin", new { id = Model.Event.Id }, new { @class = "btn btn-success btn-sm" }) 
+
+
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(I18N.View.Event.Action_LeaveMember, "MemberLeave", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-sm" }) 
+
+                                }
+                            }
+
+
+                            if (User.Identity.IsFamilyOwner()) // THE USER HAVE A FAMILY
+                            {
+                                if (!Model.IsFamilyJoigned2Event)
+                                {
+                                    Html.RenderAction("_FamilyJoinModal", Model.Event);
+                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button> 
+
+                                }
+                                else
+                                {
+                                    Html.RenderAction("_FamilyLeaveModal", Model.Event);
+                                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_LeaveMemberFamily</button> 
+
+                                }
+                            }
+                        }
+                        @if (User.IsInRole("Head Coach"))
+                        {
+                            @*
+
+                                    @Html.ActionLink(I18N.Core.GenericAction.edit, "Edit", new { id = Model.Event.Id }, new { @class = "btn btn-primary btn-sm" })
+*@
+                            @Html.ActionLink(I18N.GenericAction.cancel, "Delete", new { id = Model.Event.Id }, new { @class = "btn btn-danger btn-sm" }) 
+
+                        }
+                </div>
+            </div>
+        </div>
+        <div class="post-body">
+            <div>
+                <h4>Event - @Model.Event.RegisterUsers.Count/@(Model.Event.CoachEvents.Count * 8)</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.Name)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.Description)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.Description)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.StartDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.StartDate)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Event.EndDate)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Event.EndDate)
+                    </dd>
+                </dl>
+            </div>
+            <p>
+                @Html.ActionLink(I18N.GenericAction.back2list, "Index")
+            </p>
+        </div>
+    </div>
+</div>
+

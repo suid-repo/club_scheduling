@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+
+namespace WebApplication.Helpers
+{
+    public class SmsHelper
+    {
+        private static string SID
+        {
+            get
+            {
+                return Environment.GetEnvironmentVariable("TWILIO_SID", EnvironmentVariableTarget.User);
+            }
+        }
+
+        private static string Token
+        {
+            get
+            {
+                return Environment.GetEnvironmentVariable("TWILIO_TOKEN", EnvironmentVariableTarget.User);
+            }
+        }
+
+        private static string PhoneNumber
+        {
+            get
+            {
+                return Environment.GetEnvironmentVariable("TWILIO_NUMBER", EnvironmentVariableTarget.User);
+            }
+        }
+
+        public static Task SendSmsAsync(string message, string to)
+        {
+            TwilioClient.Init(SID, Token);
+
+            MessageResource.Create(
+            body: message,
+            from: new Twilio.Types.PhoneNumber(PhoneNumber),
+            to: new Twilio.Types.PhoneNumber(to)
+            );
+
+            return Task.FromResult(0);
+        }
+
+    }
+}

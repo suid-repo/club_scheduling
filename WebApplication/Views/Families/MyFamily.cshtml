@@ -1,0 +1,52 @@
+﻿@model WebApplication.Core.Family
+@using WebApplication.Extentions;
+@{
+    ViewBag.Title = "MyFamily";
+}
+
+<h2>@I18N.View.Family.MyFamily_Title</h2>
+
+<div>
+    <h4>@I18N.View.Family.MyFamily_Subtitle</h4>
+    <div class="float-md-right">
+        @if (User.Identity.IsFamilyOwner())
+        {
+            @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+        }
+    </div>
+    <hr />
+    @if (Model != null)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Users)
+            </dt>
+
+            <dd>
+
+                @if (Model.Users.Count > 0)
+                {
+                    Html.RenderPartial("_UserList", Model.Users);
+                }
+                else
+                {
+                    <p>@I18N.View.Family.MyFamily_Body_NoUsers</p>
+                }
+
+            </dd>
+        </dl>
+
+    }
+    else
+    {
+        <p>@I18N.View.Family.MyFamily_Create_Disclaimer</p>
+        <p>@Html.ActionLink(I18N.GenericAction.create, "Create", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })</p>
+    }
+</div>
