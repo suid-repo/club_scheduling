@@ -34,9 +34,9 @@ namespace WebApplication.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -234,7 +234,7 @@ namespace WebApplication.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
-            }           
+            }
 
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -260,7 +260,12 @@ namespace WebApplication.Controllers
             {
                 model.Levels = context.Levels.ToList();
             }
-                model.SelectedLevel = (user.Level == null) ? 0 : user.Level.Id;
+
+            if (user.Level != null)
+            {
+                model.SelectedLevel = user.Level.Id;
+            } 
+
             return View(model);
         }
 
@@ -275,24 +280,27 @@ namespace WebApplication.Controllers
                 return View(model);
             }
             string userId = User.Identity.GetUserId();
-            ApplicationUser user = await UserManager.FindByIdAsync(userId);
 
-            Level level = null;
-            using (ApplicationDbContext db = new ApplicationDbContext())
+            try
             {
-                level = db.Levels.Where(l => l.Id == model.SelectedLevel).FirstOrDefault();
-                db.Entry(level).State = EntityState.Detached;
+                using (ApplicationDbContext db = new ApplicationDbContext())
+                {
+                    Level level = db.Levels.Where(l => l.Id == model.SelectedLevel).FirstOrDefault();
+                    ApplicationUser user = db.Users.Find(userId);
+                    user.Level = level;
+
+                    db.Entry(user).State = EntityState.Modified;
+
+                    await db.SaveChangesAsync();
+
+                    return RedirectToAction("Index", new { Message = ManageMessageId.ChangeLevelSuccess });
+                }
             }
-
-            user.Level = level;
-
-            IdentityResult result = await UserManager.UpdateAsync(user);
-            if (result.Succeeded)
+            catch (Exception)
             {
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangeLevelSuccess });
-            }
-            AddErrors(result);
-            return View(model);
+                AddErrors(new IdentityResult(new string [] { "A problem occured, your level is not changed." }));
+                return View(model);
+            }            
         }
 
         //
@@ -384,7 +392,7 @@ namespace WebApplication.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -436,6 +444,6 @@ namespace WebApplication.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

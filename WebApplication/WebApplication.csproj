@@ -453,6 +453,7 @@
     <Content Include="Content\fonts\blog.eot" />
     <Content Include="Content\fonts\blog.ttf" />
     <Content Include="Content\fonts\blog.woff" />
+    <None Include="Properties\PublishProfiles\ClubScheduling - Web Deploy.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
