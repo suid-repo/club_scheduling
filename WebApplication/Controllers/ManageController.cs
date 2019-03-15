@@ -260,7 +260,7 @@ namespace WebApplication.Controllers
             {
                 model.Levels = context.Levels.ToList();
             }
-                model.SelectedLevel = user.Level.Id;
+                model.SelectedLevel = (user.Level == null) ? 0 : user.Level.Id;
             return View(model);
         }
 
