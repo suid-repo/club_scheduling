@@ -84,7 +84,7 @@ namespace WebApplication.Controllers
                     signInManager.SignIn(thisUser, false, false);
                 }
 
-                return RedirectToAction("MyFamily");
+                    return RedirectToAction("MyFamily");
             }
 
             return View(family);
@@ -318,7 +318,7 @@ namespace WebApplication.Controllers
                     db.Entry(family).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("MyFamily");
-                }
+                }               
             }
             model.CreateMemberViewModel = new _CreateMember2AddViewModel();
             model.CreateMemberViewModel.Levels = db.Levels.ToList();
@@ -350,8 +350,7 @@ namespace WebApplication.Controllers
             {
                 string userId =
                 AccountHelper.RegisterFakeUser(model.CreateMember.FirstName, model.CreateMember.LastName, model.CreateMember.BirthDay.Value);
-                ApplicationUser user = db.Users.Find(userId);
-                user.Family.Id = User.Identity.GetFamilyId().Value;
+                ApplicationUser user = db.Users.Find(userId);               
                 user.Level.Id = model.SelectedLevel;
                 family.Users.Add(user);
                 db.Entry(family).State = EntityState.Modified;
@@ -411,3 +410,12 @@ namespace WebApplication.Controllers
         }
     }
 }
+
+                using (ApplicationSignInManager signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>())
+                {
+                    signInManager.SignIn(thisUser, false, false);
+                }
+
+                    return RedirectToAction("MyFamily");
+                }               
+            }
