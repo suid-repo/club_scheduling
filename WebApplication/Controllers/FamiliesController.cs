@@ -365,9 +365,9 @@ namespace WebApplication.Controllers
         }
 
         // This partial view is used to create the new account that is automatically added to the family
-        public PartialViewResult _CreateMember2Add(ApplicationUser user)
+        public PartialViewResult _CreateMember2Add(_CreateMember2AddViewModel model)
         {
-            return PartialView(user);
+            return PartialView(model);
         }
     }
 }
