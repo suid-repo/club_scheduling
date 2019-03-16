@@ -410,12 +410,3 @@ namespace WebApplication.Controllers
         }
     }
 }
-
-                using (ApplicationSignInManager signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>())
-                {
-                    signInManager.SignIn(thisUser, false, false);
-                }
-
-                    return RedirectToAction("MyFamily");
-                }               
-            }
