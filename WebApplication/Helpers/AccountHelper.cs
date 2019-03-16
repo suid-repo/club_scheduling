@@ -73,7 +73,7 @@ namespace WebApplication.Helpers
         {
             
             PasswordHasher ps = new PasswordHasher();
-            string email = firstName + lastName + birthday.ToString("ddMMYY") + "@localhost.com";
+            string email = firstName + lastName + birthday.ToString("ddMMyy") + "@localhost.com";
             ApplicationUser user = new ApplicationUser
             {
                 Email = email,
