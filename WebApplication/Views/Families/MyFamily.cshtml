@@ -18,6 +18,7 @@
                             @if (User.Identity.IsFamilyOwner())
                             {
                                 @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink(I18N.GenericAction.add, "AddMember", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
                             }
                         </div>
                     </div>
