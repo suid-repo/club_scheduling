@@ -120,6 +120,9 @@
   <data name="Action_AddMember" xml:space="preserve">
     <value>Add an existing account via invite code</value>
   </data>
+  <data name="Action_GenerateInviteCode" xml:space="preserve">
+    <value>Generate Invite Code</value>
+  </data>
   <data name="Action_MyFamily" xml:space="preserve">
     <value>Display information about your family</value>
   </data>

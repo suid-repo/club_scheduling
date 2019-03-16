@@ -172,7 +172,7 @@ namespace WebApplication.Controllers
                 return RedirectToAction("Index");
             }
 
-
+            model.Roles = FillRoles();
             return View(model);
         }
 

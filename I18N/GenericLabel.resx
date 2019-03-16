@@ -123,6 +123,9 @@
   <data name="of" xml:space="preserve">
     <value>of</value>
   </data>
+  <data name="or" xml:space="preserve">
+    <value>or</value>
+  </data>
   <data name="page" xml:space="preserve">
     <value>Page</value>
   </data>
