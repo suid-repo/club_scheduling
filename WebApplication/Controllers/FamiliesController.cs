@@ -259,7 +259,7 @@ namespace WebApplication.Controllers
 
         // The way we add an existing account to the family is to use
         // an invite code that when entered and verified can then add the user into the family
-        // GET: Families/AddMember/5
+        // GET: Families/AddMemberInviteCode/5
         [Authorize(Roles = "Member")]
         public ActionResult AddMember()
         {
@@ -269,15 +269,16 @@ namespace WebApplication.Controllers
             }
 
             FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
-            model.InviteUser = new ApplicationUser();
+            model.CreateMemberViewModel = new _CreateMember2AddViewModel();
+            model.CreateMemberViewModel.Levels = db.Levels.ToList();
             return View(model);
         }
 
-        // POST: Families/AddMember/5
+        // POST: Families/AddMemberInviteCode/5
         [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMember([Bind(Include = "InviteCode")] FamilyAddMemberViewModel model)
+        public ActionResult AddMemberInviteCode([Bind(Include = "InviteCode")] FamilyAddMemberViewModel model)
         {
             if (!(User.Identity.IsFamilyOwner()))
             {
@@ -316,8 +317,9 @@ namespace WebApplication.Controllers
                     db.SaveChanges();
                     return RedirectToAction("MyFamily");
                 }               
-            }           
-            model.InviteUser = new ApplicationUser();
+            }
+            model.CreateMemberViewModel = new _CreateMember2AddViewModel();
+            model.CreateMemberViewModel.Levels = db.Levels.ToList();
             return View(model);
         }
 
@@ -327,7 +329,7 @@ namespace WebApplication.Controllers
         [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMember([Bind(Include = "FirstName, LastName, Birthday")] ApplicationUser model)
+        public ActionResult AddMember([Bind(Include = "CreateMember, SelectedLevel")] _CreateMember2AddViewModel model)
         {
             if (!(User.Identity.IsFamilyOwner()))
             {
@@ -345,17 +347,21 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 string userId =
-                AccountHelper.RegisterFakeUser(model.FirstName, model.LastName, model.BirthDay.Value);
+                AccountHelper.RegisterFakeUser(model.CreateMember.FirstName, model.CreateMember.LastName, model.CreateMember.BirthDay.Value);
                 ApplicationUser user = db.Users.Find(userId);
-                family.Users.Add(model);
+                user.Family.Id = User.Identity.GetFamilyId().Value;
+                user.Level.Id = model.SelectedLevel;
+                family.Users.Add(user);
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("MyFamily");
             }
 
             FamilyAddMemberViewModel viewModel = new FamilyAddMemberViewModel();
-            viewModel.InviteUser = model;
-            return View(model);
+            viewModel.CreateMemberViewModel = new _CreateMember2AddViewModel();
+            viewModel.CreateMemberViewModel.Levels = db.Levels.ToList();
+            
+            return View(viewModel);
         }
 
         // This partial view is used to create the new account that is automatically added to the family
