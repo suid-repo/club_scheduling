@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using WebApplication.Extentions;
 using System.Configuration;
 using WebApplication.Helpers;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace WebApplication.Controllers
 {
@@ -52,25 +53,38 @@ namespace WebApplication.Controllers
         // GET: Families/Create
         public ActionResult Create()
         {
-            return View();            
+            //the member should not be in family
+            Family family = new Family();
+            family.OwnerId = User.Identity.GetUserId();
+            return View(family);            
         }
 
         [Authorize(Roles = "Member")]
         // POST: Families/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Family family)
+        public ActionResult Create([Bind(Include = "Id,Name, OwnerId")] Family family)
         {
+            //the memeber should note be in a family
+
             if (ModelState.IsValid)
             {
-                // HERE ADD THE CURRENT USER AS THE OWNER IN THE family OBJECT
-                family.Owner = db.Users.First(u => u.Id.Equals(User.Identity.GetUserId()));
-                // Now whoever creates a family will automatically be set as the family owner
+                string userId = User.Identity.GetUserId();
+                ApplicationUser thisUser = db.Users.Find(userId);
 
+                family.Users = new List<ApplicationUser>
+                {
+                    thisUser
+                };
                 db.Families.Add(family);
                 db.SaveChanges();
 
-                return RedirectToAction("MyFamily");
+                using (ApplicationSignInManager signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>())
+                {
+                    signInManager.SignIn(thisUser, false, false);
+                }
+
+                    return RedirectToAction("MyFamily");
             }
 
             return View(family);

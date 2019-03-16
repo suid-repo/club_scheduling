@@ -31,8 +31,8 @@ namespace WebApplication.Models
         [Display(Name = "InviteCode", ResourceType = typeof(I18N.Core.User))]
         public string InviteCode { get; set; }
         public virtual Family Family { get; set; }
-        [JsonIgnore]
-        public virtual Family OwnFamily { get; set; }
+        //[JsonIgnore]
+        //public virtual Family OwnFamily { get; set; }
         [Display(Name = "FirstName", ResourceType = typeof(I18N.Core.User))]
         public virtual Level Level { get; set; }
 

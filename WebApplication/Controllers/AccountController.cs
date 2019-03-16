@@ -57,7 +57,7 @@ namespace WebApplication.Controllers
                 _userManager = value;
             }
         }
-
+        
         //
         // GET: /Account/Login
         [AllowAnonymous]
