@@ -15,7 +15,7 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-
+                @Html.HiddenFor(m => m.OwnerId)
                 <div class="form-horizontal">
                     <h4>@I18N.View.Family.Edit_Subtitle</h4>
                     <hr />

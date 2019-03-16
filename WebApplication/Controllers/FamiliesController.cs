@@ -119,7 +119,7 @@ namespace WebApplication.Controllers
         [Authorize(Roles = "Member, Head Coach")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
+        public ActionResult Edit([Bind(Include = "Id,Name, OwnerId")] Family family)
         {
             // If the current user is not a head coach or the family owner then no access
             if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
