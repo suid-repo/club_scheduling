@@ -7,6 +7,11 @@ using System.Web;
 
 namespace WebApplication.Models
 {
+    public class FamilyIndexViewModel
+    {
+        public Family Family { get; set; }
+        public ApplicationUser User { get; set; }
+    }
     public class FamilyAddMemberViewModel
     {
         public string InviteCode { get; set; }

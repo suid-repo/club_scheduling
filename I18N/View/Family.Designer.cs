@@ -214,6 +214,15 @@ namespace I18N.View {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à you can use the following code to be invited by an another user:.
+        /// </summary>
+        public static string InviteCode_Text {
+            get {
+                return ResourceManager.GetString("InviteCode_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No users.
         /// </summary>
         public static string MyFamily_Body_NoUsers {

@@ -46,8 +46,8 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
- 
-        [Authorize(Roles = "Member")] 
+
+        [Authorize(Roles = "Member")]
         // Only members can create families, head coaches and coaches will need a
         // member account seperate from their coach account to do this
         // GET: Families/Create
@@ -56,7 +56,7 @@ namespace WebApplication.Controllers
             //the member should not be in family
             Family family = new Family();
             family.OwnerId = User.Identity.GetUserId();
-            return View(family);            
+            return View(family);
         }
 
         [Authorize(Roles = "Member")]
@@ -84,7 +84,7 @@ namespace WebApplication.Controllers
                     signInManager.SignIn(thisUser, false, false);
                 }
 
-                    return RedirectToAction("MyFamily");
+                return RedirectToAction("MyFamily");
             }
 
             return View(family);
@@ -105,7 +105,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
 
             Family family = db.Families.Find(id);
             if (family == null)
@@ -130,7 +130,7 @@ namespace WebApplication.Controllers
             {
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
-                
+
                 return RedirectToAction("MyFamily");
             }
             return View(family);
@@ -151,7 +151,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
 
             Family family = db.Families.Find(id);
             if (family == null)
@@ -242,14 +242,16 @@ namespace WebApplication.Controllers
         {
             // When you click the MyFamily tab this method checks what family you are in and 
             // displays the information of that family
-            int? familyId= User.Identity.GetFamilyId();
-            Family family = null;
+            int? familyId = User.Identity.GetFamilyId();
+            string userId = User.Identity.GetUserId();
+            FamilyIndexViewModel model = new FamilyIndexViewModel();
+            model.User = db.Users.Find(userId);
             if (familyId != null)
             {
-               family = db.Families.Find(familyId);
-            }                          
-           
-            return View(family);
+                model.Family = db.Families.Find(familyId);
+            }
+
+            return View(model);
         }
 
         public PartialViewResult _UserList(IEnumerable<ApplicationUser> model)
@@ -290,7 +292,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             if (ModelState.IsValid)
             {
                 ApplicationUser user = db.Users.Where(u => u.InviteCode.Equals(model.InviteCode)).FirstOrDefault();
@@ -316,7 +318,7 @@ namespace WebApplication.Controllers
                     db.Entry(family).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("MyFamily");
-                }               
+                }
             }
             model.CreateMemberViewModel = new _CreateMember2AddViewModel();
             model.CreateMemberViewModel.Levels = db.Levels.ToList();
@@ -360,9 +362,47 @@ namespace WebApplication.Controllers
             FamilyAddMemberViewModel viewModel = new FamilyAddMemberViewModel();
             viewModel.CreateMemberViewModel = new _CreateMember2AddViewModel();
             viewModel.CreateMemberViewModel.Levels = db.Levels.ToList();
-            
+
             return View(viewModel);
         }
+
+        [Authorize(Roles = "Member")]
+        public ActionResult GenerateInviteCode()
+        {
+            if (User.Identity.IsFamilyOwner())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            try
+            {
+                Random r = new Random();
+                string userId = User.Identity.GetUserId();
+
+                ApplicationUser user = db.Users.Find(userId);
+                string inviteCode;
+                do
+                {
+                    inviteCode = r.Next(100000, 999999).ToString();
+
+                }
+                while (db.Users.Where(u => u.InviteCode.Equals(inviteCode)).Count() > 0);
+
+
+
+                user.InviteCode = inviteCode;
+
+                db.Entry(user).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return RedirectToAction("MyFamily");
+            }
+            catch (Exception)
+            {
+            }
+            return RedirectToAction("MyFamily");
+        }
+
 
         // This partial view is used to create the new account that is automatically added to the family
         public PartialViewResult _CreateMember2Add(_CreateMember2AddViewModel model)
