@@ -14,7 +14,7 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return Environment.GetEnvironmentVariable("TWILIO_SID", EnvironmentVariableTarget.User);
+                return Environment.GetEnvironmentVariable("TWILIO_SID");
             }
         }
 
@@ -22,7 +22,7 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return Environment.GetEnvironmentVariable("TWILIO_TOKEN", EnvironmentVariableTarget.User);
+                return Environment.GetEnvironmentVariable("TWILIO_TOKEN");
             }
         }
 
@@ -30,7 +30,7 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return Environment.GetEnvironmentVariable("TWILIO_NUMBER", EnvironmentVariableTarget.User);
+                return Environment.GetEnvironmentVariable("TWILIO_NUMBER");
             }
         }
 

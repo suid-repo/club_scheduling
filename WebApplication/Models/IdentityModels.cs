@@ -27,12 +27,13 @@ namespace WebApplication.Models
         [Required(ErrorMessageResourceType = typeof(I18N.Core.User),
               ErrorMessageResourceName = "BirthdayRequired")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? BirthDay { get; set; }
         [Display(Name = "InviteCode", ResourceType = typeof(I18N.Core.User))]
         public string InviteCode { get; set; }
         public virtual Family Family { get; set; }
-        [JsonIgnore]
-        public virtual Family OwnFamily { get; set; }
+        //[JsonIgnore]
+        //public virtual Family OwnFamily { get; set; }
         [Display(Name = "FirstName", ResourceType = typeof(I18N.Core.User))]
         public virtual Level Level { get; set; }
 

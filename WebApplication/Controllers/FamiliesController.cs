@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using WebApplication.Extentions;
 using System.Configuration;
 using WebApplication.Helpers;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace WebApplication.Controllers
 {
@@ -45,32 +46,45 @@ namespace WebApplication.Controllers
             }
             return View(family);
         }
- 
-        [Authorize(Roles = "Member")] 
+
+        [Authorize(Roles = "Member")]
         // Only members can create families, head coaches and coaches will need a
         // member account seperate from their coach account to do this
         // GET: Families/Create
         public ActionResult Create()
         {
-            return View();            
+            //the member should not be in family
+            Family family = new Family();
+            family.OwnerId = User.Identity.GetUserId();
+            return View(family);
         }
 
         [Authorize(Roles = "Member")]
         // POST: Families/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Family family)
+        public ActionResult Create([Bind(Include = "Id,Name, OwnerId")] Family family)
         {
+            //the memeber should note be in a family
+
             if (ModelState.IsValid)
             {
-                // HERE ADD THE CURRENT USER AS THE OWNER IN THE family OBJECT
-                family.Owner = db.Users.First(u => u.Id.Equals(User.Identity.GetUserId()));
-                // Now whoever creates a family will automatically be set as the family owner
+                string userId = User.Identity.GetUserId();
+                ApplicationUser thisUser = db.Users.Find(userId);
 
+                family.Users = new List<ApplicationUser>
+                {
+                    thisUser
+                };
                 db.Families.Add(family);
                 db.SaveChanges();
 
-                return RedirectToAction("MyFamily");
+                using (ApplicationSignInManager signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>())
+                {
+                    signInManager.SignIn(thisUser, false, false);
+                }
+
+                    return RedirectToAction("MyFamily");
             }
 
             return View(family);
@@ -91,7 +105,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
 
             Family family = db.Families.Find(id);
             if (family == null)
@@ -105,7 +119,7 @@ namespace WebApplication.Controllers
         [Authorize(Roles = "Member, Head Coach")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Family family)
+        public ActionResult Edit([Bind(Include = "Id,Name, OwnerId")] Family family)
         {
             // If the current user is not a head coach or the family owner then no access
             if (!(User.IsInRole("Head Coach") || User.Identity.IsFamilyOwner()))
@@ -116,7 +130,7 @@ namespace WebApplication.Controllers
             {
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
-                
+
                 return RedirectToAction("MyFamily");
             }
             return View(family);
@@ -137,7 +151,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
 
             Family family = db.Families.Find(id);
             if (family == null)
@@ -228,14 +242,16 @@ namespace WebApplication.Controllers
         {
             // When you click the MyFamily tab this method checks what family you are in and 
             // displays the information of that family
-            int? familyId= User.Identity.GetFamilyId();
-            Family family = null;
+            int? familyId = User.Identity.GetFamilyId();
+            string userId = User.Identity.GetUserId();
+            FamilyIndexViewModel model = new FamilyIndexViewModel();
+            model.User = db.Users.Find(userId);
             if (familyId != null)
             {
-               family = db.Families.Find(familyId);
-            }                          
-           
-            return View(family);
+                model.Family = db.Families.Find(familyId);
+            }
+
+            return View(model);
         }
 
         public PartialViewResult _UserList(IEnumerable<ApplicationUser> model)
@@ -245,7 +261,7 @@ namespace WebApplication.Controllers
 
         // The way we add an existing account to the family is to use
         // an invite code that when entered and verified can then add the user into the family
-        // GET: Families/AddMember/5
+        // GET: Families/AddMemberInviteCode/5
         [Authorize(Roles = "Member")]
         public ActionResult AddMember()
         {
@@ -255,15 +271,16 @@ namespace WebApplication.Controllers
             }
 
             FamilyAddMemberViewModel model = new FamilyAddMemberViewModel();
-            model.InviteUser = new ApplicationUser();
+            model.CreateMemberViewModel = new _CreateMember2AddViewModel();
+            model.CreateMemberViewModel.Levels = db.Levels.ToList();
             return View(model);
         }
 
-        // POST: Families/AddMember/5
+        // POST: Families/AddMemberInviteCode/5
         [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMember([Bind(Include = "InviteCode")] FamilyAddMemberViewModel model)
+        public ActionResult AddMemberInviteCode([Bind(Include = "InviteCode")] FamilyAddMemberViewModel model)
         {
             if (!(User.Identity.IsFamilyOwner()))
             {
@@ -275,7 +292,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             if (ModelState.IsValid)
             {
                 ApplicationUser user = db.Users.Where(u => u.InviteCode.Equals(model.InviteCode)).FirstOrDefault();
@@ -302,8 +319,9 @@ namespace WebApplication.Controllers
                     db.SaveChanges();
                     return RedirectToAction("MyFamily");
                 }               
-            }           
-            model.InviteUser = new ApplicationUser();
+            }
+            model.CreateMemberViewModel = new _CreateMember2AddViewModel();
+            model.CreateMemberViewModel.Levels = db.Levels.ToList();
             return View(model);
         }
 
@@ -313,7 +331,7 @@ namespace WebApplication.Controllers
         [Authorize(Roles = "Member")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddMember([Bind(Include = "FirstName, LastName, Birthday")] ApplicationUser model)
+        public ActionResult AddMember([Bind(Include = "CreateMember, SelectedLevel")] _CreateMember2AddViewModel model)
         {
             if (!(User.Identity.IsFamilyOwner()))
             {
@@ -331,23 +349,64 @@ namespace WebApplication.Controllers
             if (ModelState.IsValid)
             {
                 string userId =
-                AccountHelper.RegisterFakeUser(model.FirstName, model.LastName, model.BirthDay.Value);
-                ApplicationUser user = db.Users.Find(userId);
-                family.Users.Add(model);
+                AccountHelper.RegisterFakeUser(model.CreateMember.FirstName, model.CreateMember.LastName, model.CreateMember.BirthDay.Value);
+                ApplicationUser user = db.Users.Find(userId);               
+                user.Level.Id = model.SelectedLevel;
+                family.Users.Add(user);
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("MyFamily");
             }
 
             FamilyAddMemberViewModel viewModel = new FamilyAddMemberViewModel();
-            viewModel.InviteUser = model;
-            return View(model);
+            viewModel.CreateMemberViewModel = new _CreateMember2AddViewModel();
+            viewModel.CreateMemberViewModel.Levels = db.Levels.ToList();
+
+            return View(viewModel);
         }
 
-        // This partial view is used to create the new account that is automatically added to the family
-        public PartialViewResult _CreateMember2Add(ApplicationUser user)
+        [Authorize(Roles = "Member")]
+        public ActionResult GenerateInviteCode()
         {
-            return PartialView(user);
+            if (User.Identity.IsFamilyOwner())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
+            try
+            {
+                Random r = new Random();
+                string userId = User.Identity.GetUserId();
+
+                ApplicationUser user = db.Users.Find(userId);
+                string inviteCode;
+                do
+                {
+                    inviteCode = r.Next(100000, 999999).ToString();
+
+                }
+                while (db.Users.Where(u => u.InviteCode.Equals(inviteCode)).Count() > 0);
+
+
+
+                user.InviteCode = inviteCode;
+
+                db.Entry(user).State = EntityState.Modified;
+
+                db.SaveChanges();
+                return RedirectToAction("MyFamily");
+            }
+            catch (Exception)
+            {
+            }
+            return RedirectToAction("MyFamily");
+        }
+
+
+        // This partial view is used to create the new account that is automatically added to the family
+        public PartialViewResult _CreateMember2Add(_CreateMember2AddViewModel model)
+        {
+            return PartialView(model);
         }
     }
 }

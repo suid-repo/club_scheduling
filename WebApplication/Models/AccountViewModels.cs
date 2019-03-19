@@ -107,8 +107,9 @@ namespace WebApplication.Models
         {
             get
             {
+                int ageLimit = int.Parse(ConfigurationManager.AppSettings.Get("RegistrationAgeLimit"));
                 DateTime date = DateTime.Now;
-                return date.AddYears(-8).Date;
+                return date.AddYears(-ageLimit).Date;
             }
         }
     }

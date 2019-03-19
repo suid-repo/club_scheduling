@@ -1,52 +1,69 @@
-﻿@model WebApplication.Core.Family
+﻿@model WebApplication.Models.FamilyIndexViewModel
 @using WebApplication.Extentions;
+
 @{
-    ViewBag.Title = "MyFamily";
+    ViewBag.Title = I18N.View.Family.MyFamily_Title;
 }
-
-<h2>@I18N.View.Family.MyFamily_Title</h2>
-
-<div>
-    <h4>@I18N.View.Family.MyFamily_Subtitle</h4>
-    <div class="float-md-right">
-        @if (User.Identity.IsFamilyOwner())
-        {
-            @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })
-        }
-    </div>
-    <hr />
-    @if (Model != null)
-    {
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Users)
-            </dt>
-
-            <dd>
-
-                @if (Model.Users.Count > 0)
+<div class="post-single">
+    <div class="post-details">
+        <div class="row">
+            <div class="pull-left"><h2>@ViewBag.Title</h2></div>
+        </div>
+        <div class="post-body">
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <div class="float-md-right">
+                            @if (User.Identity.IsFamilyOwner())
+                            {
+                                @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Family.Id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink(I18N.GenericAction.add, "AddMember", new { id = Model.Family.Id }, new { @class = "btn btn-primary btn-sm" })
+                            }
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                @if (Model.Family != null)
                 {
-                    Html.RenderPartial("_UserList", Model.Users);
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Family.Name)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Family.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Family.Users)
+                        </dt>
+                        <dd>
+                            @if (Model.Family.Users.Count > 0)
+                            {
+                                Html.RenderPartial("_UserList", Model.Family.Users);
+                            }
+                            else
+                            {
+                                <p>@I18N.View.Family.MyFamily_Body_NoUsers</p>
+                            }
+                        </dd>
+                    </dl>
+
                 }
                 else
                 {
-                    <p>@I18N.View.Family.MyFamily_Body_NoUsers</p>
+                    <p>@I18N.View.Family.MyFamily_Create_Disclaimer</p>
+                    <p>
+                        @Html.ActionLink(I18N.GenericAction.create, "Create", null, new { @class = "btn btn-primary btn-sm" }) @I18N.GenericLabel.or
+                        @if (Model.User.InviteCode == null)
+                        {
+                            @Html.ActionLink(I18N.View.Family.Action_GenerateInviteCode, "GenerateInviteCode", null, new { @class = "btn btn-primary btn-sm" })
+                        }
+                        else
+                        {
+                            @I18N.View.Family.InviteCode_Text <b>@Model.User.InviteCode</b>
+                        }
+                    </p>
                 }
-
-            </dd>
-        </dl>
-
-    }
-    else
-    {
-        <p>@I18N.View.Family.MyFamily_Create_Disclaimer</p>
-        <p>@Html.ActionLink(I18N.GenericAction.create, "Create", new { id = Model.Id }, new { @class = "btn btn-primary btn-sm" })</p>
-    }
+            </div>
+        </div>
+    </div>
 </div>

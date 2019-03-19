@@ -22,7 +22,11 @@ namespace WebApplication.Core
         [Required(ErrorMessageResourceType = typeof(I18N.Core.Family),
               ErrorMessageResourceName = "Family_NameRequired")]
         public string Name { get; set; }
-        [InverseProperty("OwnFamily"), Required]
+
+        [JsonIgnore]
+        [Required, ForeignKey("Owner")]
+        public string OwnerId { get; set; }
+        
         [JsonIgnore]
         public virtual ApplicationUser Owner { get; set; }
         [InverseProperty("Family")]

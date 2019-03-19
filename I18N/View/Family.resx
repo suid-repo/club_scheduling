@@ -120,6 +120,9 @@
   <data name="Action_AddMember" xml:space="preserve">
     <value>Add an existing account via invite code</value>
   </data>
+  <data name="Action_GenerateInviteCode" xml:space="preserve">
+    <value>Generate Invite Code</value>
+  </data>
   <data name="Action_MyFamily" xml:space="preserve">
     <value>Display information about your family</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Index_Title" xml:space="preserve">
     <value>Index</value>
+  </data>
+  <data name="InviteCode_Text" xml:space="preserve">
+    <value>you can use the following code to be invited by an another user:</value>
   </data>
   <data name="MyFamily_Body_NoUsers" xml:space="preserve">
     <value>No users</value>

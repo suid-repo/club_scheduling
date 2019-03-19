@@ -16,7 +16,7 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return new SendGridClient(Environment.GetEnvironmentVariable("SENDGRID_API_KEY", EnvironmentVariableTarget.User));
+                return new SendGridClient(Environment.GetEnvironmentVariable("SENDGRID_API_KEY"));
             }
         }
 
