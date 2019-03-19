@@ -7,28 +7,28 @@ $(document).ready(function () {
     // For demo purposes only
     // ------------------------------------------------------ //
 
-    var stylesheet = $('link#theme-stylesheet');
-    $( "<link id='new-stylesheet' rel='stylesheet'>" ).insertAfter(stylesheet);
-    var alternateColour = $('link#new-stylesheet');
+    //var stylesheet = $('link#theme-stylesheet');
+    //$( "<link id='new-stylesheet' rel='stylesheet'>" ).insertAfter(stylesheet);
+    //var alternateColour = $('link#new-stylesheet');
 
-    if ($.cookie("theme_csspath")) {
-        alternateColour.attr("href", $.cookie("theme_csspath"));
-    }
+    //if ($.cookie("theme_csspath")) {
+    //    alternateColour.attr("href", $.cookie("theme_csspath"));
+    //}
 
-    $("#colour").change(function () {
+    //$("#colour").change(function () {
 
-        if ($(this).val() !== '') {
+    //    if ($(this).val() !== '') {
 
-            var theme_csspath = 'css/style.' + $(this).val() + '.css';
+    //        var theme_csspath = 'css/style.' + $(this).val() + '.css';
 
-            alternateColour.attr("href", theme_csspath);
+    //        alternateColour.attr("href", theme_csspath);
 
-            $.cookie("theme_csspath", theme_csspath, { expires: 365, path: document.URL.substr(0, document.URL.lastIndexOf('/')) });
+    //        $.cookie("theme_csspath", theme_csspath, { expires: 365, path: document.URL.substr(0, document.URL.lastIndexOf('/')) });
 
-        }
+    //    }
 
-        return false;
-    });
+    //    return false;
+    //});
 
 
     // ------------------------------------------------------- //
@@ -85,13 +85,13 @@ $(document).ready(function () {
     // ---------------------------------------------- //
     // Search Bar
     // ---------------------------------------------- //
-    $('.search-btn').on('click', function (e) {
-        e.preventDefault();
-        $('.search-area').fadeIn();
-    });
-    $('.search-area .close-btn').on('click', function () {
-        $('.search-area').fadeOut();
-    });
+    //$('.search-btn').on('click', function (e) {
+    //    e.preventDefault();
+    //    $('.search-area').fadeIn();
+    //});
+    //$('.search-area .close-btn').on('click', function () {
+    //    $('.search-area').fadeOut();
+    //});
 
 
 
