@@ -40,7 +40,7 @@
                 }
                 @if (User.Identity.IsFamilyOwner() || User.IsInRole("Head Coach"))
                 {
-                    @Html.ActionLink(I18N.GenericAction.remove, "DeleteUser", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                    @Html.ActionLink(I18N.GenericAction.remove, "RemoveMember", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                 }
             </td>
         </tr>

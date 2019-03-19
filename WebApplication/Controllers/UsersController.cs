@@ -243,7 +243,6 @@ namespace WebApplication.Controllers
             {
                 Manager.AddToRole(userId, "Member");
             }
-
         }
 
         protected override void Dispose(bool disposing)

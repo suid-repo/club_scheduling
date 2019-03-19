@@ -197,6 +197,12 @@ namespace WebApplication.Controllers
             {
                 return HttpNotFound();
             }
+            
+            if (!User.IsInRole("Head Coach") && User.Identity.GetFamilyId() != user.Family.Id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+
             return View(user);
         }
 
@@ -210,7 +216,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
-
+            user = db.Users.Find(user.Id);
             Family family = db.Families.Find(user.Family.Id);
             family.Users.Remove(user);
             db.Entry(family).State = EntityState.Modified;
@@ -315,6 +321,9 @@ namespace WebApplication.Controllers
                 {
                     // If all goes well then the user is now added to the family
                     family.Users.Add(user);
+                    // The users invite code is now sert to null
+                    user.InviteCode = null;
+                    db.Entry(user).State = EntityState.Modified;
                     db.Entry(family).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("MyFamily");
