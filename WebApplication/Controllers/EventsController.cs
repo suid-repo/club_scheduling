@@ -399,7 +399,10 @@ namespace WebApplication.Controllers
             Event @event = db.Events.Include(e => e.RegisterUsers)
                 .Include(e => e.Queued)
                 .Where(e => e.Id == eventId).FirstOrDefault();
-
+            if (User.Identity.GetFamilyId() == null)
+            {
+                return false;
+            }
             return @event.RegisterUsers.Any(ru => ru.Family.Id.Equals(User.Identity.GetFamilyId())) || @event.Queued.QueuedItems.Any(q => q.User.Family.Id == User.Identity.GetFamilyId());
 
         }
