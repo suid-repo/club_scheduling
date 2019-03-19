@@ -14,7 +14,10 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return Environment.GetEnvironmentVariable("TWILIO_SID");
+                if (Environment.GetEnvironmentVariable("TWILIO_SID") == null)
+                    return Environment.GetEnvironmentVariable("TWILIO_SID", EnvironmentVariableTarget.User);
+                else
+                    return Environment.GetEnvironmentVariable("TWILIO_SID");
             }
         }
 
@@ -22,7 +25,10 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return Environment.GetEnvironmentVariable("TWILIO_TOKEN");
+                if (Environment.GetEnvironmentVariable("TWILIO_TOKEN") == null)
+                    return Environment.GetEnvironmentVariable("TWILIO_TOKEN", EnvironmentVariableTarget.User);
+                else
+                    return Environment.GetEnvironmentVariable("TWILIO_TOKEN");
             }
         }
 
@@ -30,7 +36,10 @@ namespace WebApplication.Helpers
         {
             get
             {
-                return Environment.GetEnvironmentVariable("TWILIO_NUMBER");
+                if (Environment.GetEnvironmentVariable("TWILIO_NUMBER") == null)
+                    return Environment.GetEnvironmentVariable("TWILIO_NUMBER", EnvironmentVariableTarget.User);
+                else
+                    return Environment.GetEnvironmentVariable("TWILIO_NUMBER");
             }
         }
 
