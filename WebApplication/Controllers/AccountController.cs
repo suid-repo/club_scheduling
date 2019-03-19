@@ -421,14 +421,11 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed()
         {
-            return new HttpStatusCodeResult(HttpStatusCode.NotImplemented);
-            // First verify user is not owner of a family
-            //If yes, DO Action
+            //return new HttpStatusCodeResult(HttpStatusCode.NotImplemented);
+            
+            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-
-            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
-
-            await _userManager.DeleteAsync(user);
+            await UserManager.DeleteAsync(user);
 
             return LogOff();
         }
