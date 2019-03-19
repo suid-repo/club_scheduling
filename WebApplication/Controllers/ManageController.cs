@@ -125,12 +125,21 @@ namespace WebApplication.Controllers
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
             if (UserManager.SmsService != null)
             {
-                var message = new IdentityMessage
+                try
                 {
-                    Destination = model.Number,
-                    Body = "Your security code is: " + code
-                };
-                await UserManager.SmsService.SendAsync(message);
+                    var message = new IdentityMessage
+                    {
+                        Destination = model.Number,
+                        Body = "Your security code is: " + code
+                    };
+
+                    await UserManager.SmsService.SendAsync(message);
+                }
+                catch(Exception)
+                {
+                    ModelState.AddModelError("exceptionError", "An error is occurred during the sending of the security code.");
+                    return View();  
+                }                
             }
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
