@@ -227,6 +227,15 @@ namespace WebApplication.Controllers
             Family family = db.Families.Find(user.Family.Id);
             family.Users.Remove(user);
             db.Entry(family).State = EntityState.Modified;
+
+            //If the user is a fake user, we also delete him from the DB
+            //We have to refactore this to put a flag in the user class to detect fake users
+            if (user.Email.Contains("@localhost.com"))
+            {
+                db.Entry(user).State = EntityState.Deleted;
+            }
+
+
             db.SaveChanges();
             // The user is now removed from the family
 
@@ -365,8 +374,10 @@ namespace WebApplication.Controllers
             {
                 string userId =
                 AccountHelper.RegisterFakeUser(model.CreateMember.FirstName, model.CreateMember.LastName, model.CreateMember.BirthDay.Value);
-                ApplicationUser user = db.Users.Find(userId);               
-                user.Level.Id = model.SelectedLevel;
+                ApplicationUser user = db.Users.Find(userId);
+                Level level = db.Levels.Find(model.SelectedLevel);
+
+                user.Level = level;
                 family.Users.Add(user);
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
