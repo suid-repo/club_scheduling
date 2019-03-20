@@ -248,13 +248,12 @@ namespace WebApplication.Controllers
         {
             // When you click the MyFamily tab this method checks what family you are in and 
             // displays the information of that family
-            int? familyId = User.Identity.GetFamilyId();
             string userId = User.Identity.GetUserId();
             FamilyIndexViewModel model = new FamilyIndexViewModel();
             model.User = db.Users.Find(userId);
-            if (familyId != null)
+            if (model.User.Family != null)
             {
-                model.Family = db.Families.Find(familyId);
+                model.Family = db.Families.Find(model.User.Family.Id);
             }
 
             return View(model);
