@@ -21,7 +21,7 @@
                             }
                             else //Unsubscribe button
                             {
-                                @Html.ActionLink(I18N.View.Event.Action_LeaveCoach, "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary     btn-sm" }) 
+                                @Html.ActionLink(I18N.View.Event.Action_LeaveCoach, "CoachLeave", new { id = Model.Event.Id }, new { @class = "btn btn-secondary btn-sm" }) 
 
                             }
                         }
@@ -50,13 +50,13 @@
                                 if (!Model.IsFamilyJoigned2Event)
                                 {
                                     Html.RenderAction("_FamilyJoinModal", Model.Event);
-                                    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button> 
+                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_JoinMemberFamily</button> 
 
                                 }
                                 else
                                 {
                                     Html.RenderAction("_FamilyLeaveModal", Model.Event);
-                                    <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_LeaveMemberFamily</button> 
+                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#event-family-modal">@I18N.View.Event.Action_LeaveMemberFamily</button> 
 
                                 }
                             }
