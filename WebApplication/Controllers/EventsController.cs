@@ -342,7 +342,7 @@ namespace WebApplication.Controllers
                 model.Users2Kick = GetUsers2Kick(@event.Id);
                 model.IsInQueued = IsInQueued(@event.Id);
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 return null;
             }
@@ -416,14 +416,15 @@ namespace WebApplication.Controllers
         private List<ApplicationUser> GetUsers2Kick(int eventId)
         {
             Event @event = db.Events.Find(eventId);
-            if (@event.RegisterUsers.Any(ru => ru.Family.Id == User.Identity.GetFamilyId()))
-            {
-                return @event.RegisterUsers.Where(u => u.Family.Id == User.Identity.GetFamilyId()).ToList();
+            int familyId = User.Identity.GetFamilyId().Value;
 
-            }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == User.Identity.GetFamilyId()))
+            if (@event.RegisterUsers.Any(ru => ru.Family.Id == familyId))
             {
-                return @event.Queued.QueuedItems.Select(u => u.User).Where(qi => qi.Family.Id == User.Identity.GetFamilyId()).ToList();
+                return @event.RegisterUsers.Where(ru => ru.Family != null && ru.Family.Id == familyId).ToList();
+            }
+            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == familyId))
+            {
+                return @event.Queued.QueuedItems.Select(u => u.User).Where(qi => qi.Family != null && qi.Family.Id == familyId).ToList();
 
             }
             throw new Exception("User is not in the queued either event");
@@ -435,11 +436,13 @@ namespace WebApplication.Controllers
         private bool IsInQueued(int eventId)
         {
             Event @event = db.Events.Find(eventId);
-            if (@event.RegisterUsers.Any(ru => ru.Family.Id == User.Identity.GetFamilyId()))
+            int familyId = User.Identity.GetFamilyId().Value;
+
+            if (@event.RegisterUsers.Any(ru => ru.Family.Id == familyId))
             {
                 return false;
             }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == User.Identity.GetFamilyId()))
+            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == familyId))
             {
                 return true;
             }
