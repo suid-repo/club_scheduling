@@ -403,7 +403,10 @@ namespace WebApplication.Controllers
             {
                 return false;
             }
-            return @event.RegisterUsers.Any(ru => ru.Family.Id.Equals(User.Identity.GetFamilyId())) || @event.Queued.QueuedItems.Any(q => q.User.Family.Id == User.Identity.GetFamilyId());
+
+            int familyId = User.Identity.GetFamilyId().Value;
+
+            return @event.RegisterUsers.Any(ru => ru.Family.Id.Equals(User.Identity.GetFamilyId())) || @event.Queued.QueuedItems.Any(q => q.User.Family != null && q.User.Family.Id == familyId);
 
         }
 
