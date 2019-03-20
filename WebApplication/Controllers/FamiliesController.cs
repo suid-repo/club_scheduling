@@ -116,7 +116,7 @@ namespace WebApplication.Controllers
         }
 
         // POST: Families/Edit/5
-        [Authorize(Roles = "Member, Head Coach")]
+        [Authorize(Roles = "Member,Head Coach")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name, OwnerId")] Family family)
@@ -131,7 +131,14 @@ namespace WebApplication.Controllers
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("MyFamily");
+                if (!User.IsInRole("Head Coach"))
+                {
+                    return RedirectToAction("MyFamily");
+                }
+                else
+                {
+                    return RedirectToAction("Families");
+                }
             }
             return View(family);
         }
@@ -248,13 +255,12 @@ namespace WebApplication.Controllers
         {
             // When you click the MyFamily tab this method checks what family you are in and 
             // displays the information of that family
-            int? familyId = User.Identity.GetFamilyId();
             string userId = User.Identity.GetUserId();
             FamilyIndexViewModel model = new FamilyIndexViewModel();
             model.User = db.Users.Find(userId);
-            if (familyId != null)
+            if (model.User.Family != null)
             {
-                model.Family = db.Families.Find(familyId);
+                model.Family = db.Families.Find(model.User.Family.Id);
             }
 
             return View(model);

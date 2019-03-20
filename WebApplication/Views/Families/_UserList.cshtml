@@ -38,7 +38,7 @@
                 {
                     @Html.ActionLink(I18N.GenericAction.details, "Details", "Users", new { id = item.Id }, new { @class = "btn btn-primary btn-sm", target = "_blank" })
                 }
-                @if (User.Identity.IsFamilyOwner() || User.IsInRole("Head Coach"))
+                @if ((User.Identity.IsFamilyOwner() || User.IsInRole("Head Coach")) && item.Id != item.Family.OwnerId)
                 {
                     @Html.ActionLink(I18N.GenericAction.remove, "RemoveMember", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
                 }
