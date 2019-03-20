@@ -365,8 +365,10 @@ namespace WebApplication.Controllers
             {
                 string userId =
                 AccountHelper.RegisterFakeUser(model.CreateMember.FirstName, model.CreateMember.LastName, model.CreateMember.BirthDay.Value);
-                ApplicationUser user = db.Users.Find(userId);               
-                user.Level.Id = model.SelectedLevel;
+                ApplicationUser user = db.Users.Find(userId);
+                Level level = db.Levels.Find(model.SelectedLevel);
+
+                user.Level = level;
                 family.Users.Add(user);
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
