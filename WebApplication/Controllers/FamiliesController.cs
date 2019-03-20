@@ -116,7 +116,7 @@ namespace WebApplication.Controllers
         }
 
         // POST: Families/Edit/5
-        [Authorize(Roles = "Member, Head Coach")]
+        [Authorize(Roles = "Member,Head Coach")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name, OwnerId")] Family family)
@@ -131,7 +131,14 @@ namespace WebApplication.Controllers
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToAction("MyFamily");
+                if (!User.IsInRole("Head Coach"))
+                {
+                    return RedirectToAction("MyFamily");
+                }
+                else
+                {
+                    return RedirectToAction("Families");
+                }
             }
             return View(family);
         }
