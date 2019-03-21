@@ -417,11 +417,11 @@ namespace WebApplication.Controllers
             Event @event = db.Events.Find(eventId);
             int familyId = User.Identity.GetFamilyId().Value;
 
-            if (@event.RegisterUsers.Any(ru => ru.Family.Id == familyId))
+            if (@event.RegisterUsers.Any(ru => ru.Family != null && ru.Family.Id == familyId))
             {
                 return @event.RegisterUsers.Where(ru => ru.Family != null && ru.Family.Id == familyId).ToList();
             }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == familyId))
+            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family != null && ru.User.Family.Id == familyId))
             {
                 return @event.Queued.QueuedItems.Select(u => u.User).Where(qi => qi.Family != null && qi.Family.Id == familyId).ToList();
 
@@ -437,11 +437,11 @@ namespace WebApplication.Controllers
             Event @event = db.Events.Find(eventId);
             int familyId = User.Identity.GetFamilyId().Value;
 
-            if (@event.RegisterUsers.Any(ru => ru.Family.Id == familyId))
+            if (@event.RegisterUsers.Any(ru => ru.Family != null && ru.Family.Id == familyId))
             {
                 return false;
             }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family.Id == familyId))
+            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family != null && ru.User.Family.Id == familyId))
             {
                 return true;
             }
