@@ -25,6 +25,7 @@
                     <div class="col-md-10">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        @Html.ValidationMessage("IdentityErrors", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
