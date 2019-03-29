@@ -52,6 +52,7 @@ namespace WebApplication.Controllers
                 }
 
                 applicationUsers = applicationUsers.OrderBy(u => u.FirstName).ThenBy(u => u.LastName);
+                ViewBag.Roles = db.Roles.ToList();
 
                 return View(applicationUsers.ToPagedList(pageNumber, pageSize));
             }
