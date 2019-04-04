@@ -131,10 +131,10 @@ namespace WebApplication.Migrations
             var assembly = Assembly.GetExecutingAssembly();
 
             Console.Write(this.GetType().Assembly.GetManifestResourceNames());
-            if (context.Database.SqlQuery<int>("IF TYPE_ID(N'QueuedListTableType') IS NULL SELECT 1 ELSE SELECT 0;").FirstOrDefault() == 1)
+            if (context.Database.SqlQuery<int>("IF TYPE_ID(N'EventListTableType') IS NULL SELECT 1 ELSE SELECT 0;").FirstOrDefault() == 1)
             {
 
-                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.QueuedListTableType.sql"))
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.EventListTableType.sql"))
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         context.Database.ExecuteSqlCommand(reader.ReadToEnd());
@@ -160,37 +160,19 @@ namespace WebApplication.Migrations
                     context.Database.ExecuteSqlCommand(reader.ReadToEnd());
                 }
             }
-
-            if (context.Database.SqlQuery<int>("IF object_id(N'P_Move2Event') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_CheckUser2Add') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
             {
-                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_Move2Event.sql"))
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CheckUsers2Add.sql"))
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     context.Database.ExecuteSqlCommand(reader.ReadToEnd());
                 }
             }
 
-            if (context.Database.SqlQuery<int>("IF object_id(N'P_Move2Queued') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_CheckUser2Kick') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
             {
-                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_Move2Queued.sql"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
-                }
-            }
-
-            if (context.Database.SqlQuery<int>("IF object_id(N'P_CoachJoined') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
-            {
-                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CoachJoined.sql"))
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    context.Database.ExecuteSqlCommand(reader.ReadToEnd());
-                }
-            }
-
-            if (context.Database.SqlQuery<int>("IF object_id(N'P_CoachLeaved') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
-            {
-                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CoachLeaved.sql"))
+                using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CheckUsers2Kick.sql"))
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     context.Database.ExecuteSqlCommand(reader.ReadToEnd());

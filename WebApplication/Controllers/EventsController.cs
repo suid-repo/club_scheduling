@@ -78,8 +78,6 @@ namespace WebApplication.Controllers
                         .FirstOrDefault());
                 }
 
-                eventCreateViewModels.Event.Queued = new Queued();
-
                 db.Events.Add(eventCreateViewModels.Event);
                 db.SaveChanges();
 
@@ -198,13 +196,22 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
             //PREVENT REGISTER USER TWICE
-            if (@event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())))
+            if (@event.RegisterUsers.Any(ru => ru.UserId.Equals(User.Identity.GetUserId())))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+
             //Register the user
-            QueuedHelper.Add(db, user, id.Value);
+            MemberEvent memberEvent = new MemberEvent
+            {
+                EventId = id.Value,
+                UserId = User.Identity.GetUserId()
+            };
+
+            db.Entry(memberEvent).State = EntityState.Added;
+
+            db.SaveChanges();
+
             return RedirectToAction("Details", new { id = id });
         }
 
@@ -222,19 +229,12 @@ namespace WebApplication.Controllers
                 return HttpNotFound();
             }
 
-            if (@event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())))
+            if (@event.RegisterUsers.Any(ru => ru.UserId.Equals(User.Identity.GetUserId())))
             {
                 //REMOVE THE USER FROM THE EVENT
-                @event.RegisterUsers.Remove(@event.RegisterUsers.Where(ru => ru.Id.Equals(User.Identity.GetUserId())).First());
+                @event.RegisterUsers.Remove(@event.RegisterUsers.Where(ru => ru.UserId.Equals(User.Identity.GetUserId())).First());
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
-            }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.UserId.Equals(User.Identity.GetUserId())))
-            {
-                //LOAD USER DATA
-                ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-                //REMOVE THE USER FROM THE QUEUE
-                QueuedHelper.Remove(db, user, id.Value);
             }
             else //PREVENT LEAVE AN NONE EXISTING USER
             {
@@ -256,7 +256,19 @@ namespace WebApplication.Controllers
             if (model.Event != null && model.UsersSelected != null)
             {
                 string[] usersSelected = model.UsersSelected.Where(us => !us.Equals("false") && !us.Equals("true")).ToArray();
-                QueuedHelper.Add(db, db.Users.Where(u => usersSelected.Any(us => u.Id.Contains(us))).ToList(), model.Event.Id);
+
+                foreach (string userId in usersSelected)
+                {
+                    MemberEvent memberEvent = new MemberEvent
+                    {
+                        EventId = model.Event.Id,
+                        UserId = userId
+                    };
+
+                    db.Entry(memberEvent).State = EntityState.Added;
+                }
+
+                db.SaveChanges();
 
             }
             return RedirectToAction("Details/" + model.Event.Id.ToString());
@@ -269,25 +281,18 @@ namespace WebApplication.Controllers
             //if (ModelState.IsValid)
             if (model.Event != null)
             {
-                if (model.IsInQueued)
+                //REMOVE THE USER FROM THE EVENT -- 
+                model.Event = db.Events.Find(model.Event.Id);
+
+                foreach (MemberEvent user in GetUsers2Kick(model.Event.Id))
                 {
-
-                    QueuedHelper.Remove(db, GetUsers2Kick(model.Event.Id), model.Event.Id);
+                    model.Event.RegisterUsers.Remove(user);
                 }
-                else
-                {
-                    //REMOVE THE USER FROM THE EVENT -- 
-                    model.Event = db.Events.Find(model.Event.Id);
-
-                    foreach (ApplicationUser user in GetUsers2Kick(model.Event.Id))
-                    {
-                        model.Event.RegisterUsers.Remove(user);
-                    }
 
 
-                    db.Entry(model.Event).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
+                db.Entry(model.Event).State = EntityState.Modified;
+                db.SaveChanges();
+
 
             }
             return RedirectToAction("Details/" + model.Event.Id.ToString());
@@ -315,7 +320,7 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Event @event = db.Events.Include(e => e.CoachEvents).Include(e => e.RegisterUsers).Include(e => e.Queued).Where(e => e.Id == id).FirstOrDefault();
+            Event @event = db.Events.Include(e => e.CoachEvents).Include(e => e.RegisterUsers).Where(e => e.Id == id).FirstOrDefault();
             db.Events.Remove(@event);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -342,7 +347,7 @@ namespace WebApplication.Controllers
                 model.Users2Kick = GetUsers2Kick(@event.Id);
                 model.IsInQueued = IsInQueued(@event.Id);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -383,10 +388,9 @@ namespace WebApplication.Controllers
         {
 
             Event @event = db.Events.Include(e => e.RegisterUsers)
-                .Include(e => e.Queued)
                 .Where(e => e.Id == eventId).FirstOrDefault();
 
-            return @event.RegisterUsers.Any(ru => ru.Id.Equals(User.Identity.GetUserId())) || @event.Queued.QueuedItems.Any(q => q.UserId.Equals(User.Identity.GetUserId()));
+            return @event.RegisterUsers.Any(ru => ru.UserId.Equals(User.Identity.GetUserId()));
 
         }
 
@@ -396,8 +400,7 @@ namespace WebApplication.Controllers
         private bool IsFamilyJoined2Event(int eventId)
         {
 
-            Event @event = db.Events.Include(e => e.RegisterUsers)
-                .Include(e => e.Queued)
+            Event @event = db.Events.Include(e => e.RegisterUsers).Include("RegisterUsers.Users").Include("RegisterUsers.Fanily")
                 .Where(e => e.Id == eventId).FirstOrDefault();
             int? familyId = User.Identity.GetFamilyId();
 
@@ -406,25 +409,21 @@ namespace WebApplication.Controllers
                 return false;
             }
 
-            return @event.RegisterUsers.Any(ru => ru.Family != null && ru.Family.Id.Equals(familyId.Value)) || @event.Queued.QueuedItems.Any(q => q.User.Family != null && q.User.Family.Id == familyId.Value);
+            return @event.RegisterUsers.Any(ru => ru.User.Family != null && ru.User.Family.Id.Equals(familyId.Value));
         }
 
         /**
          * 
          */
-        private List<ApplicationUser> GetUsers2Kick(int eventId)
+        private List<MemberEvent> GetUsers2Kick(int eventId)
         {
             Event @event = db.Events.Find(eventId);
             int familyId = User.Identity.GetFamilyId().Value;
 
-            if (@event.RegisterUsers.Any(ru => ru.Family != null && ru.Family.Id == familyId))
-            {
-                return @event.RegisterUsers.Where(ru => ru.Family != null && ru.Family.Id == familyId).ToList();
-            }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family != null && ru.User.Family.Id == familyId))
-            {
-                return @event.Queued.QueuedItems.Select(u => u.User).Where(qi => qi.Family != null && qi.Family.Id == familyId).ToList();
 
+            if (@event.RegisterUsers.Any(ru => ru.User.Family != null && ru.User.Family.Id == familyId))
+            {
+                return @event.RegisterUsers.Where(ru => ru.User.Family != null && ru.User.Family.Id == familyId).ToList();
             }
             throw new Exception("User is not in the queued either event");
         }
@@ -437,13 +436,9 @@ namespace WebApplication.Controllers
             Event @event = db.Events.Find(eventId);
             int familyId = User.Identity.GetFamilyId().Value;
 
-            if (@event.RegisterUsers.Any(ru => ru.Family != null && ru.Family.Id == familyId))
+            if (@event.RegisterUsers.Any(ru => ru.User.Family != null && ru.User.Family.Id == familyId))
             {
-                return false;
-            }
-            else if (@event.Queued.QueuedItems.Any(ru => ru.User.Family != null && ru.User.Family.Id == familyId))
-            {
-                return true;
+                return @event.RegisterUsers.Any(ru => ru.User.Family.Id == familyId && ru.isRegistered == false);
             }
 
             throw new Exception("User is not in the queued either event");
@@ -452,7 +447,7 @@ namespace WebApplication.Controllers
         /**
          * 
          */
-         private async Task SendMail2Coaches(string templateName, List<string[]> templateData)
+        private async Task SendMail2Coaches(string templateName, List<string[]> templateData)
         {
             var coachRole = db.Roles.Where(r => r.Name.Equals("Coach")).FirstOrDefault();
 
@@ -466,7 +461,7 @@ namespace WebApplication.Controllers
             }
 
             await MailHelper.SendMailTemplateAsync(templateName, templateData, "A new event is created", coachesEmails);
-            
+
         }
     }
 }

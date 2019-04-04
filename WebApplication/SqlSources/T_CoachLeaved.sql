@@ -16,7 +16,7 @@ BEGIN
 			BEGIN TRANSACTION
                 SELECT TOP(1) @eventIdInserted = EventId FROM deleted;
                 
-                EXEC P_CoachLeaved
+                EXEC P_CheckQueued
                 @eventId = @eventIdInserted
                 COMMIT TRANSACTION
 			BREAK		

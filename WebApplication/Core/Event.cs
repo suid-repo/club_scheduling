@@ -39,8 +39,6 @@ namespace WebApplication.Core
         [JsonIgnore]
         public virtual ICollection<CoachEvent> CoachEvents { get; set; }
         [JsonIgnore]
-        public virtual ICollection<ApplicationUser> RegisterUsers { set; get; }
-        [JsonIgnore]
-        public virtual Queued Queued { get; set; }
+        public virtual ICollection<MemberEvent> RegisterUsers { set; get; }
     }
 }

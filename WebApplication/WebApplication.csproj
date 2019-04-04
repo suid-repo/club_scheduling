@@ -298,8 +298,7 @@
     <Compile Include="Core\Event.cs" />
     <Compile Include="Core\Family.cs" />
     <Compile Include="Core\Level.cs" />
-    <Compile Include="Core\Queued.cs" />
-    <Compile Include="Core\QueuedItem.cs" />
+    <Compile Include="Core\MemberEvent.cs" />
     <Compile Include="Extentions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -307,7 +306,6 @@
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
-    <Compile Include="Helpers\QueuedHelper.cs" />
     <Compile Include="Helpers\SmsHelper.cs" />
     <Compile Include="Migrations\201812152158088_Initial Migration.cs" />
     <Compile Include="Migrations\201812152158088_Initial Migration.Designer.cs">
@@ -360,6 +358,10 @@
     <Compile Include="Migrations\201903161559281_OwnerId Property Added.cs" />
     <Compile Include="Migrations\201903161559281_OwnerId Property Added.Designer.cs">
       <DependentUpon>201903161559281_OwnerId Property Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904041535035_Queued Object Removed.cs" />
+    <Compile Include="Migrations\201904041535035_Queued Object Removed.Designer.cs">
+      <DependentUpon>201904041535035_Queued Object Removed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -521,12 +523,13 @@
     <EmbeddedResource Include="Migrations\201903161559281_OwnerId Property Added.resx">
       <DependentUpon>201903161559281_OwnerId Property Added.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041535035_Queued Object Removed.resx">
+      <DependentUpon>201904041535035_Queued Object Removed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
-    <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
-    <EmbeddedResource Include="SqlSources\P_CoachLeaved.sql" />
-    <EmbeddedResource Include="SqlSources\P_Move2Event.sql" />
-    <EmbeddedResource Include="SqlSources\P_Move2Queued.sql" />
-    <EmbeddedResource Include="SqlSources\QueuedListTableType.sql" />
+    <EmbeddedResource Include="SqlSources\P_CheckUsers2Add.sql" />
+    <EmbeddedResource Include="SqlSources\P_CheckUsers2Kick.sql" />
+    <EmbeddedResource Include="SqlSources\EventListTableType.sql" />
     <EmbeddedResource Include="SqlSources\T_CoachJoigned.sql" />
     <EmbeddedResource Include="SqlSources\T_CoachLeaved.sql" />
     <EmbeddedResource Include="SqlSources\UserListTableType.sql" />
