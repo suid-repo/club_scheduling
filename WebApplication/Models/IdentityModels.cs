@@ -40,7 +40,7 @@ namespace WebApplication.Models
         public virtual ICollection<Event> Events { get; set; }
         public virtual ICollection<CoachEvent> CoachEvents { get; set; }
         [JsonIgnore]
-        public virtual ICollection<QueuedItem> QueuedItems { get; set; }
+        public virtual ICollection<MemberEvent> MemberEvents { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -68,8 +68,7 @@ namespace WebApplication.Models
         public DbSet<Level> Levels { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Family> Families { get; set; }
-        public DbSet<Queued> Queueds { get; set; }
-        public DbSet<QueuedItem> QueuedItems { get; set; }
+        public DbSet<MemberEvent> MemberEvents { get; set; }
         public DbSet<CoachEvent> CoachEvents { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

@@ -298,8 +298,7 @@
     <Compile Include="Core\Event.cs" />
     <Compile Include="Core\Family.cs" />
     <Compile Include="Core\Level.cs" />
-    <Compile Include="Core\Queued.cs" />
-    <Compile Include="Core\QueuedItem.cs" />
+    <Compile Include="Core\MemberEvent.cs" />
     <Compile Include="Extentions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -307,7 +306,6 @@
     <Compile Include="Helpers\AccountHelper.cs" />
     <Compile Include="Helpers\CultureHelper.cs" />
     <Compile Include="Helpers\MailHelper.cs" />
-    <Compile Include="Helpers\QueuedHelper.cs" />
     <Compile Include="Helpers\SmsHelper.cs" />
     <Compile Include="Migrations\201812152158088_Initial Migration.cs" />
     <Compile Include="Migrations\201812152158088_Initial Migration.Designer.cs">

@@ -36,7 +36,7 @@ namespace WebApplication.Models
 
     public class EventFamilyLeaveModalViewModel
     {
-        public List<ApplicationUser> Users2Kick { get; set; }
+        public List<MemberEvent> Users2Kick { get; set; }
         public Event Event { get; set; }
         public bool IsInQueued { get; set; }
     }
