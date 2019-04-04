@@ -359,6 +359,10 @@
     <Compile Include="Migrations\201903161559281_OwnerId Property Added.Designer.cs">
       <DependentUpon>201903161559281_OwnerId Property Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904041535035_Queued Object Removed.cs" />
+    <Compile Include="Migrations\201904041535035_Queued Object Removed.Designer.cs">
+      <DependentUpon>201904041535035_Queued Object Removed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\EventViewModels.cs" />
@@ -518,6 +522,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903161559281_OwnerId Property Added.resx">
       <DependentUpon>201903161559281_OwnerId Property Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904041535035_Queued Object Removed.resx">
+      <DependentUpon>201904041535035_Queued Object Removed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
     <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
