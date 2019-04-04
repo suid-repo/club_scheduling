@@ -38,8 +38,9 @@ namespace WebApplication.Controllers
                 ViewBag.CurrentSearch = search;
 
                 //IEnumerable<ApplicationUser> applicationUsers = db.Users.Include(a => a.OwnFamily);
-
+                
                 IQueryable<ApplicationUser> applicationUsers = db.Users;
+                IQueryable<IdentityRole> roles = db.Roles;
 
                 if (!string.IsNullOrEmpty(search))
                 {
@@ -47,12 +48,19 @@ namespace WebApplication.Controllers
                         (
                             u => u.FirstName.StartsWith(search) ||
                                  u.LastName.StartsWith(search) ||
-                                 u.Email.StartsWith(search)
+                                 u.Email.StartsWith(search) ||
+                                 u.Roles.Join
+                                 (
+                                     roles,
+                                     r => r.RoleId,
+                                     rl => rl.Id,
+                                     (r, rl) => new { Roles = rl }
+                                     ).Select(r => r.Roles.Name).Where(r => r.StartsWith(search)).Any()
                         );
                 }
 
                 applicationUsers = applicationUsers.OrderBy(u => u.FirstName).ThenBy(u => u.LastName);
-                ViewBag.Roles = db.Roles.ToList();
+                ViewBag.Roles = db.Roles.ToList(); 
 
                 return View(applicationUsers.ToPagedList(pageNumber, pageSize));
             }
