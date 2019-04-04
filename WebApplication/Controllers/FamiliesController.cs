@@ -230,7 +230,7 @@ namespace WebApplication.Controllers
 
             //If the user is a fake user, we also delete him from the DB
             //We have to refactore this to put a flag in the user class to detect fake users
-            if (user.Email.Contains("@localhost.com"))
+            if (user.IsFakeAccount == true)
             {
                 db.Entry(user).State = EntityState.Deleted;
             }

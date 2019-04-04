@@ -34,6 +34,10 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>          
             <td>
+                @if (item.IsFakeAccount == true)
+                {
+                    @Html.ActionLink(I18N.GenericAction.edit, "Edit", "Users", new { id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                }
                 @if (User.IsInRole("Head Coach"))
                 {
                     @Html.ActionLink(I18N.GenericAction.details, "Details", "Users", new { id = item.Id }, new { @class = "btn btn-primary btn-sm", target = "_blank" })
