@@ -71,7 +71,7 @@ namespace WebApplication.Migrations
                     UserName = "admin@localhost.com",
                     Email = "admin@localhost.com",
                     PasswordHash = ps.HashPassword("Admin$1"),
-                    //EmailConfirmed = true,
+                    EmailConfirmed = true,
                     FirstName = "HeadCoach",
                     LastName = "SuperAdmin",
                     BirthDay = DateTime.Now,

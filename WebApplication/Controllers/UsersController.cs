@@ -236,10 +236,11 @@ namespace WebApplication.Controllers
 
         private void ChangeUserRole(string userId, string role)
         {
-            string[] roles = { "Head Coach", "Coach", "Member" };
+            string[] roles = { "Head Coach", "Coach" };
+            string[] userRoles = Manager.GetRoles(userId).ToArray();
 
-            Manager.RemoveFromRoles(userId, roles);
-
+            Manager.RemoveFromRoles(userId, userRoles);
+                        
             if (role.Equals("Head Coach"))
             {
                 Manager.AddToRoles(userId, roles);
