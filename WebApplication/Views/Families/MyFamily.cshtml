@@ -17,7 +17,13 @@
                             @if (User.Identity.IsFamilyOwner())
                             {
                                 @Html.ActionLink(I18N.GenericAction.edit, "Edit", new { id = Model.Family.Id }, new { @class = "btn btn-primary btn-sm" })
+
                                 @Html.ActionLink(I18N.GenericAction.add, "AddMember", new { id = Model.Family.Id }, new { @class = "btn btn-primary btn-sm" })
+                            }
+
+                            @if (Model.Family.Users.Count < 2)
+                            {
+                            @Html.ActionLink("Delete Family", "Delete", new { id = Model.Family.Id }, new { @class = "btn btn-primary btn-sm" })
                             }
                         </div>
                     </div>
