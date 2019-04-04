@@ -31,6 +31,7 @@ namespace WebApplication.Models
         public DateTime? BirthDay { get; set; }
         [Display(Name = "InviteCode", ResourceType = typeof(I18N.Core.User))]
         public string InviteCode { get; set; }
+        public bool IsFakeAccount { get; set; }
         public virtual Family Family { get; set; }
         //[JsonIgnore]
         //public virtual Family OwnFamily { get; set; }

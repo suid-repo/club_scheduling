@@ -378,6 +378,7 @@ namespace WebApplication.Controllers
                 Level level = db.Levels.Find(model.SelectedLevel);
 
                 user.Level = level;
+                user.IsFakeAccount = true;
                 family.Users.Add(user);
                 db.Entry(family).State = EntityState.Modified;
                 db.SaveChanges();
@@ -387,7 +388,7 @@ namespace WebApplication.Controllers
             FamilyAddMemberViewModel viewModel = new FamilyAddMemberViewModel();
             viewModel.CreateMemberViewModel = new _CreateMember2AddViewModel();
             viewModel.CreateMemberViewModel.Levels = db.Levels.ToList();
-
+            
             return View(viewModel);
         }
 
