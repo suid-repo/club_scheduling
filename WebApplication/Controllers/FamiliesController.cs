@@ -137,7 +137,7 @@ namespace WebApplication.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Families");
+                    return RedirectToAction("");
                 }
             }
             return View(family);
