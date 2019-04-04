@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[P_CheckQueued]
-	@queuedId INT = 0
+	@eventId INT = 0
 AS
-	DECLARE @queuedList QueuedListTableType
+	DECLARE @eventList EventListTableType
 	DECLARE @cursor INT = 0
 
 	SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
@@ -12,27 +12,27 @@ AS
 		BEGIN TRY
 			BEGIN TRANSACTION
 			-- CHOOSE THE EVENT(S) TO CHECK
-			IF @queuedId > 0
-				INSERT INTO @queuedList VALUES (@QueuedId)
+			IF @eventId > 0
+				INSERT INTO @eventList VALUES (@eventId)
 			ELSE
-				INSERT INTO @queuedList
-				SELECT Q.EventId
-				FROM Queueds AS Q
-				INNER JOIN [Events] AS E ON ( Q.EventId = E.Id )
+				INSERT INTO @eventList
+				SELECT E.Id
+				FROM [Events] AS E
 				WHERE E.StartDate >= GETDATE()
 
 			-- DO SOME LOGIC NOW
 			DECLARE MY_CURSOR CURSOR LOCAL STATIC READ_ONLY FORWARD_ONLY
 			FOR
-			SELECT QueuedId
-			FROM @queuedList
+			SELECT EventId
+			FROM @eventList
 
 			OPEN MY_CURSOR
-			FETCH NEXT FROM MY_CURSOR INTO @queuedId
+			FETCH NEXT FROM MY_CURSOR INTO @eventId
 			WHILE @@FETCH_STATUS = 0
 			BEGIN
-				EXEC P_CoachJoined @queuedId
-				FETCH NEXT FROM MY_CURSOR INTO @queuedId
+				EXEC P_CheckUsers2Kick @eventId
+				EXEC P_CheckUsers2Add @eventId
+				FETCH NEXT FROM MY_CURSOR INTO @eventId
 			END 
 			CLOSE MY_CURSOR
 			DEALLOCATE MY_CURSOR

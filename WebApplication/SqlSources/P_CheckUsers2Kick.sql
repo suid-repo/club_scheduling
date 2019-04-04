@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[P_CoachLeaved]
+﻿CREATE PROCEDURE [dbo].[P_CheckUsers2Kick]
 	@eventId int
 AS
 	/**
@@ -29,20 +29,20 @@ AS
 		-- Select the list of family registered in this event
 		-- We choose MAX function to penalize late members family (join the event seperate with other) 
 		INSERT INTO @familyList
-		SELECT ANU.Family_Id, NULL, 0, COUNT(0)
-		FROM ApplicationUserEvents AS AUE
-		INNER JOIN AspNetUsers AS ANU ON ANU.Id = AUE.ApplicationUser_Id
-		WHERE Event_Id = @eventId
+		SELECT ANU.Family_Id, NULL, MAX(ME.[Time]), COUNT(0)
+		FROM MemberEvents AS ME
+		INNER JOIN AspNetUsers AS ANU ON ANU.Id = ME.UserId
+		WHERE EventId = @eventId
 		AND ANU.Family_Id IS NOT NULL
 		GROUP BY ANU.Family_Id
 		HAVING COUNT(0) <= @maxPeople
 	
 		-- Select People W/OUT family
 		INSERT INTO @familyList
-		SELECT 0, AUE.ApplicationUser_Id, 0, 1
-		FROM ApplicationUserEvents AS AUE
-		INNER JOIN AspNetUsers AS ANU ON ANU.Id = AUE.ApplicationUser_Id
-		WHERE Event_Id = @eventId
+		SELECT 0, ME.UserId, ME.[Time], 1
+		FROM MemberEvents AS ME
+		INNER JOIN AspNetUsers AS ANU ON ANU.Id = ME.UserId
+		WHERE EventId = @eventId
 		AND ANU.Family_Id IS NULL
 
 		--SELECT OUR FIRST FAMILY
@@ -92,10 +92,8 @@ AS
 
 		IF (@numPeople > 0)
 		BEGIN
-			EXEC P_Move2Queued 
-			@eventId = @eventId,
-			@insertedTime = @insertedTime,
-			@userList = @people2kick
+			UPDATE MemberEvents SET isRegistered = 0
+			WHERE UserId IN (SELECT UserId FROM @people2Kick)
 		END
 	END
 RETURN 0

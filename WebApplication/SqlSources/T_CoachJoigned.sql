@@ -15,7 +15,7 @@ BEGIN
 			BEGIN TRANSACTION
             SELECT TOP(1) @eventIdInserted = EventId FROM Inserted
             
-            EXEC P_CoachJoined 
+            EXEC P_CheckQueued 
             @eventId = @eventIdInserted
             COMMIT TRANSACTION
 			BREAK		

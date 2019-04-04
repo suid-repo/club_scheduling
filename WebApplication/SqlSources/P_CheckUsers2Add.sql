@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[P_CoachJoined]
+﻿CREATE PROCEDURE [dbo].[P_CheckUsers2Add]
 	@eventId int
 AS
 	/**
@@ -27,20 +27,20 @@ AS
 		-- Select the list of family in this event
 		-- We choose MAX function to penalize late members family (join the event seperate with other) 
 		INSERT INTO @familyList
-		SELECT ANU.Family_Id, NULL, MAX(QI.[Time]), COUNT(0)
-		FROM QueuedItems AS QI
-		INNER JOIN AspNetUsers AS ANU ON ANU.Id = QI.UserId
-		WHERE QueuedId = @eventId
+		SELECT ANU.Family_Id, NULL, MAX(ME.[Time]), COUNT(0)
+		FROM MemberEvents AS ME
+		INNER JOIN AspNetUsers AS ANU ON ANU.Id = ME.UserId
+		WHERE EventId = @eventId
 		AND ANU.Family_Id IS NOT NULL
 		GROUP BY ANU.Family_Id
 		HAVING COUNT(0) <= @maxPeople
 	
 		-- Select People W/OUT family
 		INSERT INTO @familyList
-		SELECT 0, QI.UserId, QI.[Time], 1
-		FROM QueuedItems AS QI
-		INNER JOIN AspNetUsers AS ANU ON ANU.Id = QI.UserId
-		WHERE QueuedId = @eventId
+		SELECT 0, ME.UserId, ME.[Time], 1
+		FROM MemberEvents AS ME
+		INNER JOIN AspNetUsers AS ANU ON ANU.Id = ME.UserId
+		WHERE EventId = @eventId
 		AND ANU.Family_Id IS NULL
 
 		--SELECT OUR FIRST FAMILY
@@ -65,9 +65,9 @@ AS
 				BEGIN
 					INSERT INTO @people2Add
 					SELECT TOP(@maxPeople - @numPeople) UserId
-					FROM QueuedItems AS QI
-					INNER JOIN AspNetUsers AS ANU ON ANU.Id = QI.UserId
-					WHERE QueuedId = @eventId
+					FROM MemberEvents AS ME
+					INNER JOIN AspNetUsers AS ANU ON ANU.Id = ME.UserId
+					WHERE EventId = @eventId
 					AND ANU.Family_Id = @selectedFamily
 
 					SELECT @maxPeople -= MembersCount FROM @familyList WHERE FamilyId = @selectedFamily -- Decrease maxPeople
@@ -90,9 +90,8 @@ AS
 
 		IF (@numPeople > 0)
 		BEGIN
-			EXEC P_Move2Event
-			@eventId = @eventId,
-			@userList = @people2Add
+			UPDATE MemberEvents SET isRegistered = 1
+			WHERE UserId IN (SELECT UserId FROM @people2Add)
 		END
 	END
 RETURN 0

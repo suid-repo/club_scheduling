@@ -527,11 +527,9 @@
       <DependentUpon>201904041535035_Queued Object Removed.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlSources\P_CheckQueued.sql" />
-    <EmbeddedResource Include="SqlSources\P_CoachJoined.sql" />
-    <EmbeddedResource Include="SqlSources\P_CoachLeaved.sql" />
-    <EmbeddedResource Include="SqlSources\P_Move2Event.sql" />
-    <EmbeddedResource Include="SqlSources\P_Move2Queued.sql" />
-    <EmbeddedResource Include="SqlSources\QueuedListTableType.sql" />
+    <EmbeddedResource Include="SqlSources\P_CheckUsers2Add.sql" />
+    <EmbeddedResource Include="SqlSources\P_CheckUsers2Kick.sql" />
+    <EmbeddedResource Include="SqlSources\EventListTableType.sql" />
     <EmbeddedResource Include="SqlSources\T_CoachJoigned.sql" />
     <EmbeddedResource Include="SqlSources\T_CoachLeaved.sql" />
     <EmbeddedResource Include="SqlSources\UserListTableType.sql" />
