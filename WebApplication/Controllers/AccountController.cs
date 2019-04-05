@@ -173,6 +173,7 @@ namespace WebApplication.Controllers
                     // Give the default role
                     user = UserManager.FindByName(model.Email);
                     await UserManager.AddToRoleAsync(user.Id, "Member");
+                    user.IsFakeAccount = false;
 
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
