@@ -114,6 +114,7 @@ namespace WebApplication.Controllers
             }
 
             ViewBag.Id = new SelectList(db.Families, "Id", "Name", applicationUser.Id);
+            applicationUser.IsFakeAccount = false;
             return View(applicationUser);
         }
 
