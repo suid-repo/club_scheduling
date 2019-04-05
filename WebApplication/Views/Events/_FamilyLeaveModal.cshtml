@@ -25,9 +25,9 @@
                             @foreach (var member in Model.Users2Kick)
                             {
                                 <tr>
-                                    <td>@member.FirstName</td>
-                                    <td>@member.LastName</td>
-                                    <td>@member.Level.Name</td>
+                                    <td>@member.User.FirstName</td>
+                                    <td>@member.User.LastName</td>
+                                    <td>@member.User.Level.Name</td>
                                 </tr>
                             }
                         </tbody>
