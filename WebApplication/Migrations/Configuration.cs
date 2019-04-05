@@ -170,7 +170,7 @@ namespace WebApplication.Migrations
                 }
             }
 
-            if (context.Database.SqlQuery<int>("IF object_id(N'P_CheckUser2Kick') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
+            if (context.Database.SqlQuery<int>("IF object_id(N'P_CheckUsers2Kick') IS NULL SELECT 1 ELSE SELECT 0").FirstOrDefault() == 1)
             {
                 using (Stream stream = assembly.GetManifestResourceStream("WebApplication.SqlSources.P_CheckUsers2Kick.sql"))
                 using (StreamReader reader = new StreamReader(stream))

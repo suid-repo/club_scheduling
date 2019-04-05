@@ -135,6 +135,7 @@ namespace WebApplication.Controllers
             }
 
             model.Roles = FillRoles();
+            model.Levels = FillLevels();
 
             if (Manager.IsInRole(model.User.Id, "Head Coach"))
             {
@@ -166,6 +167,7 @@ namespace WebApplication.Controllers
                 user.FirstName = model.User.FirstName;
                 user.LastName = model.User.LastName;
                 user.BirthDay = model.User.BirthDay;
+                user.LevelId = model.User.LevelId;
 
                 if (user.PhoneNumber != model.User.PhoneNumber)
                 {
@@ -183,6 +185,7 @@ namespace WebApplication.Controllers
             }
 
             model.Roles = FillRoles();
+            model.Levels = FillLevels();
             return View(model);
         }
 
@@ -233,6 +236,11 @@ namespace WebApplication.Controllers
                 Value = "Member",
             });
             return items;
+        }
+
+        private IEnumerable<SelectListItem> FillLevels()
+        {
+            return new SelectList(db.Levels.ToList(), "Id", "Name");
         }
 
         private void ChangeUserRole(string userId, string role)

@@ -11,6 +11,7 @@ namespace WebApplication.Models
         public ApplicationUser User { get; set; }
         public string SelectedRole { get; set; }
         public IEnumerable<SelectListItem> Roles { get; set; }
+        public IEnumerable<SelectListItem> Levels { get; set; }
     }
 
     

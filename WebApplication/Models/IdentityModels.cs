@@ -35,7 +35,9 @@ namespace WebApplication.Models
         public virtual Family Family { get; set; }
         //[JsonIgnore]
         //public virtual Family OwnFamily { get; set; }
-        [Display(Name = "FirstName", ResourceType = typeof(I18N.Core.User))]
+        [Display(Name = "Level", ResourceType = typeof(I18N.Core.User))]
+        [ForeignKey("Level")]
+        public int? LevelId { get; set; }
         public virtual Level Level { get; set; }
 
         public virtual ICollection<Event> Events { get; set; }
