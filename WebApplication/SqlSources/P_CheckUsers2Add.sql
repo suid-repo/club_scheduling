@@ -14,9 +14,9 @@ AS
 	 DECLARE @familyList FamilyQueuedListTableType
 
 	-- Get the number of people register to this event
-	SELECT @numPeople = COUNT(ApplicationUser_Id)
-	FROM ApplicationUserEvents
-	WHERE Event_Id = @eventId
+	SELECT @numPeople = COUNT(UserId)
+	FROM MemberEvents
+	WHERE EventId = @eventId
 
 	-- Determine the number of maximum people for this event
 	SELECT @maxPeople = COUNT(UserId)*8 - @numPeople

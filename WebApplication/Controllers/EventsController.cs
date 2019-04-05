@@ -43,6 +43,7 @@ namespace WebApplication.Controllers
 
 
             model.IsJoigned2Event = IsJoined2Event(model.Event.Id);
+
             model.IsFamilyJoigned2Event = IsFamilyJoined2Event(model.Event.Id);
 
             return View(model);
@@ -400,7 +401,7 @@ namespace WebApplication.Controllers
         private bool IsFamilyJoined2Event(int eventId)
         {
 
-            Event @event = db.Events.Include(e => e.RegisterUsers).Include("RegisterUsers.Users").Include("RegisterUsers.Fanily")
+            Event @event = db.Events.Include(e => e.RegisterUsers).Include("RegisterUsers.User").Include("RegisterUsers.User.Family")
                 .Where(e => e.Id == eventId).FirstOrDefault();
             int? familyId = User.Identity.GetFamilyId();
 

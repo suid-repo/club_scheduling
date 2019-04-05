@@ -15,9 +15,9 @@ AS
 	 DECLARE @familyList FamilyQueuedListTableType
 
 	-- Get the number of people register to this event
-	SELECT @numPeople = COUNT(ApplicationUser_Id)
-	FROM ApplicationUserEvents
-	WHERE Event_Id = @eventId
+	SELECT @numPeople = COUNT(UserId)
+	FROM MemberEvents
+	WHERE EventId = @eventId
 
 	-- Determine the number of people to kick
 	SELECT @maxPeople =  @numPeople - COUNT(UserId)*8
@@ -66,10 +66,10 @@ AS
 			ELSE -- Family is selected
 				BEGIN
 					INSERT INTO @people2Kick
-					SELECT ApplicationUser_Id
-					FROM ApplicationUserEvents AS AUE
-					INNER JOIN AspNetUsers AS ANU ON ANU.Id = AUE.ApplicationUser_Id
-					WHERE Event_Id = @eventId
+					SELECT UserId
+					FROM MemberEvents AS AUE
+					INNER JOIN AspNetUsers AS ANU ON ANU.Id = AUE.UserId
+					WHERE EventId = @eventId
 					AND ANU.Family_Id = @selectedFamily
 
 					SELECT @maxPeople -= MembersCount FROM @familyList WHERE FamilyId = @selectedFamily -- Decrease maxPeople
