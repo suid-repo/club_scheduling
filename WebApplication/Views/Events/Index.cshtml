@@ -1,8 +1,9 @@
-﻿@model IEnumerable<WebApplication.Core.Event>
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<WebApplication.Core.Event>
 @{
     ViewBag.Title = I18N.View.Event.Index_Title;
 }
-
+@Styles.Render("~/Content/pagedlist")
 <div class="post-single">
     <div class="post-details">
         <div class="row">
@@ -55,9 +56,13 @@
                         </div>
                     </div>
                 }
-
+            </div>
+            <div class="page-count">
+                @I18N.GenericLabel.page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) @I18N.GenericLabel.of @Model.PageCount
+            </div>
+            <div class="pagination">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sort = ViewBag.CurrentSort, search = ViewBag.CurrentSearch }))
             </div>
         </div>
     </div>
 </div>
-

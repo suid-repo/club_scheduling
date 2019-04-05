@@ -12,6 +12,9 @@ using WebApplication.Helpers;
 using Microsoft.AspNet.Identity;
 using WebApplication.Extentions;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
+using PagedList;
 
 namespace WebApplication.Controllers
 {
@@ -21,9 +24,33 @@ namespace WebApplication.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Events
-        public ActionResult Index()
+        public ActionResult Index([Bind(Include = "page")] int? page)
         {
-            return View(db.Events.ToList());
+            try
+            {
+                int pageSize = int.Parse(ConfigurationManager.AppSettings.Get("PageSize"));
+                int pageNumber = page ?? 1;
+
+                //IEnumerable<ApplicationUser> applicationUsers = db.Users.Include(a => a.OwnFamily);
+
+                IQueryable<Event> events = db.Events.Where(e => e.StartDate > DateTime.Now);
+
+                events = events.OrderBy(e => e.StartDate).ThenBy(e => e.Name);
+
+                return View(events.ToPagedList(pageNumber, pageSize));
+            }
+            catch (ArgumentNullException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "PageSize seems to did not be set.");
+            }
+            catch (FormatException)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "PageSize seems to not be valid integer.");
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
 
         // GET: Events/Details/5
