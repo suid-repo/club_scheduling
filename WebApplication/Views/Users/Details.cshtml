@@ -71,6 +71,21 @@
                     </dd>
 
                     <dt>
+                        @Html.DisplayNameFor(model => model.IsFakeAccount)
+                    </dt>
+
+                    <dd>
+                        @if (Model.IsFakeAccount == true)
+                        {
+                            @I18N.GenericAction.yes
+                        }
+                        else
+                        {
+                            @I18N.GenericAction.no
+                        }
+                    </dd>
+
+                    <dt>
                         @Html.DisplayNameFor(model => model.PhoneNumber)
                     </dt>
 
